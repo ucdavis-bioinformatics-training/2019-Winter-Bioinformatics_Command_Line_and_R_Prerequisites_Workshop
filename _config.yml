@@ -22,7 +22,7 @@ navigation:
     url: CLI_Intro/command-line-intro-challenge-solutions
   - title: Some Bioinformatics File Formats - TALK # MATT
     url: CLI_Intro/formats.pdf
-  - title: Installing Simple Bioinformatics Software & Conda- HANDS-ON # NICK
+  - title: Installing Simple Bioinformatics Software & Conda - HANDS-ON # NICK
     url: CLI_Intro/software
 
   - heading: Advanced CLI
