@@ -15,50 +15,50 @@ navigation:
 
   - heading: CLI Intro
   - title: Introduction and Getting Connected # MATT
-    url: monday/logging-in
+    url: CLI_Intro/logging-in
   - title: Unix & the Command Line - HANDS-ON # KEITH
-    url: monday/command-line-intro
+    url: CLI_Intro/command-line-intro
   - title: Unix & the Command Line - Challenge Solutions - HANDS-ON # KEITH
-    url: monday/command-line-intro-challenge-solutions
+    url: CLI_Intro/command-line-intro-challenge-solutions
   - title: Some Bioinformatics File Formats - TALK # MATT
-    url: monday/formats.pdf
+    url: CLI_Intro/formats.pdf
   - title: Installing Simple Bioinformatics Software & Conda- HANDS-ON # NICK
-    url: monday/software
+    url: CLI_Intro/software
 
   - heading: Advanced CLI
   - title: Clusters & Modules - HANDS-ON # KEITH
-    url: tuesday/cluster
+    url: Advanced_CLI/cluster
   - title: Git Basics # HANNAH
     url:
   - title: Folder and Experiment Structure # MATT
     url:
   - title: Advanced Command Line Topics - HANDS-ON # NICK
-    url: tuesday/advanced-command-line
+    url: Advanced_CLI/advanced-command-line
   - title: Advanced Challenge Solutions # NICK
-    url: tuesday/advanced-challenge-solutions
+    url: Advanced_CLI/advanced-challenge-solutions
   - title: A Simple RNA-Seq Workflow # NICK
-    url: tuesday/bioworkflow
+    url: Advanced_CLI/bioworkflow
 
 
   - heading: Intro to R
   - title: Introduction to R
-    url: wednesday/Intro2R/Intro2R_fixed
+    url: Intro_to_R/Intro2R/Intro2R_fixed
   - title: Data in R - Prepare
-    url: wednesday/Intro2R/data_in_R_prepare_fixed
+    url: Intro_to_R/Intro2R/data_in_R_prepare_fixed
   - title: Data in R
-    url: wednesday/Intro2R/data_in_R_fixed
+    url: Intro_to_R/Intro2R/data_in_R_fixed
 
 
   - heading: Advanced R
   - title: R Oddities
-    url: thursday/
+    url: Advanced_R/R_Oddities.Rmd
   - title: Walkthrough of Vignettes for limma and biomaRt
-    url: wednesday/Data_in_R/data_in_R_prepare.md
+    url: Advanced_R/limma_biomart_vignettes.Rmd
   - title: Linear Models in R
-    url: wednesday/Data_in_R/data_in_R.md
+    url: Advanced_R/linear_models.Rmd
 
 
-    # todo for Wed/Thursday:
+    # todo for Wed/Advanced_R:
       # stats talk = linear models in R?
       # R md  and notebooks
       # Data munging?
@@ -68,8 +68,8 @@ navigation:
 
   - heading: Optional
   - title: Warmup / Review - HANDS-ON
-    url: tuesday/warmup
+    url: Advanced_CLI/warmup
   - title: Warmup - Solutions - HANDS-ON
-    url: tuesday/warmup-solution
+    url: Advanced_CLI/warmup-solution
   - title: Using Screen to Manage Multiple Projects - TALK
-    url: tuesday/screen.pdf
+    url: Advanced_CLI/screen.pdf
