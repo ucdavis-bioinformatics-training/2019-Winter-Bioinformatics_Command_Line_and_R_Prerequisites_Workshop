@@ -16,23 +16,23 @@ navigation:
   - heading: CLI Intro
   - title: Introduction and Getting Connected # MATT
     url: CLI_Intro/logging-in
-  - title: Unix & the Command Line - HANDS-ON # KEITH
+  - title: Unix & the Command Line # KEITH
     url: CLI_Intro/command-line-intro
-  - title: Unix & the Command Line - Challenge Solutions - HANDS-ON # KEITH
+  - title: Unix & the Command Line - Challenge Solutions # KEITH
     url: CLI_Intro/command-line-intro-challenge-solutions
-  - title: Some Bioinformatics File Formats - TALK # MATT
+  - title: Some Bioinformatics File Formats # MATT
     url: CLI_Intro/formats.pdf
-  - title: Installing Simple Bioinformatics Software & Conda - HANDS-ON # NIK
+  - title: Installing Simple Bioinformatics Software & Conda # NIK
     url: CLI_Intro/software
 
   - heading: Advanced CLI
-  - title: Clusters & Modules - HANDS-ON # KEITH
+  - title: Clusters & Modules # KEITH
     url: Advanced_CLI/cluster
   - title: Git Basics # HANNAH
     url:
   - title: Folder and Experiment Structure # MATT
     url:
-  - title: Advanced Command Line Topics - HANDS-ON # NIK
+  - title: Advanced Command Line Topics # NIK
     url: Advanced_CLI/advanced-command-line
   - title: Advanced Challenge Solutions # NIK
     url: Advanced_CLI/advanced-challenge-solutions
@@ -67,9 +67,9 @@ navigation:
 
 
   - heading: Optional
-  - title: Warmup / Review - HANDS-ON
+  - title: CLI Warmup / Review
     url: Advanced_CLI/warmup
-  - title: Warmup - Solutions - HANDS-ON
+  - title: CLI Warmup - Solutions
     url: Advanced_CLI/warmup-solution
-  - title: Using Screen to Manage Multiple Projects - TALK
+  - title: Using Screen to Manage Multiple Projects
     url: Advanced_CLI/screen.pdf
