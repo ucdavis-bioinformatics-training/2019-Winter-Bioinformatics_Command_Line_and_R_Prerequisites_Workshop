@@ -9,9 +9,6 @@ navigation:
   - heading: Introduction
   - title: Intro to the Workshop and Core
     url: welcome
-  - title: Examples of Markdown Formatting
-    url: examples
-
 
   - heading: CLI Intro
   - title: Introduction and Getting Connected # MATT
@@ -73,3 +70,12 @@ navigation:
     url: Advanced_CLI/warmup-solution
   - title: Using Screen to Manage Multiple Projects
     url: Advanced_CLI/screen.pdf
+
+  - heading: ETC
+  - title: Examples of Markdown Formatting
+    url: examples
+  - title: Github
+    url: https://github.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop
+  - title: Biocore website
+    url: http://bioinformatics.ucdavis.edu
+
