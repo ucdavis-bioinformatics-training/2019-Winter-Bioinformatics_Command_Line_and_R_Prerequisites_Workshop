@@ -1,5 +1,5 @@
 theme: jekyll-theme-minimal
-title: 'UC Davis Bioinformatics Prerequisites'
+title: 'UC Davis Bioinformatics Prerequisites Workshop'
 show_downloads: True
 google_analytics: True
 navigation:
@@ -9,35 +9,32 @@ navigation:
   - heading: Introduction
   - title: Intro to the Workshop and Core
     url: welcome
-  - title: Examples of Markdown Formatting
-    url: examples
-
 
   - heading: CLI Intro
   - title: Introduction and Getting Connected # MATT
     url: CLI_Intro/logging-in
-  - title: Unix & the Command Line - HANDS-ON # KEITH
+  - title: Unix & the Command Line # KEITH
     url: CLI_Intro/command-line-intro
-  - title: Unix & the Command Line - Challenge Solutions - HANDS-ON # KEITH
+  - title: Unix & the Command Line - Challenge Solutions # KEITH
     url: CLI_Intro/command-line-intro-challenge-solutions
-  - title: Some Bioinformatics File Formats - TALK # MATT
+  - title: Some Bioinformatics File Formats # MATT
     url: CLI_Intro/formats.pdf
-  - title: Installing Simple Bioinformatics Software & Conda - HANDS-ON # NICK
+  - title: Installing Simple Bioinformatics Software & Conda # NIK
     url: CLI_Intro/software
 
 
   - heading: Advanced CLI
-  - title: Clusters & Modules - HANDS-ON # KEITH
+  - title: Clusters & Modules # KEITH
     url: Advanced_CLI/cluster
   - title: Git Basics # HANNAH
     url:
   - title: Folder and Experiment Structure # MATT
     url:
-  - title: Advanced Command Line Topics - HANDS-ON # NICK
+  - title: Advanced Command Line Topics # NIK
     url: Advanced_CLI/advanced-command-line
-  - title: Advanced Challenge Solutions # NICK
+  - title: Advanced Challenge Solutions # NIK
     url: Advanced_CLI/advanced-challenge-solutions
-  - title: A Simple RNA-Seq Workflow # NICK
+  - title: A Simple RNA-Seq Workflow # NIK
     url: Advanced_CLI/bioworkflow
 
 
@@ -68,9 +65,18 @@ navigation:
 
 
   - heading: Optional
-  - title: Warmup / Review - HANDS-ON
+  - title: CLI Warmup / Review
     url: Advanced_CLI/warmup
-  - title: Warmup - Solutions - HANDS-ON
+  - title: CLI Warmup - Solutions
     url: Advanced_CLI/warmup-solution
-  - title: Using Screen to Manage Multiple Projects - TALK
+  - title: Using Screen to Manage Multiple Projects
     url: Advanced_CLI/screen.pdf
+
+  - heading: ETC
+  - title: Examples of Markdown Formatting
+    url: examples
+  - title: Github
+    url: https://github.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop
+  - title: Biocore website
+    url: http://bioinformatics.ucdavis.edu
+
