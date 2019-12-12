@@ -1,0 +1,372 @@
+---
+title: "Working Through the limma and biomaRt Vignettes"
+output: md
+---
+
+Note: Throughout, text taken directly from the vignettes will be shown in <span style="font-family:georgia"</span> georgia font</span> and code/output from the vignettes will be shown with a blue background. Everything else is my commentary/additions.
+
+## limma
+Limma is an R package for differential expression testing of RNASeq and microarray data.  The [limma User's Guide](http://bioconductor.org/packages/release/bioc/vignettes/limma/inst/doc/usersguide.pdf) is an extensive, 100+ page summary of limma's many capabilities.  We will focus only on Chapter 15, "RNA-seq Data".
+
+Install edgeR if you have not already done so (installs limma as a dependency):
+```{r}
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#     install.packages("BiocManager")
+# BiocManager::install("edgeR", version = "3.8")
+```
+
+Load edgeR (which loads limma as a dependency)
+```{r}
+library(edgeR)
+```
+
+Read in a counts table:
+```{r}
+counts <- read.delim('https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2018-September-Bioinformatics-Prerequisites/master/friday/counts.tsv', row.names = 1)
+```
+
+The counts table has one column per sample and one row per gene.  It shows the number of reads aligning to each gene in each sample.
+```{r}
+dim(counts)
+head(counts)
+```
+
+We also need to define a model matrix since this is not done in the vignette:
+```{r}
+group <- rep(c("A", "B"), each = 2)
+design <- model.matrix(~group)
+```
+
+Now for the actual limma vignette (starting in 15.3):
+
+> 
+<span style="font-family:georgia">
+15.3 Normalization and Filtering
+</span>
+
+>
+<span style="font-family:georgia">
+Once a matrix of read counts has been created, with rows for genes and columns for samples,
+it is convenient to create a DGEList object using the edgeR package. 
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+dge <- DGEList(counts=counts)
+```
+
+```{r}
+dge
+```
+
+A DGEList object is a container for counts, normalization factors, and library sizes.
+
+> 
+<span style="font-family:georgia">
+The next step is to remove rows that consistently have zero or very low counts. One can for
+example use
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+keep <- filterByExpr(dge, design)
+dge <- dge[keep,,keep.lib.sizes=FALSE]
+```
+
+```{r}
+dge
+```
+Our data have been filtered from 25,702 genes to 1620 genes.  Note that filtering is not an exact science, and is done different ways even within the limma User's Guide (see e.g. section 18.1.7).  
+
+> 
+<span style="font-family:georgia">
+Here we will assume that filtering has been done.
+</span>
+
+> 
+<span style="font-family:georgia">
+It is usual to apply scale normalization to RNA-seq read counts, and the TMM normalization
+method in particular has been found to perform well in comparative studies. This can be applied
+to the DGEList object:
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+dge <- calcNormFactors(dge)
+```
+
+The norm.factors column in dge$samples has now been assigned numbers other than the default value of 1:
+```{r}
+dge
+```
+
+> 
+<span style="font-family:georgia">
+15.4 Differential expression: limma-trend
+</span>
+
+>
+<span style="font-family:georgia">
+If the sequencing depth is reasonably consistent across the RNA samples, then the simplest and most
+robust approach to differential expression is to use limma-trend. This approach will usually work well if the
+ratio of the largest library size to the smallest is not more than about 3-fold.
+>
+<span style="font-family:georgia">
+In the limma-trend approach, the counts are converted to logCPM values using edgeR's cpm
+function:
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+logCPM <- cpm(dge, log=TRUE, prior.count=3)
+```
+
+prior.count is the constant that is added to all counts before log transformation in order to avoid taking the log of 0.  Its default value is 0.25.
+
+>
+<span style="font-family:georgia">
+The prior count is used here to damp down the variances of logarithms of low counts.
+</span>
+>
+<span style="font-family:georgia">
+The logCPM values can then be used in any standard limma pipeline, using the trend=TRUE
+argument when running eBayes or treat. For example:
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+fit <- lmFit(logCPM, design)
+fit <- eBayes(fit, trend=TRUE)
+topTable(fit, coef=ncol(design))
+```
+
+Using trend=TRUE means that limma "squeezes" the genewise variances towards a trend line (rather than the default global mean).
+
+coef = ncol(design) in the call to topTable works out to coef = 2.  We are telling topTable to test the second coefficient ("groupB"):
+```{r}
+head(coef(fit))
+```
+
+In the output from topTable:
+
+- logFC is the log2 fold change for group B over group A (it is also the "groupB" coefficient from the linear model fitted to the logCPM)
+- AveExpr is the average expression in log2 counts per million reads, across all samples
+- t is the moderated t statistic from the test that the logFC differs from 0
+- P.Value is the raw p-value from the test that the logFC differs from 0
+- adj.P.Val is the Benjamini-Hochberg false discovery rather adjusted p-value
+- B is the log odds that the gene is differentially expressed
+
+topTable shows the top 10 most significant genes by default, the argument n can be used to change that number.
+
+>
+<span style="font-family:georgia">
+Or, to give more weight to fold-changes in the gene ranking, one might use:
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+fit <- treat(fit, lfc=log2(1.2))
+topTreat(fit, coef=ncol(design))
+```
+
+The function treat() tests if the absolute log fold change is greater than the indicated value (log2(1.2)), rather than 0.  
+
+>
+<span style="font-family:georgia">
+15.5 Differential expression: voom
+</span>
+>
+<span style="font-family:georgia">
+When the library sizes are quite variable between samples, then the voom approach is theoretically
+more powerful than limma-trend. In this approach, the voom transformation is applied to the
+normalized and filtered DGEList object:
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+v <- voom(dge, design, plot=TRUE)
+```
+
+In the plot, each point represents a gene, with the x-axis showing the average expression in log2 counts per million reads and the y-axis showing the square root of the residual standard deviation of expression in log2 counts per million reads.
+
+>
+<span style="font-family:georgia">
+The voom transformation uses the experiment design matrix, and produces an EList object.
+</span>
+>
+<span style="font-family:georgia">
+It is also possible to give a matrix of counts directly to voom without TMM normalization, by
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+v <- voom(counts, design, plot=TRUE)
+```
+
+>
+<span style="font-family:georgia">
+If the data are very noisy, one can apply the same between-array normalization methods as would
+be used for microarrays, for example:
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+v <- voom(counts, design, plot=TRUE, normalize="quantile")
+```
+
+>
+<span style="font-family:georgia">
+After this, the usual limma pipelines for differential expression can be applied, for example:
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+fit <- lmFit(v, design)
+fit <- eBayes(fit)
+topTable(fit, coef=ncol(design))
+```
+
+>
+<span style="font-family:georgia">
+Or, to give more weight to fold-changes in the ranking, one could use say:
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+fit <- treat(fit, lfc=log2(1.2))
+topTreat(fit, coef=ncol(design))
+```
+
+## biomaRt
+The biomaRt package provides an R interface to [Ensembl](www.ensembl.org) databases.  
+
+Install biomaRt if not already installed
+```{r}
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#     install.packages("BiocManager")
+# BiocManager::install("biomaRt", version = "3.8")
+```
+Let's start with part 2 of the biomaRt vignette (accessible from within R by vignette("biomaRt")):
+
+>
+<span style="font-family:georgia">
+2 Selecting a BioMart database and dataset
+</span>
+>
+<span style="font-family:georgia">
+Every analysis with biomaRt starts with selecting a BioMart database to use. A first step is to check which BioMart web services are available. The function listMarts() will display all available BioMart web services
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+library("biomaRt")
+listMarts()
+```
+>
+<span style="font-family:georgia">
+The useMart() function can now be used to connect to a specified BioMart database, this must be a valid name given by listMarts(). In the next example we choose to query the Ensembl BioMart database.
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+ensembl=useMart("ensembl")
+```
+>
+<span style="font-family:georgia">
+BioMart databases can contain several datasets, for Ensembl every species is a different dataset. In a next step we look at which datasets are available in the selected BioMart by using the function listDatasets().
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+listDatasets(ensembl)
+```
+>
+<span style="font-family:georgia">
+To select a dataset we can update the Mart object using the function useDataset(). In the example below we choose to use the hsapiens dataset.
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+ensembl = useDataset("hsapiens_gene_ensembl",mart=ensembl)
+```
+
+>
+<span style="font-family:georgia">
+Or alternatively if the dataset one wants to use is known in advance, we can select a BioMart database and dataset in one step by:
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+ensembl = useMart("ensembl",dataset="hsapiens_gene_ensembl")
+```
+
+>
+<span style="font-family:georgia">
+3 How to build a biomaRt query
+</span>
+>
+<span style="font-family:georgia">
+The getBM() function has three arguments that need to be introduced: filters, attributes and values. Filters define a restriction on the query. For example you want to restrict the output to all genes located on the human X chromosome then the filter chromosome_name can be used with value 'X'. The listFilters() function shows you all available filters in the selected dataset.
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+filters = listFilters(ensembl)
+filters[1:70,]
+```
+>
+<span style="font-family:georgia">
+Attributes define the values we are interested in to retrieve. For example we want to retrieve the gene symbols or chromosomal coordinates. The listAttributes() function displays all available attributes in the selected dataset.
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+attributes = listAttributes(ensembl)
+attributes[1:20,]
+```
+>
+<span style="font-family:georgia">
+The getBM() function is the main query function in biomaRt. It has four main arguments:
+</span>
+>
+<span style="font-family:georgia">
+- attributes: is a vector of attributes that one wants to retrieve (= the output of the query).
+</span>
+>
+<span style="font-family:georgia">
+- filters: is a vector of filters that one wil use as input to the query.
+</span>
+>
+<span style="font-family:georgia">
+- values: a vector of values for the filters. In case multple filters are in use, the values argument requires a list of values where each position in the list corresponds to the position of the filters in the filters argument (see examples below).
+</span>
+>
+<span style="font-family:georgia">
+- mart: is an object of class Mart, which is created by the useMart() function.
+>
+<span style="font-family:georgia">
+Note: for some frequently used queries to Ensembl, wrapper functions are available: getGene() and getSequence(). These functions call the getBM() function with hard coded filter and attribute names.
+</span>
+>
+<span style="font-family:georgia">
+Now that we selected a BioMart database and dataset, and know about attributes, filters, and the values for filters; we can build a biomaRt query. Let's make an easy query for the following problem: We have a list of Affymetrix identifiers from the u133plus2 platform and we want to retrieve the corresponding EntrezGene identifiers using the Ensembl mappings.
+</span>
+>
+<span style="font-family:georgia">
+The u133plus2 platform will be the filter for this query and as values for this filter we use our list of Affymetrix identifiers. As output (attributes) for the query we want to retrieve the EntrezGene and u133plus2 identifiers so we get a mapping of these two identifiers as a result. The exact names that we will have to use to specify the attributes and filters can be retrieved with the listAttributes() and listFilters() function respectively. Let's now run the query:
+</span>
+
+```{r, class.source = 'bg-info', class.output = 'bg-info'}
+affyids=c("202763_at","209310_s_at","207500_at")
+getBM(attributes=c('affy_hg_u133_plus_2', 'entrezgene'), 
+      filters = 'affy_hg_u133_plus_2', 
+      values = affyids, 
+      mart = ensembl)
+```
+
+## Putting it all Together
+Let's use biomaRt to get annotation for our output from limma:
+
+```{r}
+v <- voom(dge, design)
+fit <- lmFit(v, design)
+fit <- eBayes(fit)
+tab <- topTable(fit, coef=ncol(design), n = 20)
+head(tab)
+```
+
+The identifiers (row names) in our top table are Entrez Gene identifiers, so let's add a column with that information
+```{r}
+tab$entrezgene <- rownames(tab)
+head(tab)
+```
+
+Let's get the gene symbol and gene description matching those Entrez Gene identifiers:
+```{r}
+anno <- getBM(ensembl, attributes = c("entrezgene", "hgnc_symbol", "description"), filters = "entrezgene", values = tab$entrezgene)
+anno
+```
+
+

@@ -1,5 +1,5 @@
 theme: jekyll-theme-minimal
-title: 'UC Davis Bioinformatics Workshop Base Template'
+title: 'UC Davis Bioinformatics Prerequisites'
 show_downloads: True
 google_analytics: True
 navigation:
@@ -11,3 +11,65 @@ navigation:
     url: welcome
   - title: Examples of Markdown Formatting
     url: examples
+
+
+  - heading: Monday
+  - title: Introduction and Getting Connected # MATT
+    url: monday/logging-in
+  - title: Unix & the Command Line - HANDS-ON # KEITH
+    url: monday/command-line-intro
+  - title: Unix & the Command Line - Challenge Solutions - HANDS-ON # KEITH
+    url: monday/command-line-intro-challenge-solutions
+  - title: Some Bioinformatics File Formats - TALK # ??
+    url: monday/formats.pdf
+  - title: Installing Simple Bioinformatics Software - HANDS-ON # NICK (move to tuesday)
+    url: monday/software.md
+
+  - heading: Tuesday
+  - title: Warmup / Review - HANDS-ON
+    url: tuesday/warmup
+  - title: Warmup - Solutions - HANDS-ON
+    url: tuesday/warmup-solution
+  - title: Advanced Command Line Topics - HANDS-ON
+    url: tuesday/advanced-command-line
+  - title: Advanced Challenge Solutions
+    url: tuesday/advanced-challenge-solutions
+  - title: Using Screen to Manage Multiple Projects - TALK
+    url: tuesday/screen.pdf
+  - title: Clusters & Modules - HANDS-ON
+    url: tuesday/cluster
+  - title: A Simple RNA-Seq Workflow
+    url: tuesday/bioworkflow
+
+    # todo for monday/Tuesday:
+      # add bash profile stuff?
+      # basics of environment control (conda)
+      # basics of git
+      # folder and experiment structure
+      # installing and running simple sequencing tools
+
+
+  - heading: Wednesday
+  - title: Introduction to R
+    url: wednesday/Intro2R/Intro2R_fixed
+  - title: Data in R - Prepare
+    url: wednesday/Intro2R/data_in_R_prepare_fixed
+  - title: Data in R
+    url: wednesday/Intro2R/data_in_R_fixed
+
+
+  - heading: Thursday
+  - title: R Oddities
+    url: thursday/
+  - title: Walkthrough of Vignettes for limma and biomaRt
+    url: wednesday/Data_in_R/data_in_R_prepare.md
+  - title: Linear Models in R
+    url: wednesday/Data_in_R/data_in_R.md
+
+
+    # todo for Wed/Thursday:
+      # stats talk = linear models in R?
+      # R md  and notebooks
+      # Data munging?
+      # tidyverse, data frame manipulation
+      # Figures in R and model building

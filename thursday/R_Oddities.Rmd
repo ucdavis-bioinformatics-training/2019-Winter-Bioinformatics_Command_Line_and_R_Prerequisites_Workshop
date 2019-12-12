@@ -1,0 +1,288 @@
+---
+title: "R Oddities"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+R is a very powerful language.  However, it doesn't always behave the way one might expect...
+
+## Strings and factors
+By default, when reading in a file, R reads in character data as a factor (i.e. coded as numbers).  This can lead to some unintended consequences:
+```{r}
+dat <- read.csv("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-March-Bioinformatics-Prerequisites/master/thursday/stringsAsFactors_example.csv")
+dat
+str(dat)
+```
+
+Age needs to be numeric if we want to use it in an analysis.  One might think that `as.numeric()` would help:
+```{r}
+as.numeric(dat$Age)
+```
+
+This is not what we want!  This error is obvious with a small dataset, but easy to miss with a larger one.  A few ways to fix this:
+
+1. Use `stringsAsFactors = F` when reading in the data
+```{r}
+dat <- read.csv("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-March-Bioinformatics-Prerequisites/master/thursday/stringsAsFactors_example.csv", stringsAsFactors = F)
+str(dat)
+as.numeric(dat$Age)
+```
+
+2. Use `as.character()` with `as.numeric()`
+```{r}
+dat <- read.csv("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-March-Bioinformatics-Prerequisites/master/thursday/stringsAsFactors_example.csv")
+str(dat)
+as.numeric(as.character(dat$Age))
+```
+
+3. If you're recording data, don't mix character and numeric data in the same column.
+
+## Missing values in calculations
+By default, summaries of data with missing values (NA's) return NA
+```{r}
+height <- c(55, 60, 65, 72, 66, NA, NA, NA)
+mean(height)
+```
+
+To get the mean of the non-missing values, use `na.rm = T`
+```{r}
+mean(height, na.rm = T)
+```
+
+Sometimes, `na.rm = T` leaves nothing in one subgroup of the data.  This can also lead to unexpected behavior:
+```{r}
+height <- c(55, 60, 65, 72, 66, NA, NA, NA)
+sex <- c("F", "F", "F", "F", "F", "M", "M", "M")
+mean(height[sex == "M"], na.rm = T)
+min(height[sex == "M"], na.rm = T)
+max(height[sex == "M"], na.rm = T)
+```
+
+These aren't errors per se, but be very careful if you plan to use these results in downstream calculations.
+
+If you're testing for missing values, use `is.na()` instead of `==`
+```{r}
+x <- NA
+x == NA # always returns NA
+```
+
+```{r}
+is.na(x)
+```
+
+## Subsetting strangeness
+Be careful when subsetting on data with missing values:
+```{r}
+height <- c(55, 60, 65, 72, 66, 72, 63, 66)
+sex <- c("F", "F", "F", "F", "F", "M", "M", NA)
+dat <- data.frame(height = height, sex = sex)
+dat[dat$sex == "M",]
+```
+Where did the NA's come from?  There are no missing values for height here.
+Let's break this down:
+The statement `dat$sex == "M"` returns NA when applied to the NA value for sex:
+```{r}
+dat$sex == "M"
+```
+When we use `dat$sex == "M"` to subset, the resulting NA creates a row where all the values are NA:
+```{r}
+dat[dat$sex == "M",]
+```
+There are a few ways around this:
+
+1. Use `subset()`
+```{r}
+subset(dat, sex == "M")
+```
+
+2. Use `which()`
+```{r}
+dat[which(dat$sex == "M"),]
+```
+
+Sometimes we want to remove certain observations.  What happens if you try to take away something that's not there?
+```{r}
+dat
+```
+
+```{r}
+drop <- which(dat$sex == "Male")
+drop
+```
+
+```{r}
+dat2 <- dat[-drop,]
+dat2
+```
+Logically, one would think that taking nothing away from something would leave what you started with...
+
+The solution is to check that you aren't using an empty vector to subset:
+```{r}
+drop <- which(dat$sex == "Male")
+if (length(drop) > 0){
+  dat2 <- dat[-drop,]
+}else{
+  dat2 <- dat
+}
+dat2
+```
+
+You may be aware that you can use `dat[1,]` to pull out the first row of the data frame `dat`:
+```{r}
+dat
+```
+
+```{r}
+dat[1,]
+```
+
+What happens if you forget the comma?
+```{r}
+dat[1]
+```
+
+Since a data frame is a list, using a single subscript gives you a list (here, another data frame) with a single element
+```{r}
+str(dat[1])
+```
+
+However, this behaviour is totally different with a matrix
+```{r}
+mat <- as.matrix(dat)
+mat
+```
+
+```{r}
+mat[1]
+```
+
+When you take a single subscript of a matrix, you get that element of the vectorized matrix
+
+## Mangled column names
+By default, when reading in data R converts column names to syntactically valid R variable names.  Spaces and punctuation are converted to ".", and column names starting with a number have "X" added to the beginning:
+```{r}
+dat <- read.csv("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-March-Bioinformatics-Prerequisites/master/thursday/check_names_example.csv")
+dat
+```
+If you want to keep the original column names, use `check.names = F`:
+```{r}
+dat <- read.csv("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-March-Bioinformatics-Prerequisites/master/thursday/check_names_example.csv", check.names = F)
+dat
+```
+
+However, since these aren't valid R names you have to put backticks (``) around the names when using them:
+```{r}
+# dat$1st Run # doesn't work
+```
+
+```{r}
+dat$`1st Run`
+```
+
+## Package not available error messages
+Upon installation of a package, R may sometimes say the package is not available.  This may happen for a couple of reasons:
+
+1. You're using the wrong archive (usually, trying to install a Bioconductor package from CRAN)
+```{r}
+install.packages("limma")
+```
+(Sometimes RStudio may look in multiple archives without you asking explicitly, but I have only seen this behaviour on Linux).
+
+(This is how you would install the package from Bioconductor):
+```{r}
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#     install.packages("BiocManager")
+# BiocManager::install("limma", version = "3.8")
+```
+
+2. You spelled the package name wrong.  
+
+3. The package actually doesn't exist (least likely)
+
+## Whitespace
+Whitespace in character data (from e.g. an accidentally typed space in an Excel file) is handled like a regular character in R:
+```{r}
+dat <- read.csv("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-March-Bioinformatics-Prerequisites/master/thursday/whitespace_example.csv")
+dat
+```
+```{r}
+table(dat$Sex)
+```
+Notice that `"F"` and `"F "` are treated as separate categories.
+
+To trim leading and trailing whitespace on reading data in, use `strip.white = T`
+```{r}
+dat <- read.csv("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-March-Bioinformatics-Prerequisites/master/thursday/whitespace_example.csv", strip.white = T)
+table(dat$Sex)
+```
+
+Not every method of reading data in R has this option, but you can also use the function `trimws()`:
+```{r}
+dat <- read.csv("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-March-Bioinformatics-Prerequisites/master/thursday/whitespace_example.csv")
+table(dat$Sex)
+```
+
+```{r}
+dat$Sex <- trimws(dat$Sex)
+table(dat$Sex)
+```
+
+## Alphabetically ordered factor levels
+By default, R orders levels of factors (or characters that it converts to factors for analysis) alphabetically.  This may not be what you want.
+```{r}
+rating <- factor(c("Strongly Agree (5)", "Agree (4)", "Agree (4)", "Disagree (2)", "Disagree (2)", "Strongly Disagree (1)", "Agree (4)", "Neither Agree nor Disagree (3)"))
+table(rating)
+```
+The default order doesn't make sense here.  However, we can change the levels when creating the factor variable:
+```{r}
+levels.use <- c("Strongly Disagree (1)", "Disagree (2)", "Neither Agree nor Disagree (3)", "Agree (4)", "Strongly Agree (5)")
+rating <- factor(c("Strongly Agree (5)", "Agree (4)", "Agree (4)", "Disagree (2)", "Disagree (2)", "Strongly Disagree (1)", "Agree (4)", "Neither Agree nor Disagree (3)"),
+                 levels = levels.use)
+table(rating)
+```
+But beware of trying to use `levels()` after the fact to change the ordering of the levels:
+```{r}
+rating <- factor(c("Strongly Agree (5)", "Agree (4)", "Agree (4)", "Disagree (2)", "Disagree (2)", "Strongly Disagree (1)", "Agree (4)", "Neither Agree nor Disagree (3)"))
+levels(rating) <- levels.use
+table(rating)
+```
+We have accidentally changed all of the "Agree" responses to "Strongly Disagree"!
+
+To make a factor level the reference (first) level, you can use the `relevel()` function:
+```{r}
+genotype <- factor(c("Mut", "WT", "Mut", "Mut", "WT", "WT"))
+levels(genotype)
+```
+
+Make "WT" the reference level:
+```{r}
+genotype <- relevel(genotype, ref = "WT")
+levels(genotype)
+```
+
+## Overloaded functions
+R functions (like plot() and print()) often do different things depending on the type of object you apply them to.  This is useful, unless you aren't expecting it.  
+
+Consider the function plotMDS in the limma package, which creates a multidimensional scaling plot. Let's read in some RNA-Seq count data and plot it:
+```{r}
+counts <- read.delim("https://ucdavis-bioinformatics-training.github.io/2018-June-RNA-Seq-Workshop/friday/all_counts.txt")
+limma::plotMDS(counts) 
+```
+
+edgeR has an object class called a DGEList that is a container for counts and other information.  By changing the class, we get a totally different plot (the data are scaled and log transformed first):
+```{r}
+d <- edgeR::DGEList(counts)
+limma::plotMDS(d)
+```
+
+Check the documentation to see how a function behaves for different types of input.
+
+## A few other things:
+1. Cutting and pasting an entire R error message into Google can be surprisingly helpful.
+2. R is case sensitive: you can have two different objects called "Age" and "age" (although I wouldn't recommend it)
+3. If you're using R on a Windows machine, file paths have to be specified using "/" instead of the usual backslash
+
+#### (Inspired by [The R Inferno](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf))
