@@ -13,7 +13,7 @@ navigation:
     url: examples
 
 
-  - heading: Monday
+  - heading: CLI Intro
   - title: Introduction and Getting Connected # MATT
     url: monday/logging-in
   - title: Unix & the Command Line - HANDS-ON # KEITH
@@ -23,9 +23,9 @@ navigation:
   - title: Some Bioinformatics File Formats - TALK # ??
     url: monday/formats.pdf
   - title: Installing Simple Bioinformatics Software - HANDS-ON # NICK (move to tuesday)
-    url: monday/software.md
+    url: monday/software
 
-  - heading: Tuesday
+  - heading: Advanced CLI
   - title: Warmup / Review - HANDS-ON
     url: tuesday/warmup
   - title: Warmup - Solutions - HANDS-ON
@@ -49,7 +49,7 @@ navigation:
       # installing and running simple sequencing tools
 
 
-  - heading: Wednesday
+  - heading: Intro to R
   - title: Introduction to R
     url: wednesday/Intro2R/Intro2R_fixed
   - title: Data in R - Prepare
@@ -58,7 +58,7 @@ navigation:
     url: wednesday/Intro2R/data_in_R_fixed
 
 
-  - heading: Thursday
+  - heading: Advanced R
   - title: R Oddities
     url: thursday/
   - title: Walkthrough of Vignettes for limma and biomaRt
