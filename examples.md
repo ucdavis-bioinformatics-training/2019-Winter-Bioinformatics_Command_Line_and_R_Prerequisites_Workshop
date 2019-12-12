@@ -106,7 +106,7 @@ write.table(top.table, file = "A.C_v_B.C.txt", row.names = F, sep = "\t", quote 
 
 
 ## R CODE
-- run the `alter_rmd.py` script to change some of the R formatting.
+- run the `alter_md.py` script to change some of the R formatting.
 ```bash
 python alter_rmd.py -i Intro2R.md
 ```

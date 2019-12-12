@@ -25,6 +25,7 @@ navigation:
   - title: Installing Simple Bioinformatics Software & Conda - HANDS-ON # NICK
     url: CLI_Intro/software
 
+
   - heading: Advanced CLI
   - title: Clusters & Modules - HANDS-ON # KEITH
     url: Advanced_CLI/cluster
