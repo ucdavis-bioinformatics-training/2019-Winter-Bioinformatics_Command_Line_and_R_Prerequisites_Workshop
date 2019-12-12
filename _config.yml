@@ -20,33 +20,24 @@ navigation:
     url: monday/command-line-intro
   - title: Unix & the Command Line - Challenge Solutions - HANDS-ON # KEITH
     url: monday/command-line-intro-challenge-solutions
-  - title: Some Bioinformatics File Formats - TALK # ??
+  - title: Some Bioinformatics File Formats - TALK # MATT
     url: monday/formats.pdf
-  - title: Installing Simple Bioinformatics Software - HANDS-ON # NICK (move to tuesday)
+  - title: Installing Simple Bioinformatics Software & Conda- HANDS-ON # NICK
     url: monday/software
 
   - heading: Advanced CLI
-  - title: Warmup / Review - HANDS-ON
-    url: tuesday/warmup
-  - title: Warmup - Solutions - HANDS-ON
-    url: tuesday/warmup-solution
-  - title: Advanced Command Line Topics - HANDS-ON
-    url: tuesday/advanced-command-line
-  - title: Advanced Challenge Solutions
-    url: tuesday/advanced-challenge-solutions
-  - title: Using Screen to Manage Multiple Projects - TALK
-    url: tuesday/screen.pdf
-  - title: Clusters & Modules - HANDS-ON
+  - title: Clusters & Modules - HANDS-ON # KEITH
     url: tuesday/cluster
-  - title: A Simple RNA-Seq Workflow
+  - title: Git Basics # HANNAH
+    url:
+  - title: Folder and Experiment Structure # MATT
+    url:
+  - title: Advanced Command Line Topics - HANDS-ON # NICK
+    url: tuesday/advanced-command-line
+  - title: Advanced Challenge Solutions # NICK
+    url: tuesday/advanced-challenge-solutions
+  - title: A Simple RNA-Seq Workflow # NICK
     url: tuesday/bioworkflow
-
-    # todo for monday/Tuesday:
-      # add bash profile stuff?
-      # basics of environment control (conda)
-      # basics of git
-      # folder and experiment structure
-      # installing and running simple sequencing tools
 
 
   - heading: Intro to R
@@ -73,3 +64,12 @@ navigation:
       # Data munging?
       # tidyverse, data frame manipulation
       # Figures in R and model building
+
+
+  - heading: Optional
+  - title: Warmup / Review - HANDS-ON
+    url: tuesday/warmup
+  - title: Warmup - Solutions - HANDS-ON
+    url: tuesday/warmup-solution
+  - title: Using Screen to Manage Multiple Projects - TALK
+    url: tuesday/screen.pdf
