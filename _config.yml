@@ -22,7 +22,7 @@ navigation:
     url: CLI_Intro/command-line-intro-challenge-solutions
   - title: Some Bioinformatics File Formats - TALK # MATT
     url: CLI_Intro/formats.pdf
-  - title: Installing Simple Bioinformatics Software & Conda - HANDS-ON # NICK
+  - title: Installing Simple Bioinformatics Software & Conda - HANDS-ON # NIK
     url: CLI_Intro/software
 
   - heading: Advanced CLI
@@ -32,11 +32,11 @@ navigation:
     url:
   - title: Folder and Experiment Structure # MATT
     url:
-  - title: Advanced Command Line Topics - HANDS-ON # NICK
+  - title: Advanced Command Line Topics - HANDS-ON # NIK
     url: Advanced_CLI/advanced-command-line
-  - title: Advanced Challenge Solutions # NICK
+  - title: Advanced Challenge Solutions # NIK
     url: Advanced_CLI/advanced-challenge-solutions
-  - title: A Simple RNA-Seq Workflow # NICK
+  - title: A Simple RNA-Seq Workflow # NIK
     url: Advanced_CLI/bioworkflow
 
 
