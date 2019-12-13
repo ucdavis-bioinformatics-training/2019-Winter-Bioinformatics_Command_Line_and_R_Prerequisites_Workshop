@@ -111,7 +111,7 @@ This creates a new, empty "samtools" directory in our previously created "softwa
 
 **12\.** Now, you will notice that the "samtools-1.10" directory has a file called "configure" in it. Whenever software has this file, you need to run it first before running "make". We are going to run it and include the directory where we want the final product to go (using the \-\-prefix flag):
 
-	./configure --prefix=/share/workshop/<your username>/software/samtools
+	./configure --prefix=/share/workshop/$USER/software/samtools
 
 This will scan your system and make sure it has all of the necessary components to compile samtools. Once that is done, run make:
 
