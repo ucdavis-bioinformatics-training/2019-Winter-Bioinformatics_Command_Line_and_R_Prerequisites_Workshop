@@ -971,7 +971,7 @@ The way to run the R code inside the code chunk is to use the green arrow locate
 
 ---
 
-Challenge
+`r colFmt("Challenge", 'blue')`
 ====================================================
 
 Use the Iris data we have loaded, generate a table that lists the median of each measurement (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) for each species. Then generate a plot based on the result, such as following:
