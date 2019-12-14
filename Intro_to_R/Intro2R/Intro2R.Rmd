@@ -3,14 +3,17 @@ title: "R for Biologist - An Introduction to R"
 author: "Bioinformatics Core"
 date: "`r format(Sys.Date())`"
 output:
-  html_document:
-    keep_md: TRUE
+    html_document
 ---
 
+```{css echo=FALSE}
+.colsel {
+background-color: lightyellow;
+}
+```
 
-```{r setup, include=FALSE, echo=FALSE, warning=FALSE, error=FALSE}
+```{r echo=FALSE}
 library(knitr)
-
 colFmt = function(x,color){
   outputFormat = opts_knit$get("rmarkdown.pandoc.to")
   if(outputFormat == 'latex')
@@ -22,26 +25,107 @@ colFmt = function(x,color){
 }
 ```
 
-Topics covered in this introduction to R
-====================================================
-1. Basic concepts
-2. Basic data types in R
-3. Import and export data in R
-4. Functions in R
-5. Basic statistics in R
-6. Simple data visulization in R
-7. Install packages in R
-8. Save data in R session
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(class.source = "colsel")
+```
+
+R and RStudio
+========================================================
+
+### What is R?
+[R](http://r-project.org/) is a language and environment for statistical computing and graphics developed in 1993. It provides a wide variety of statistical and graphical techniques (linear and nonlinear modeling, statistical tests, time series analysis, classification, clustering, ...), and is highly extensible, meaning that the user community can write new R tools. It is a GNU project (Free and Open Source).
+
+The R language has its roots in the S language and environment which was developed at Bell Laboratories (formerly AT&T, now Lucent Technologies) by John Chambers and colleagues. R was created by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand, and now, R is developed by the R Development Core Team, of which Chambers is a member. R is named partly after the first names of the first two R authors (Robert Gentleman and Ross Ihaka), and partly as a play on the name of S. R can be considered as a different implementation of S. There are some important differences, but much code written for S runs unaltered under R.
+
+Some of R's strengths:
+
+* The ease with which well-designed publication-quality plots can be produced, including mathematical symbols and formulae where needed. Great care has been taken over the defaults for the minor design choices in graphics, but the user retains full control.
+* It compiles and runs on a wide variety of UNIX platforms and similar systems (including FreeBSD and Linux), Windows and MacOS.
+* R can be extended (easily) via packages.
+* R has its own LaTeX-like documentation format, which is used to supply comprehensive documentation, both on-line in a number of formats and in hardcopy.
+* It has a vast community both in academia and in business.
+* It's FREE!   
+
+### The R environment
+R is an integrated suite of software facilities for data manipulation, calculation and graphical display. It includes
+
+* an effective data handling and storage facility,
+* a suite of operators for calculations on arrays, in particular matrices,
+* a large, coherent, integrated collection of intermediate tools for data analysis,
+* graphical facilities for data analysis and display either on-screen or on hardcopy, and
+* a well-developed, and effective programming language which includes conditionals, loops, user-defined recursive functions and input and output facilities.
+
+The term "environment" is intended to characterize it as a fully planned and coherent system, rather than an incremental accretion of very specific and inflexible tools, as is frequently the case with other data analysis software.
+
+R, like S, is designed around a true computer language, and it allows users to add additional functionality by defining new functions. Much of the system is itself written in the R dialect of S, which makes it easy for users to follow the algorithmic choices made. For computationally-intensive tasks, C, C++ and Fortran code can be linked and called at run time. Advanced users can write C code to manipulate R objects directly.
+
+Many users think of R as a statistics system. The R group prefers to think of it of an environment within which statistical techniques are implemented.   
+
+### The R Homepage
+The R homepage has a wealth of information on it,
+
+[R-project.org](http://r-project.org/)
+
+On the homepage you can:
+
+* Learn more about R
+* Download R
+* Get Documentation (official and user supplied)
+* Get access to CRAN 'Comprehensive R archival network'
+
+### Interface for R
+
+There are many ways one can interface with R language. Here are a few popular ones:
+
+* [RStudio](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-March-Bioinformatics-Prerequisites/master/wednesday/Intro2R/rstudio.png)
+* [RGui](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-March-Bioinformatics-Prerequisites/master/wednesday/Intro2R/rgui.png)
+* Jupyter and R notebooks
+* text editors, such as vi(m), Emacs...
+
+
+### RStudio
+
+[RStudio](http://rstudio.com/) started in 2010, to offer R a more full featured integrated development environment (IDE) and modeled after matlab's IDE.
+
+RStudio has many features:
+
+* syntax highlighting
+* code completion
+* smart indentation
+* "Projects"
+* workspace browser and data viewer
+* embedded plots
+* Markdown notebooks, Sweave authoring and knitr with one click pdf or html
+* runs on all platforms and over the web
+* etc. etc. etc.
+
+RStudio and its team have contributed to many R packages.[13] These include:
+
+* Tidyverse – R packages for data science, including ggplot2, dplyr, tidyr, and purrr
+* Shiny – An interactive web technology
+* RMarkdown – Insert R code into markdown documents
+* knitr – Dynamic reports combining R, TeX, Markdown & HTML
+* packrat – Package dependency tool
+* devtools – Package development tool
+
+RStudio Cheat Sheets: [rstudio-ide.pdf](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf)
 
 ---
 
-Topic 1. Basic concepts
+Programming fundamentals
 ====================================================
 
-There are three concepts that we should be familiar with before working in R:
 
-* Operators
+There are three concepts that are essential in any programming language:
+
+* `r colFmt("Variables", 'purple')`
+
+A variable is a named storage. Creating a variable is to reserve some space in memory. In R, the name of a variable can have letters, numbers, dot and underscore. However, a valid variable name cannot start with a underscore or a number, or start with a dot that is followed by a number.
+
+
+
+* `r colFmt("Operations", 'purple')`
 
 ```{r echo=FALSE, results= 'asis'}
 library(knitr)
@@ -55,24 +139,40 @@ kable(data.frame(Operator=c("<", ">", "<=", ">=", "==", "!="), Description=c("Le
 kable(data.frame(Operator=c("!", "&", "&&", "|", "||"), Description=c("Logical NOT", "Element-wise logical AND", "Logical AND", "Element-wise logical OR", "Logical OR"), stringsAsFactors=F), align='c', caption="Logical Operators in R") %>% kable_styling(bootstrap_options="striped", full_width=F, position="left")
 ```
 
-* Functions
+* `r colFmt("Functions", 'purple')`
 
-Functions are essential in all programming languages. A function takes zero or more parameters and return a result. The way to use a function in R is:
+A function is a block of organized, reusable code that is used to perform a set of predefined operations. A function may take zero or more parameters and return a result. The way to use a function in R is:
 
-function.name(parameter1=value1, ...)
+**function.name(parameter1=value1, ...)**
+
+In R, in order to get help information on a funciton, one may use the command *?function.name*.
 
 
-* Variables
 
-A variable is a named storage. The name of a variable can have letters, numbers, dot and underscore. However, a valid variable name cannot start with a underscore or a number, or start with a dot that is followed by a number.
+<P style="page-break-before: always">
 
 
 ---
 
-Topic 2. Basic data types in R
+Topics covered in this introduction to R
+====================================================
+1. Basic data types in R
+2. Basic data structures in R
+3. Import and export data in R
+4. Functions in R
+5. Basic statistics in R
+6. Simple data visulization in R
+7. Install packages in R
+8. Save data in R session
+9. R notebook
+
+
+---
+
+Topic 1. Basic data types in R
 ====================================================
 
-### Simple variables: variables that have a numeric value, a character value (such as a string), or a logical value (True or False)
+### There are 5 basic atomic classes: logical, integer, numeric, complex, and character.
 
 Examples of numeric values.
 ```{r}
@@ -86,9 +186,9 @@ b
 
 Examples of character values.
 ```{r}
-# assign a string "Professor" to variable title
-title <- "Professor"
-title
+# assign a string "BRCA1" to variable gene
+gene <- "BRCA1"
+gene
 # assign a string "Hello World" to variable hello
 hello <- "Hello World"
 hello
@@ -96,96 +196,84 @@ hello
 
 Examples of logical values.
 ```{r}
-# assign logical value "TRUE" to variable is_female
-is_female <- TRUE
-is_female
-# assign logical value "FALSE" to variable is_male
-is_male <- FALSE
-is_male
+# assign logical value "TRUE" to variable brca1_expressed
+brca1_expressed <- TRUE
+brca1_expressed
+# assign logical value "FALSE" to variable her2_expressed
+her2_expressed <- FALSE
+her2_expressed
 # assign logical value to a variable by logical operation
-age <- 20
-is_adult <- age > 18
-is_adult
+her2_expression_level <- 0
+her2_expressed <- her2_expression_level > 0
+her2_expressed
 ```
 
 To find out the type of variable.
 ```{r}
-class(is_female)
+class(her2_expressed)
 # To check whether the variable is a specific type
-is.numeric(hello)
+is.numeric(gene)
 is.numeric(a)
-is.character(hello)
+is.character(gene)
+
 ```
 
-The rule to convert a logical variable to numeric: TRUE > 1, FALSE > 0
-```{r}
-as.numeric(is_female)
-as.numeric(is_male)
-```
+In the case that one compares two different classes of data, the coersion rule in R is `r colFmt("logical -> integer -> numeric -> complex -> character", 'red')` . The following is an example of converting a numeric variable to character.
 
-R does not know how to convert a numeric variable to a character variable.
+
 ```{r}
 b
 as.character(b)
 ```
 
+<P style="page-break-before: always">
 
-### Vectors: a vector is a combination of multiple values(numeric, character or logical) in the same object. A vector is created using the function c() (for concatenate).
+---
 
-```{r}
-friend_ages <- c(21, 27, 26, 32)
-friend_ages
 
-friend_names <- c("Mina", "Ella", "Anna", "Cora")
-friend_names
+Topic 2. Basic data structures in R
+====================================================
+
+```{r echo=FALSE}
+
+kable(data.frame(Homogeneous=c("Atomic vector", "Matrix", "Array"), Heterogeneous=c("List", "Data frame", ""), row.names=c("1d", "2d", "Nd"), stringsAsFactors=F), align='c') %>% kable_styling(bootstrap_options="striped", full_width=F, position="left")
 ```
 
-One can give names to the elements of a vector.
+
+### Atomic vectors: an atomic vector is a combination of multiple values(numeric, character or logical) in the same object. An atomic vector is created using the function c() (for concatenate).
+
+```{r}
+gene_names <- c("ESR1", "p53", "PI3K", "BRCA1", "EGFR")
+gene_names
+
+gene_expression <- c(0, 100, 50, 200, 80)
+gene_expression
+```
+
+One can give names to the elements of an atomic vector.
 ```{r}
 # assign names to a vector by specifying them
-names(friend_ages) <- c("Mina", "Ella", "Anna", "Carla")
-friend_ages
+names(gene_expression) <- c("ESR1", "p53", "PI3K", "BRCA1", "EGFR")
+gene_expression
 
 # assign names to a vector using another vector
-names(friend_ages) <- friend_names
-friend_ages
+names(gene_expression) <- gene_names
+gene_expression
 ```
 
 Or One may create a vector with named elements from scratch.
 ```{r}
-friend_ages <- c(Mina=21, Ella=27, Anna=26, Cora=32)
-friend_ages
+gene_expression <- c(ESR1=0, p53=100, PI3K=50, BRCA1=200, EGFR=80)
+gene_expression
 ```
 
 To find out the length of a vector:
 ```{r}
-length(friend_ages)
+length(gene_expression)
 ```
 
-To access elements of a vector: by index, or by name if it is a named vector.
-```{r}
-friend_ages[2]
-friend_ages["Ella"]
-
-friend_ages[c(1,3)]
-friend_ages[c("Mina", "Anna")]
-
-# selecting elements of a vector by excluding some of them.
-friend_ages[-3]
-```
-
-To select a subset of a vector can be done by logical vector.
-```{r}
-my_friends <- c("Mina", "Ella", "Anna", "Cora")
-my_friends
-has_child <- c("TRUE", "TRUE", "FALSE", "TRUE")
-has_child
-
-my_friends[has_child == "TRUE"]
-```  
-
-
-##### `r colFmt("NOTE: a vector can only hold elements of the same type.", 'red')`  
+   
+##### `r colFmt("NOTE: a vector can only hold elements of the same type. If there are a mixture of data types, they will be coerced according the coersion rule mentioned earlier in this documentation.", 'red')`  
 
 
 
@@ -213,23 +301,6 @@ dim(my_matrix)
 ```
 
 
-Accessing elements of a matrix is done in similar ways to accessing elements of a vector.
-
-```{r}
-my_matrix[1,3]
-my_matrix["row1", "col3"]
-```
-
-```{r}
-my_matrix[1,]
-my_matrix[,3]
-```
-
-```{r}
-my_matrix[col3 > 20,]
-```
-
-
 Calculations with matrices.
 
 ```{r}
@@ -247,78 +318,47 @@ Total of each column.
 colSums(my_matrix)
 ```
 
-It is also possible to use the function apply() to apply any statistical functions to rows/columns of matrices. The advantage of using apply() is that it can take a function created by user.
+There is a data structure _Array_ in R, that holds multi-dimensional (d > 2) data and is a generalized version of a matrix. *Matrix* is used much more commonly than *Array*, therefore we are not going to talk about *Array* here.
 
-The simplified format of apply() is as following:
 
-apply(X, MARGIN, FUN)
-
-X: data matrix
-MARGIN: possible values are 1 (for rows) and 2 (for columns)
-FUN: the function to apply on rows/columns
-
-To calculate the mean of each row.
+### Factors: a factor represents categorical variables, which are important in statistical modeling and can only take on a limited number of different values. The function factor() can be used to create a factor variable.
 
 ```{r}
-apply(my_matrix, 1, mean)
-```
-
-To calculate the median of each row
-
-```{r}
-apply(my_matrix, 1, median)
-```
-
-
-### Factors: a factor represents categorical or groups in data. The function factor() can be used to create a factor variable.
-
-```{r}
-friend_groups <- factor(c(1,2,1,2))
-friend_groups
+disease_stage <- factor(c("Stage1", "Stage2", "Stage2", "Stage3", "Stage1", "Stage4"))
+disease_stage
 ```
 
 In R, categories are called factor levels. The function levels() can be used to access the factor levels.
 
 ```{r}
-levels(friend_groups)
+levels(disease_stage)
 ```
 
-Change the factor levels.
+A function to compactly display the internal structure of an R object is str(). Please use str() to display the internal structure of the object we just created *disease_stage*. It shows that _disease_stage_ is a factor with four levels: "Stage1", "Stage2", "Stage3", etc... The integer numbers after the colon shows that these leves are encoded under the hood by integer numbers: the first level is 1, the second level is 2, and so on. Basically, when _factor_ function is called, R first scan through the vector to determine how many different categories that are in there, then it converts the character vector to a vector of integer values.
+
 
 ```{r}
-levels(friend_groups) <- c("best_friend", "not_best_friend")
-friend_groups
+str(disease_stage)
 ```
 
-Change the order of levels.
+
+By default, R infers the factor levels by ordering them alphabetically. One may specifically define the factor levels at the creation of the factor.
+
 
 ```{r}
-levels(friend_groups) <- c("not_best_friend", "best_friend")
-friend_groups
+disease_stage <- factor(c("Stage1", "Stage2", "Stage2", "Stage3", "Stage1", "Stage4"), levels=c("Stage2", "Stage1", "Stage3", "Stage4"))
+# The encoding for levels are different from above.
+str(disease_stage)
 ```
 
-By default, the order of factor levels is taken in the order of numeric or alphabetic.
+If you want to know the number of individuals at each levels, there are two functions: _summary_ and _table_.
 
 ```{r}
-friend_groups <- factor(c("not_best_friend", "best_friend", "not_best_friend", "best_friend"))
-friend_groups
-```
-
-The factor levels can be specified when creating the factor, if the order does not follow the default rule.
-
-```{r}
-friend_groups <- factor(c("not_best_friend", "best_friend", "not_best_friend", "best_friend"), levels=c("not_best_friend", "best_friend"))
-friend_groups
-```
-
-If you want to know the number of individuals at each levels, there are two functions.
-
-```{r}
-summary(friend_groups)
+summary(disease_stage)
 ```
 
 ```{r}
-table(friend_groups)
+table(disease_stage)
 ```
 
 
@@ -327,22 +367,25 @@ table(friend_groups)
 A data frame can be created using the function data.frame().
 
 ```{r}
-# creating a data frame using previously defined vectors
-friends <- data.frame(name=friend_names, age=friend_ages, child=has_child)
-friends
+# creating a data frame using pre-defined vectors
+patients_name=c("Patient1", "Patient2", "Patient3", "Patient4", "Patient5", "Patient6")
+Family_history=c("Y", "N", "Y", "N", "Y", "Y")
+patients_age=c(31, 40, 39, 50, 45, 65)
+meta.data <- data.frame(patients_name=patients_name, disease_stage=disease_stage, Family_history=Family_history, patients_age=patients_age)
+meta.data
 ```
 
 To check whether a data is a data frame, use the function is.data.frame().
 
 ```{r}
-is.data.frame(friends)
+is.data.frame(meta.data)
 ```
 
 ```{r}
 is.data.frame(my_matrix)
 ```
 
-One can convert a object to a data frame using the function as.data.frame().
+One can convert a matrix object to a data frame using the function as.data.frame().
 
 ```{r}
 class(my_matrix)
@@ -363,61 +406,53 @@ my_data
 t(my_data)
 ```
 
-To obtain a subset of a data frame can be done in similar ways as we have discussed: by index, by row/column names, or by logical values.
-
-```{r}
-friends["Mina",]
-```
-
-```{r}
-# The columns of a data frame can be referred to by the names of the columns
-friends
-friends$age
-friends[friends$age > 26,]
-```
-
-```{r}
-friends[friends$child == "TRUE",]
-```
-
-Function subset() can also be used to get a subset of a data frame.
-
-```{r}
-# select friends that are older than 26
-subset(friends, age > 26)
-
-# select the information of the ages of friends
-subset(friends, select=age)
-```
-
-
 A data frame can be extended.
 
 ```{r}
-# add a column that has the information on the marrital status of friends
-friends$married <- c("YES", "YES", "NO", "YES")
-friends
+# add a column that has the information on harmful mutations in BRCA1/BRCA2 genes for each patient.
+meta.data
+meta.data$BRCA <- c("YES", "NO", "YES", "YES", "YES", "NO")
+meta.data
 ```
 
-A data frame can also be extended using the functions cbind() and rbind().
+A data frame can also be extended using the functions cbind() and rbind(), for adding columns and rows respectively. When using cbind(), the number of values in the new column must match the number of rows in the data frame. When using rbind(), the two data frames must have the same variables/columns.
 
 ```{r}
-# add a column that has the information on the salaries of friends
-cbind(friends, salary=c(4000, 8000, 2000, 6000))
+# add a column that has the information on the racial information for each patient.
+cbind(meta.data, Race=c("AJ", "AS", "AA", "NE", "NE", "AS"))
+# rbind can be used to add more rows to a data frame.
+rbind(meta.data, data.frame(patients_name="Patient7", disease_stage="S4", Family_history="Y", patients_age=48, BRCA="YES"))
 ```
 
-### Lists: a list is an ordered collection of objects, which can be any type of R objects (vectors, matrices, data frames).
-
-A list can be created using the function list().
+One may use the function *merge* to merge two data frames horizontally, based on one or more common key variables.
 
 ```{r}
-my_list <- list(mother="Sophia", father="John", sisters=c("Anna", "Emma"), sister_age=c(5, 10))
+expression.data <- data.frame(patients_name=c("Patient3", "Patient4", "Patient5", "Patient1", "Patient2", "Patient6"), EGFR=c(10, 472, 103784, 1782, 187, 18289), TP53=c(16493, 72, 8193, 1849, 173894, 1482))
+expression.data
+merge(meta.data, expression.data, by="patients_name")
+```
+
+`r colFmt("In the previous example, we created *expression.data* with the same number of patients as *meta.data*. What if *expression.data* has less number of patients? As an exercise to understand how *merge* works, you can reduce the dimention of *expression.data* and check the *merge* results.", 'blue')`
+
+
+### Lists: a list is an ordered collection of objects, which can be any type of R objects (vectors, matrices, data frames, even lists).
+
+A list is constructed using the function list().
+
+```{r}
+my_list <- list(1:5, "a", c(TRUE, FALSE, FALSE), c(3.2, 103.0, 82.3))
 my_list
+str(my_list)
 ```
 
+One could construct a list by giving names to elements.
+
 ```{r}
-# names of elements in the list
+my_list <- list(Ranking=1:5, ID="a", Test=c(TRUE, FALSE, FALSE), Score=c(3.2, 103.0, 82.3))
+
+# display the names of elements in the list using the function *names*, or *str*. Compare the output of *str* with the above results to see the difference.
 names(my_list)
+str(my_list)
 ```
 
 ```{r}
@@ -425,27 +460,160 @@ names(my_list)
 length(my_list)
 ```
 
-To access elements of a list can be done using its name or index.
+### Subsetting data
+
+#### Subsetting allows one to access the piece of data of interest. When combinded with assignment, subsetting can modify selected pieces of data. The operators that can be used to subset data are: [, $, and [[.
+
+##### First, we are going to talk about subsetting data using [, which is the most commonly used operator. We will start by looking at vectors and talk about four ways to subset a vector.
+
+* `r colFmt("**Positive integers** return elements at the specified positions", 'purple')`
 
 ```{r}
-my_list$mother
+# first to recall what are stored in gene_names
+gene_names
+# obtain the first and the third elements
+gene_names[c(1,3)]
 ```
 
-```{r}
-my_list[["mother"]]
-```
+R uses 1 based indexing, meaning the first element is at the position 1, not at position 0.
+
+* `r colFmt("**Negative integers** omit elements at the specified positions", 'purple')`
 
 ```{r}
+gene_names[-c(1,3)]
+```
+
+One may not mixed positive and negative integers in one single subset operation.
+
+```{r error=TRUE}
+# The following command will produce an error.
+gene_names[c(-1, 2)]
+```
+
+* `r colFmt("**Logical vectors** select elements where the corresponding logical value is TRUE", 'purple')`, This is very useful because one may write the expression that creates the logical vector.
+
+```{r}
+gene_names[c(TRUE, FALSE, TRUE, FALSE, FALSE)]
+```
+
+Recall that we have created one vector called *gene_expression*. Let's assume that *gene_expression* stores the expression values correspond to the genes in *gene_names*. Then we may subset the genes based on expression values.
+
+```{r}
+gene_expression
+
+gene_names[gene_expression > 50]
+```
+
+If the logical vector is shorter in length than the data vector that we want to subset, then it will be recycled to be the same length as the data vector.
+
+```{r}
+gene_names[c(TRUE, FALSE)]
+```
+
+If the logical vector has "NA" in it, the corresponding value will be "NA" in the output. "NA" in R is a sysmbol for missing value.
+
+```{r}
+gene_names[c(TRUE, NA, FALSE, TRUE, NA)]
+```
+
+* `r colFmt("**Nothing** returns the original vector", 'purple')`, This is more useful for matrices, data frames than for vectors.
+
+```{r}
+gene_names[]
+```
+
+* `r colFmt("**Character vectors** return elements with matching names, when the vector is named.", 'purple')`
+
+```{r}
+gene_expression
+gene_expression[c("ESR1", "p53")]
+```
+
+##### Subsetting a list works in the same way as subsetting an atomic vector. Using [ will always return a list.
+
+```{r}
+my_list[1]
+```
+
+##### Subsetting a matrix can be done by simply generalizing the one dimension subsetting: one may supply a one dimension index for each dimension of the matrix. `r colFmt("Blank/Nothing subsetting is now useful in keeping all rows or all columns.", 'red')`
+
+
+```{r}
+my_matrix[c(TRUE, FALSE), ]
+```
+
+##### Subsetting a data frame can be done similarly as subsetting a matrix. However, one may supply only one one dimension index to subset a data frame. In this case, R will treat the data frame as a list with each column is an element in the list.
+
+```{r}
+# recall a data frame created from above: *meta.data*
+meta.data
+# subset the data frame similarly to a matrix
+meta.data[c(TRUE, FALSE, FALSE, TRUE),]
+
+# subset the data frame using one vector
+meta.data[c("patients_age", "disease_stage")]
+```
+
+<br>
+
+#### Subsetting operators: **[[** and **$**
+
+##### **[[** is similar to **[**, except that it returns the content of the element.
+
+```{r}
+# recall my_list
+my_list
+# comparing [[ with [ in subsetting a list
 my_list[[1]]
+my_list[1]
 ```
 
-```{r}
-my_list[[3]]
-```
+`r colFmt("[[ is very useful when working with a list. Because when [ is applied to a list, it always returns a list. While [[ returns the contents of the list. [[ can only extrac/return one element, so it only accept one integer/string as input.", 'red')`
+
+Because data frames are implemented as lists of columns, one may use [[ to extract a column from data frames.
 
 ```{r}
-my_list[[3]][2]
+meta.data[["disease_stage"]]
 ```
+
+
+<br>
+
+##### **$** is a shorthand for **[[** combined with character subsetting.
+
+```{r}
+# subsetting a list using $ 
+my_list$Score
+# subsetting a data frame using
+meta.data$disease_stage
+```
+
+<br>
+
+##### Simplifying vs. preserving subsetting
+
+We have seen some examples of simplying vs. preserving subsetting, for example:
+
+```{r}
+# simplifying subsetting
+my_list[[1]]
+# preserving subsetting
+my_list[1]
+```
+
+Basically, simplying subsetting returns the simplest possible data structure that can represent the output. While preserving subsetting keeps the structure of the output as the same as the input. In the above example, [[ simplifies the output to a vector, while [ keeps the output as a list.
+
+Because the syntax of carrying out simplifying and preserving subsetting differs depending on the data structure, the table below provides the information for the most basic data structure.
+
+```{r, echo=FALSE}
+kable(data.frame(Simplifying=c("x[[1]]", "x[[1]]", "x[1:3, drop=T]", "x[, 1] or x[[1]]"), Preserving=c("x[1]", "x[1]", "x[1:3]", "x[, 1, drop=F] or x[1]"), row.names=c("Vector", "List", "Factor", "Data frame"), stringsAsFactors=F), align='c') %>% kable_styling(bootstrap_options="striped", full_width=F, position="left")
+```
+
+`r colFmt("Please play around with the data structures that we have created to understand the behaviours of simplifying and preserving subsetting", 'blue')`
+
+
+
+<P style="page-break-before: always">
 
 ---
 
@@ -455,11 +623,11 @@ Topic 3. Import and export data in R
 R base function read.table() is a general funciton that can be used to read a file in table format. The data will be imported as a data frame.
 
 ```{r}
-# To read a local file. If you have downloaded the raw_counts.txt file to your local machine, you may use the following command to read it in, by providing the full path for the file location. The way to specify the full path is the same as taught in the command line session. Here we assume raw_counts.txt is in our current working directory
-data <- read.table(file="./Intro2R_files/raw_counts.txt", sep="\t", header=T, stringsAsFactors=F)
-
 # There is a very convenient way to read files from the internet.
-data <- read.table(file="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019_August_UCD_mRNAseq_Workshop/master/intro2R/Intro2R_files/raw_counts.txt", sep="\t", header=T, stringsAsFactors=F)
+data <- read.table(file="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.txt", sep="\t", header=T, stringsAsFactors=F)
+
+# To read a local file. If you have downloaded the raw_counts.txt file to your local machine, you may use the following command to read it in, by providing the full path for the file location. The way to specify the full path is the same as taught in the command line session.
+data <- read.table(file="./raw_counts.txt", sep="\t", header=T, stringsAsFactors=F)
 
 ```
 
@@ -481,7 +649,7 @@ read.delim2(): for reading "tab separated value" files (".txt"). By default, com
 
 ```{r}
 # We are going to read a file over the internet by providing the url of the file.
-data2 <- read.csv(file="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019_August_UCD_mRNAseq_Workshop/master/intro2R/Intro2R_files/raw_counts.txt", stringsAsFactors=F)
+data2 <- read.csv(file="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.csv", stringsAsFactors=F)
 
 # To look at the file:
 head(data2)
@@ -502,10 +670,7 @@ write.csv()
 
 write.csv2()
 
-
-```{r echo=FALSE, results='asis'}
-cat("\\newpage")
-```
+<P style="page-break-before: always">
 
 ---
 
@@ -537,7 +702,7 @@ rep(1:3, each=3)
 
 ```  
 
-#### `r colFmt("One useful function to find out information on a variable: str().", 'red')`  
+#### `r colFmt("One useful function to find out information on a R object: str(). It compactly display the internal structure of a R object.", 'red')`  
 
 
 ```{r}
@@ -545,18 +710,37 @@ str(data2)
 ```
 
 
-### Two special functions: lapply() and sapply()
-#### lapply() is to apply a given function to every element of a vector and obtain a list as results.
-#### The difference between lapply() and apply() is that lapply() can be applied on objects like dataframes, lists or vectors. Function apply() only works on an array of dimension 2 or a matrix.
+### A few useful functions: apply(), lapply(), sapply(), and tapply()
 
-##### To check the syntax of using lapply():
+#### apply() takes array or matrix as input and output in vector, array or list.
+
 ```{r}
-#?lapply()
+# recall my_matrix
+my_matrix
+# check the usage of apply() function
+?apply()
+# calculate sums for each row
+apply(my_matrix, MARGIN=1, sum)
+```
 
+
+#### lapply() takes list, vector or data frame as input and outputs in list.
+
+
+```{r}
+?lapply()
+
+# generate some random data matrix
 data <- as.data.frame(matrix(rnorm(49), ncol=7), stringsAsFactors=F)
 dim(data)
+
+# calculate the sum for each row
 lapply(1:dim(data)[1], function(x){sum(data[x,])})
+
+# comparing the results to apply() results
 apply(data, MARGIN=1, sum)
+
+# calculate log10 of the sum of each row
 lapply(1:dim(data)[1], function(x){log10(sum(data[x,]))})
 ```
 
@@ -564,7 +748,7 @@ lapply(1:dim(data)[1], function(x){log10(sum(data[x,]))})
 
 ```{r}
 # To check the syntax of using sapply():
-#?sapply()
+?sapply()
 
 sapply(1:dim(data)[1], function(x){log10(sum(data[x,]))})
 ```
@@ -573,6 +757,49 @@ sapply(1:dim(data)[1], function(x){log10(sum(data[x,]))})
 ```{r}
 sapply(1:dim(data)[1], function(x){log10(sum(data[x,]))}, simplify=FALSE)
 ```
+
+#### The function tapply() applys a function to each subset of a vector based on a second vector of factors.
+
+```{r}
+?tapply()
+
+# Let's use Fisher's Iris data to demonstrate the usage of tapply().
+# First, load the Iris dataset
+data(iris)
+
+# Take a look at how the data looks
+head(iris)
+
+# Generate a summary of the sepal lengths for each iris species.
+tapply(iris$Sepal.Length, iris$Species, summary)
+```
+
+#### Write one's own functions
+
+Even though there are a lot of R packages available, there are always situations where one might have to write one's own function to accomplish some very specific goals. Functions are defined by code with a specific format:
+
+```{r}
+function.name <- function(arg1=arg1, arg2, ...){
+	var <- sin(arg1) + sin(arg2)  # carry out tasks
+	var / 2
+}
+```
+
+Here, we are going to write a function to calculate the area of a triangle given the lengths of three sides.
+
+```{r}
+my.area <- function(side1=side1, side2=side2, side3=side3){
+	circonference <- (side1 + side2 + side3) / 2
+	area <- sqrt(circonference * (circonference - side1) * (circonference - side2) * (circonference - side3))
+	return(area)
+}
+
+# let's carry out some test
+my.area(side1=3, side2=4, side3=5)
+```
+
+
+<P style="page-break-before: always">
 
 ---
 
@@ -601,6 +828,8 @@ Calculate the quantiles of each samples.
 ```{r}
 apply(data, 2, quantile)
 ```
+
+<P style="page-break-before: always">
 
 ---
 
@@ -631,13 +860,6 @@ boxplot() can be used to summarize data.
 boxplot(data, xlab="Sample ID", ylab="Raw Counts")
 ```
 
-add more details to the plot.
-
-```{r}
-boxplot(data, xlab="Sample ID", ylab="Raw Counts", main="Expression levels", col="blue", border="black")
-```
-
-
 ```{r}
 x <- rnorm(1000)
 boxplot(x)
@@ -656,6 +878,8 @@ hist(x, breaks=seq(range(x)[1]-1, range(x)[2]+1, by=0.5))
 dev.off()
 ```
 
+<P style="page-break-before: always">
+
 ---
 
 Topic 7. Install packages in R
@@ -669,12 +893,12 @@ if (!requireNamespace("BiocManager"))
 ## install core packages
 BiocManager::install()
 ## install specific packages
-BiocManager::install(c("ggplot2", "ShortRead"))
+BiocManager::install(c("ggplot2", "tidyverse"))
 ```
 
 * Bioconductor has a repository and release schedule that differ from R (Bioconductor has a ‘devel’ branch to which new packages and updates are introduced, and a stable ‘release’ branch emitted once every 6 months to which bug fixes but not new features are introduced). This mismatch causes that the version detected by install.packages() is sometimes not the most recent 'release'.
 
-* A consequence of the distince 'devel' branch is that install.packages() sometimes points only to the 'release' repository, while users might want to have access to the leading-edge features in the develop version.
+* A consequence of the distinct 'devel' branch is that install.packages() sometimes points only to the 'release' repository, while users might want to have access to the leading-edge features in the develop version.
 
 * An indirect consequence of Bioconductor's structured release is that packages generally have more extensive dependences with one another.
 
@@ -686,10 +910,9 @@ source("http://bioconductor.org/biocLite.R")
 ## install core packages
 biocLite()
 ## install specific packages
-biocLite("RCircos")
-biocLite(c("IdeoViz", "devtools"))
+biocLite(c("tidyverse", "devtools"))
 ```
-
+   
 The R function install.packages() can be used to install packages that are not part of Bioconductor.
 
 ```{r eval=FALSE}
@@ -699,9 +922,11 @@ install.packages("ggplot2", repos="http://cran.us.r-project.org")
 Install from source of github.
 ```{r eval=FALSE}
 library(devtools)
-#install_github("stephenturner/qqman")
+install_github("stephenturner/qqman")
 ```
 
+
+<P style="page-break-before: always">
 
 ---
 
@@ -711,23 +936,65 @@ Topic 8. Save data in R session
 #### To save history in R session
 
 ```{r}
-#savehistory(file="March27.history")
+savehistory(file="Dec18.history")
 
-#loadhistory(file="March27.history")
+#loadhistory(file="Dec18.history")
 ```
 
 #### To save objects in R session
 
 ```{r}
-save(list=c("x", "data"), file="March27.RData")
+save(list=c("x", "data"), file="Dec18.RData")
 
-#load("March27.RData")
+#load("Dec18.RData")
 ```
+---
+
+Topic 9. R markdown and R notebooks
+====================================================
+
+Markdown is a system that allow easy incorporation of annotations/comments together with computing code. Both the raw source of markdown file and the rendered output are easy to read. R markdown allows both interactive mode with R and producing a reproducible document. An R notebook is an R markdown document with code chunks that can be executed independently and interactively, with output visible immediately beneath the input. In RStudio, by default, all R markdown documents are run in R notebook mode. Under the R notebook mode, when executing a chunk, the code is sent to the console to be run one line at a time. This allows execution to stop if a line raises an error.
+
+<br>
+
+In RStudio, creating an R notebook can be done by going to the menu command ** File -> New File -> R Notebook **.
+
+An example of an R notebook looks like:
+
+
+![](./notebook.png)
+
+
+The way to run the R code inside the code chunk is to use the green arrow located at the top right corner of each of the code chunk, or use ** Ctrl + Shift + Enter ** on Windows, or ** Cmd + Shift + Enter ** on Mac to run the current code chunk. To run each individual code line, one uses ** Ctrl + Enter ** on Windows, or ** Cmd + Enter ** on Mac.
+
+<br>
+
+---
 
 Challenge
 ====================================================
 
-Read in the reference fasta file for PhiX that you have downloaded this morning and find out the length of PhiX genome and GC content.
+Use the Iris data we have loaded, generate a table that lists the median of each measurement (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) for each species. Then generate a plot based on the result, such as following:
 
-`r colFmt("Hint: please look into bioconductor package ShortRead.", 'blue')`
-`r colFmt("The PhiX genome can be downloaded by following the instruction in Intro to Command-Line session. The link for the data is at ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/PhiX/Illumina/RTA/PhiX_Illumina_RTA.tar.gz", 'blue')`
+
+```{r echo=FALSE, message=FALSE, include=FALSE}
+tmp <- sapply(1:4, function(x){tapply(iris[,x], iris[[5]], median)})
+colnames(tmp) <- colnames(iris)[1:4]
+nms <- colnames(tmp)
+species <- as.vector(levels(iris$Species))
+x <- c(1, 2, 3, 4)
+png("test.png")
+plot(x, tmp["setosa",], pch=20, col='red', ylim=c(0, max(tmp)), xaxt="n", xlab="Measurement type", ylab="Measurement results", cex.lab=1.0)
+points(x, tmp["virginica",], pch=20, col='orange')
+points(x, tmp["versicolor",], pch=20, col='blue')
+axis(1, at=x, labels=nms, las=2, cex.axis=0.7)
+text(c(1.5,1.5,1.5), c(0, 0.7, 1.4), labels=species, col=c("red", "blue", "orange"), cex=1.5)
+dev.off()
+```
+
+![](./test.png)
+
+
+<br>
+<br>
+
