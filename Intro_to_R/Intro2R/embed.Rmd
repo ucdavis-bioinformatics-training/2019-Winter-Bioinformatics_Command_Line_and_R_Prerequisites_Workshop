@@ -39,15 +39,14 @@ Topics covered in this introduction to R
 6. Simple data visulization in R
 7. Install packages in R
 8. Save data in R session
-9. R markdown and R notebook
-10. Challenge
+9. R markdown and R notebooks
 
 ---
 
 Topic 1. Basic data types in R
 ====================================================
 
-### There are 5 basic atomic classes: numeric *(integer, complex)*, character, logical
+### There are 5 basic atomic classes: numeric _(integer, complex)_, character, logical
 
 Examples of numeric values.
 ```{r}
