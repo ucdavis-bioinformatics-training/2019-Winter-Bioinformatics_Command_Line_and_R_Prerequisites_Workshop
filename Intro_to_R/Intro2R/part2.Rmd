@@ -27,7 +27,6 @@ colFmt = function(x,color){
 knitr::opts_chunk$set(class.source = "colsel")
 ```
 
----
 
 Topic 1. Basic data types in R
 ====================================================
