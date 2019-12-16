@@ -9,7 +9,7 @@ Git is an open source version control system. It allows users to keep track of c
 
 The history of a repository forms a tree. Each commit in the tree describes exactly what was added to and subtracted from the repo since the previous commit. All the information needed to go from the very first version to the most recent, or any version in between, is contained in the commit history. This tree can be very simple, like a straight line, or something more branched, depending on the complexity of the project. Even if your project is small, version control may still be helpful for record-keeping and collaboration.
 
-Git is already installed on the cluster. These exercises assume you are working within the `~/cli/` directory you created earlier.
+Git is already installed on tadpole. These exercises assume you are logged into tadpole and working within directory where you have write permissions. If you have Git installed on your personal computer, you should be able to do the exercises there, too.
 
 In addition to Git itself, you will need a GitHub account. If you don't have one yet, [set one up now](https://github.com).
 
@@ -229,7 +229,7 @@ When you pull, you should see something like this:
 	CONFLICT (content): Merge conflict in test.txt
 	Automatic merge failed; fix conflicts and then commit the result.
 
-All right, so let's `vi test.txt` and fix those conflicts. You should see a bunch of weird things in your file when you open it:
+All right, so let's `nano test.txt` and fix those conflicts. You should see a bunch of weird things in your file when you open it:
 
 ![Git conflict](git_basics_conflict.png)
 
