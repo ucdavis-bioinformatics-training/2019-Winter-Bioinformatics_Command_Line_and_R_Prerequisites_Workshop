@@ -265,6 +265,10 @@ Topics covered in this introduction to R
 8. Save data in R session
 9. R notebook
 
+<P style="page-break-before: always">
+
+---
+
 
 <!--html_preserve--><!DOCTYPE html>
 
