@@ -85,7 +85,6 @@ b
 as.character(b)
 ```
 
-<P style="page-break-before: always">
 
 ---
 
@@ -471,9 +470,6 @@ kable(data.frame(Simplifying=c("x[[1]]", "x[[1]]", "x[1:3, drop=T]", "x[, 1] or 
 `r colFmt("Please play around with the data structures that we have created to understand the behaviours of simplifying and preserving subsetting", 'blue')`
 
 
-
-<P style="page-break-before: always">
-
 ---
 
 Topic 3. Import and export data in R
@@ -529,7 +525,6 @@ write.csv()
 
 write.csv2()
 
-<P style="page-break-before: always">
 
 ---
 
@@ -658,7 +653,6 @@ my.area(side1=3, side2=4, side3=5)
 ```
 
 
-<P style="page-break-before: always">
 
 ---
 
@@ -688,7 +682,6 @@ Calculate the quantiles of each samples.
 apply(data, 2, quantile)
 ```
 
-<P style="page-break-before: always">
 
 ---
 
@@ -737,7 +730,6 @@ hist(x, breaks=seq(range(x)[1]-1, range(x)[2]+1, by=0.5))
 dev.off()
 ```
 
-<P style="page-break-before: always">
 
 ---
 
@@ -785,7 +777,6 @@ install_github("stephenturner/qqman")
 ```
 
 
-<P style="page-break-before: always">
 
 ---
 
