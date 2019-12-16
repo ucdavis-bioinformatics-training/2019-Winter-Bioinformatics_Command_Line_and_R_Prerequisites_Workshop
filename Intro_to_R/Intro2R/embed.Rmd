@@ -47,7 +47,7 @@ Topics covered in this introduction to R
 Topic 1. Basic data types in R
 ====================================================
 
-### There are 5 basic atomic classes: numeric **(integer, complex)**, character, logical
+### There are 5 basic atomic classes: numeric *(integer, complex)*, character, logical
 
 Examples of numeric values.
 ```{r}
