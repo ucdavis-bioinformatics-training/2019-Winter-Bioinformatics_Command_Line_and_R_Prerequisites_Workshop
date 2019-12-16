@@ -151,24 +151,6 @@ In R, in order to get help information on a funciton, one may use the command *?
 <P style="page-break-before: always">
 
 
----
-
-
-Topics covered in this introduction to R
-====================================================
-1. Basic data types in R
-2. Basic data structures in R
-3. Import and export data in R
-4. Functions in R
-5. Basic statistics in R
-6. Simple data visulization in R
-7. Install packages in R
-8. Save data in R session
-9. R markdown and R notebook
-10. Challenge
-
----
-
 ```{r, echo=FALSE}
 htmltools::includeHTML("embed.html")
 ```
