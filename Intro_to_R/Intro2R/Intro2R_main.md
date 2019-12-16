@@ -252,7 +252,6 @@ In R, in order to get help information on a funciton, one may use the command *?
 <P style="page-break-before: always">
 
 
----
 
 Topics covered in this introduction to R
 ====================================================
