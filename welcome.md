@@ -27,6 +27,27 @@ To cover the **"prerequisites for doing bioinformatics"**
 * Basic knowledge of R (or equivalent) and statistical programming
 * Basic knowledge of Statistics and model building
 
+
+###UNIX/COMMAND LINE CONCEPTS
+* Introductory materials, Unix/bash command line basics.
+* Environment variables, your bash profile
+* Basic bash shell scripting.
+* Introduction to cluster computing
+* Basics of git
+* Folder and experiment structure
+* Installation and running of simple sequencing tools.
+* Constructing and run a simple bioinformatics pipeline.
+
+
+###R/DATA PROGRAMMING CONCEPTS
+* Introduction to the R programming language.
+* R markdown and notebooks.
+* Constructing metadata tables, data munging, excel to R
+* Basics of the tidyverse, data frame manipulation (join/rename/pipes)
+* Figures in R, ggplot2
+* Statistical concepts and model building.
+
+
 * Goal is 30-40% lecture/discussion 60-70% hands-on
 
 ## Internet
