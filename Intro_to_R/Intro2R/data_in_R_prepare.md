@@ -73,7 +73,7 @@ This is the stats file generated after running samtools stats on a bam file gene
 In the R console run the following command.
 
 ```r
-download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019_August_UCD_mRNAseq_Workshop/master/intro2R/Data_in_R_files/bwa_mem_Stats.log", "bwa_mem_Stats.log")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/intro2R/Data_in_R_files/bwa_mem_Stats.log", "bwa_mem_Stats.log")
 ```
 
 ### Download the template Markdown workshop document and open it
@@ -81,7 +81,7 @@ download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training
 In the R console run the following command
 
 ```r
-download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019_August_UCD_mRNAseq_Workshop/master/intro2R/data_in_R.Rmd", "data_in_R.Rmd")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/intro2R/data_in_R.Rmd", "data_in_R.Rmd")
 ```
 
 ### Edit the file YAML portion

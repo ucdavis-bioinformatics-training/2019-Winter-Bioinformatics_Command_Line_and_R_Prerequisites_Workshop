@@ -9,6 +9,8 @@ navigation:
   - heading: Introduction
   - title: Intro to the Workshop and Core
     url: welcome
+  - title: What is Bioinformatics/Genomics Perspective?
+    url: pdfs/Genomics_a_perspective_Sept2_2019.pdf
 
   - heading: CLI Intro
   - title: Introduction and Getting Connected # MATT
@@ -74,11 +76,20 @@ navigation:
   - title: Conda
     url: CLI_Intro/conda
 
+  - heading: Support
+  - title: Cheat Sheets
+    url: cheatSheetIndex
+  - title: Software and Links
+    url: software
+  - title: Scripts
+    url: scripts/scripts_links
+
   - heading: ETC
-  - title: Examples of Markdown Formatting
-    url: examples
+  - title: Closing thoughts
+    url: closing
+  - title: Workshop Photos
+    url: photos/photos
   - title: Github
     url: https://github.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop
   - title: Biocore website
     url: http://bioinformatics.ucdavis.edu
-

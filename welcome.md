@@ -19,14 +19,14 @@ __The mission of the Bioinformatics Core facility is to facilitate outstanding o
 
 ## Workshop Goals
 
-* End to End understanding of RNAseq differential
-  * Discussions/lectures
-  * Technologies
-  * Experimental design
-  * Cost estimation
-  * Workflow
-  * mRNA gene expression analysis
-* To work through a complete experiment, starting from raw data to completion, including making a few figures.
+To cover the **"prerequisites for doing bioinformatics"**
+
+* Access to a multi-core (24 cpu or greater), ‘high’ memory 64Gb or greater Linux server.
+* Familiarity with the ’command line’ and constructing scripts/pipelines.
+* Basic knowledge of how to install software
+* Basic knowledge of R (or equivalent) and statistical programming
+* Basic knowledge of Statistics and model building
+
 * Goal is 30-40% lecture/discussion 60-70% hands-on
 
 ## Internet
@@ -55,9 +55,9 @@ http://bioinformatics.ucdavis.edu/training/events/
 
 * This RNAseq Workshop
 
-  https://ucdavis-bioinformatics-training.github.io/2019_August_UCD_mRNAseq_Workshop/  
+  https://ucdavis-bioinformatics-training.github.io/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/  
 
-  https://github.com/ucdavis-bioinformatics-training/2019_August_UCD_mRNAseq_Workshop
+  https://github.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop
 
 ## Computing Cluster
 

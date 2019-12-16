@@ -7,10 +7,8 @@ You should already have an account on our systems
 1. Open a Terminal (usually under Applications/Utilities on a Mac), or install [iterm2](https://www.iterm2.com/)
 2. Cut and paste this into the terminal:
 
-    ```
     ssh username@tadpole.genomecenter.ucdavis.edu
-    ```
-    
+
 where 'username' is replaced with your username. Press Enter.
 
 3. Type in your password. No characters will display when you are typing. Press Enter.
@@ -19,9 +17,7 @@ where 'username' is replaced with your username. Press Enter.
 
 1. Use scp (secure copy, a remote file copying program):
 
-    ```
     scp username@tadpole.genomecenter.ucdavis.edu:full/path/to/file .
-    ```
 
 2. Replace 'username' with your username and replace 'full/path/to/file' with the full path to the file you want to transfer. Note that there is a "." at the end of the command, which is where to put the file, i.e. your current directory. You will have to type in your password.
 
@@ -43,10 +39,8 @@ In putty, mobaxterm:
 
 In Shell with SSH enabled:
 
-```
-ssh username@tadpole.genomecenter.ucdavis.edu
-```
-    
+    ssh username@tadpole.genomecenter.ucdavis.edu
+
 where 'username' is replaced with your username. Press Enter.
 
 ### For Windows - Transferring files

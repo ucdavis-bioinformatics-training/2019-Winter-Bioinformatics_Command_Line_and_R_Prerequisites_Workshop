@@ -74,7 +74,7 @@ getwd()
 ```
 
 ```
-## [1] "/Users/mattsettles/projects/src/github.com-ucdavis-bioinformatics-training/2019_August_UCD_mRNAseq_Workshop/intro2R"
+## [1] "/Users/mattsettles/projects/src/github.com-ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/intro2R"
 ```
 
 ```r
@@ -697,7 +697,7 @@ grid.arrange(k, l, nrow = 1)
 ### Fancy Multiple plots in a grid
 The gridExtra package is great for plotting multiple object in one plot.
 
-![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019_August_UCD_mRNAseq_Workshop/master/intro2R/Data_in_R_figures/grid_plot.png)<!-- -->
+![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/intro2R/Data_in_R_figures/grid_plot.png)<!-- -->
 
 
 ```r
