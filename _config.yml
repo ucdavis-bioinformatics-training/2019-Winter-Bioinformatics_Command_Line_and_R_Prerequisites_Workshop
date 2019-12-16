@@ -9,18 +9,18 @@ navigation:
   - heading: Introduction
   - title: Intro to the Workshop and Core
     url: welcome
+  - title: Getting Connected # MATT
+    url: CLI_Intro/logging-in
   - title: What is Bioinformatics/Genomics Perspective?
     url: pdfs/Genomics_a_perspective_Sept2_2019.pdf
 
   - heading: CLI Intro
-  - title: Introduction and Getting Connected # MATT
-    url: CLI_Intro/logging-in
   - title: Unix & the Command Line # KEITH
     url: CLI_Intro/command-line-intro
   - title: Unix & the Command Line - Challenge Solutions # KEITH
     url: CLI_Intro/command-line-intro-challenge-solutions
-  - title: Some Bioinformatics File Formats # MATT
-    url: CLI_Intro/formats.pdf
+#  - title: Some Bioinformatics File Formats # MATT
+#    url: CLI_Intro/formats.pdf
   - title: Installing Simple Bioinformatics Software & Conda # NIK
     url: CLI_Intro/software
 
