@@ -542,7 +542,7 @@ my_list[1]
 my_matrix[c(TRUE, FALSE), ]
 ```
 
-##### Subsetting a data frame can be done similarly as subsetting a matrix. However, one may supply only one one dimension index to subset a data frame. In this case, R will treat the data frame as a list with each column is an element in the list.
+##### Subsetting a data frame can be done similarly as subsetting a matrix. In addition, one may supply only one 1-dimensional index to subset a data frame. In this case, R will treat the data frame as a list with each column is an element in the list.
 
 ```{r}
 # recall a data frame created from above: *meta.data*
