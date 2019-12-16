@@ -71,6 +71,8 @@ navigation:
     url: Advanced_CLI/warmup-solution
   - title: Using Screen to Manage Multiple Projects
     url: Advanced_CLI/screen.pdf
+  - title: Conda
+    url: CLI_Intro/conda
 
   - heading: ETC
   - title: Examples of Markdown Formatting
