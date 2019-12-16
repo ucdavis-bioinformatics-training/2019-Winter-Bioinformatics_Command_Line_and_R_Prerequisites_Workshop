@@ -7,6 +7,13 @@ output:
 .colsel {
 background-color: lightyellow;
 }
+
+pre code, pre, code {
+  withie-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
 ```
 
 ```{r echo=FALSE}
