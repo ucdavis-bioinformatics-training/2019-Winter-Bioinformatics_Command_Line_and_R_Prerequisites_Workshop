@@ -27,9 +27,9 @@ navigation:
   - title: Clusters & Modules # KEITH
     url: Advanced_CLI/cluster
   - title: Git Basics # HANNAH
-    url:
-  - title: Folder and Experiment Structure # MATT
-    url:
+    url: Advanced_CLI/git_basics
+  #- title: Folder and Experiment Structure # MATT
+  #  url:
   - title: Advanced Command Line Topics # NIK
     url: Advanced_CLI/advanced-command-line
   - title: Advanced Challenge Solutions # NIK
@@ -47,13 +47,13 @@ navigation:
     url: Intro_to_R/Intro2R/data_in_R_fixed
 
 
-  - heading: Advanced R
-  - title: R Oddities
-    url: Advanced_R/R_Oddities.Rmd
-  - title: Walkthrough of Vignettes for limma and biomaRt
-    url: Advanced_R/limma_biomart_vignettes.Rmd
-  - title: Linear Models in R
-    url: Advanced_R/linear_models.Rmd
+  #- heading: Advanced R
+  #- title: R Oddities
+  #  url: Advanced_R/R_Oddities.Rmd
+  #- title: Walkthrough of Vignettes for limma and biomaRt
+  #  url: Advanced_R/limma_biomart_vignettes.Rmd
+  #- title: Linear Models in R
+  #  url: Advanced_R/linear_models.Rmd
 
 
     # todo for Wed/Advanced_R:
