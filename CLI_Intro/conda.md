@@ -18,15 +18,20 @@ First lets load the module for anaconda. Anaconda is the a set of packages, incl
 module load anaconda3
 ```
 
-Now lets create an environment in a specific path of interest.
+Now lets create an environment in a specific path of interest. Here we want to download HTStream a tool for High Throughput Sequencing Read Processing.
+
+[HTSream Homepage](https://ibest.github.io/HTStream/)
+
+[HTStream Bioconda Documentation](https://bioconda.github.io/recipes/htstream/README.html)
+
 ```
-conda create -p ~/htstream
+conda create -p /share/workshop/$USER/htstream
 ```
    - Type 'y' when prompted
  
 Lets activate the environment that we just created
 ```
-source activate ~/htstream
+source activate /share/workshop/$USER/htstream
 ```
 
 Now we should see that the environment at the start of our terminal is set to the path of our newly created environment. 
@@ -36,7 +41,7 @@ Now we should see that the environment at the start of our terminal is set to th
 
 Finally lets modify this environment with a software of interest.
 ```
-conda install htstream -p ~/htstream
+conda install htstream -p /share/workshop/$USER/htstream
 ``` 
 
 Lets see what our environment looks like after running this.
@@ -85,7 +90,7 @@ zlib                      1.2.11               h7b6447c_3
 </div>
 
 
-Now lets say we created some software in python/R on top of htstream and we want to be able to distribute the environment to someone else or load if off of the cluster. 
+###Now lets say we created some software in python/R on top of htstream and we want to be able to distribute the environment to someone else or load if off of the cluster. 
 
 ```
 conda install pandas
@@ -93,18 +98,15 @@ conda install ggplot
 conda list -e > htstream_requirments.txt
 ``` 
 
-
+### We can now create and distribute our environment by supplying others with the requirements text file. 
 *DON'T RUN THIS LINE*
 ```
 conda create --name new_environement --file htstream_requirements.txt -p ~/path_for_new_env
 ```
 
+## How does this compare with how the software HTStream would typically be installed?
 
-
-
-## How does this compare with how the software would typically be installed?
-
-*DON'T RUN THIS LINE*
+*DON'T RUN THESE LINEs*
 ```
 wget -O 1_60.tar.bz2 https://sourceforge.net/projects/boost/files/boost/1.60.0/boost_1_60_0.tar.bz2/download
 tar --bzip2 -xf 1_60.tar.bz2
@@ -115,10 +117,18 @@ BOOST_INCLUDE=$(pwd)
 BOOST_INCLUDE_LIB=$(pwd)/stage/lib
 ```
 
-https://bioconda.github.io/recipes/htstream/README.html
-
-
+Compared to typical installations such as the one shown above, conda installs only requires one command. Conda is quicker, more user friendly, and more commonly results in success. 
+    
 ---
+# A few things for your future Conda usage:
+
+<object data="https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
+## When running conda on your own computer you will need to add channels, which is where conda will look when performing package installs
 
 ```
 conda config --add channels defaults

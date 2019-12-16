@@ -27,9 +27,9 @@ navigation:
   - title: Clusters & Modules # KEITH
     url: Advanced_CLI/cluster
   - title: Git Basics # HANNAH
-    url:
-  - title: Folder and Experiment Structure # MATT
-    url:
+    url: Advanced_CLI/git_basics
+  #- title: Folder and Experiment Structure # MATT
+  #  url:
   - title: Advanced Command Line Topics # NIK
     url: Advanced_CLI/advanced-command-line
   - title: Advanced Challenge Solutions # NIK
@@ -40,20 +40,20 @@ navigation:
 
   - heading: Intro to R
   - title: Introduction to R
-    url: Intro_to_R/Intro2R/Intro2R
+    url: Intro_to_R/Intro2R/Intro2R_fixed
   - title: Data in R - Prepare
     url: Intro_to_R/Intro2R/data_in_R_prepare_fixed
   - title: Data in R
     url: Intro_to_R/Intro2R/data_in_R_fixed
 
 
-  - heading: Advanced R
-  - title: R Oddities
-    url: Advanced_R/R_Oddities.Rmd
-  - title: Walkthrough of Vignettes for limma and biomaRt
-    url: Advanced_R/limma_biomart_vignettes.Rmd
-  - title: Linear Models in R
-    url: Advanced_R/linear_models.Rmd
+  #- heading: Advanced R
+  #- title: R Oddities
+  #  url: Advanced_R/R_Oddities.Rmd
+  #- title: Walkthrough of Vignettes for limma and biomaRt
+  #  url: Advanced_R/limma_biomart_vignettes.Rmd
+  #- title: Linear Models in R
+  #  url: Advanced_R/linear_models.Rmd
 
 
     # todo for Wed/Advanced_R:
@@ -71,6 +71,8 @@ navigation:
     url: Advanced_CLI/warmup-solution
   - title: Using Screen to Manage Multiple Projects
     url: Advanced_CLI/screen.pdf
+  - title: Conda
+    url: CLI_Intro/conda
 
   - heading: ETC
   - title: Examples of Markdown Formatting
