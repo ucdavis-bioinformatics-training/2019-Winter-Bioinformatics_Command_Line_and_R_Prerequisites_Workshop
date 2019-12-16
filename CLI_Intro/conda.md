@@ -10,7 +10,7 @@
 
      - Installability of 98 randomly selected published software tools across 22 life-science journals over a span of 15 years. Error bars, where present, indicate SEM. (A) Pie chart showing the percentage of tools with various levels of installability. (B) A pie chart showing the proportion of evaluated tools that required no deviation from the documented installation procedure. (C) Tools that require no manual intervention (pass automatic installation test) exhibit decreased installation time. (D) Tools installed exhibit increased citation per year compared with tools that were not installed (Kruskal-Wallis, p-value = 0.035). (E) Tools that are easy to install include a decreased portion of undocumented commands (Not Installed versus Easy Install: Mann-Whitney U test, p-value = 0.01, Easy Install versus Complex Install: Mann-Whitney U test, p-value = 8.3 × 10 −8 ). (F) Tools available in well-maintained package managers such as Bioconda were always installable, whereas tools not shipped via package managers were prone to problems in 32% of the studied cases. SEM, standard error of the mean. https://doi.org/10.1371/journal.pbio.3000333.g002
 
-## What are some of the main components and commands of the conda CLI?
+## What are some of the main components of the conda CLI?
 https://bioconda.github.io/recipes/htstream/README.html
 
 First lets load the module for anaconda. Anaconda is the a set of packages, including conda, typically needed for a given environment.  
@@ -90,7 +90,7 @@ zlib                      1.2.11               h7b6447c_3
 </div>
 
 
-###Now lets say we created some software in python/R on top of htstream and we want to be able to distribute the environment to someone else or load if off of the cluster. 
+### Now lets say we created some software in python/R on top of htstream and we want to be able to distribute the environment to someone else or load if off of the cluster. 
 
 ```
 conda install pandas
@@ -128,7 +128,7 @@ Compared to typical installations such as the one shown above, conda installs on
     </embed>
 </object>
 
-## When running conda on your own computer you will need to add channels, which is where conda will look when performing package installs
+### When running conda on your own computer you will need to add channels, which is where conda will look when performing package installs
 
 ```
 conda config --add channels defaults
