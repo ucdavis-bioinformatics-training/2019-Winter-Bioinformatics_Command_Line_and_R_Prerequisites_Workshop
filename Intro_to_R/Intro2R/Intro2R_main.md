@@ -248,6 +248,8 @@ A function is a block of organized, reusable code that is used to perform a set 
 In R, in order to get help information on a funciton, one may use the command *?function.name*.
 
 
+<P style="page-break-before: always">
+
 
 
 <!--html_preserve--><!DOCTYPE html>
