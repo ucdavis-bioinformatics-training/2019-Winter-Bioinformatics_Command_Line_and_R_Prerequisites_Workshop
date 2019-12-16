@@ -573,6 +573,11 @@ The first '-' becomes a 'd' if the 'file' is actually a directory. The next thre
 
 <div class="output">-rwxr-xr-- 1 msettles biocore 79 Aug 19 15:05 test.sh
 </div>
+The first 10 characters of the output represent the file and permissions. 
+The first character is the file type, the next three sets of three represent the file permissions for the user, group, and everyone respectively. 
+    - r = read
+    - w = write
+    - x = execute
 
 OK! So let's run this script, feeding it the phiX genome. When we put the genome file 1st after the name of the script, this filename becomes variable '1', which the script can access by specifying '$1'. We have to provide a relative reference to the script './' because its not our our "PATH".
 
