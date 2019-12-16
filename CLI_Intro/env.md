@@ -21,9 +21,15 @@ By convention, variable names are in all caps, but they don't have to be. You ca
     MYVAR=2
     echo $MYVAR
 
-Finally, in order to use any environment variable in a program that you execute from the command-line, you need to use the **export** command:
+In order to use any environment variable in a program that you execute from the command-line, you need to use the **export** command:
 
     export MYVAR=3
+
+You can also use backticks (`) to execute a command and send the output into a variable:
+
+    MYVAR=`pwd`
+    echo $MYVAR
+
 
 .bashrc/.bash_profile, aliases & the PATH variable
 -----------------------------------------------------
