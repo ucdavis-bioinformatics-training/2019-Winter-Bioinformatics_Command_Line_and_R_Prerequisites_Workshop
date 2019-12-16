@@ -215,6 +215,8 @@ OK, let's destroy what we just created:
 
 So, 'mkdir' and 'rmdir' are used to create and destroy (empty) directories. 'rm' to remove files. To create a file can be as simple as using 'echo' and the '>' (redirection) character to put text into a file. Even simpler is the 'touch' command.
 
+    mkdir ~/cli
+    cd ~/cli
     touch newFile
     ls -ltra  # look at the time listed for the file you just created
     cat newFile  # it's empty!
