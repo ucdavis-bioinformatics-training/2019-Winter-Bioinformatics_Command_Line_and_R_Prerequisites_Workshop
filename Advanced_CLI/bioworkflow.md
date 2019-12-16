@@ -4,13 +4,13 @@ A Simple Bioinformatics Workflow
 **1\.** First, log into a node and then let's make a directory for our analysis:
 
     srun -t 1440 -c 10 -n 1 --mem 8000 --reservation workshop --account workshop --pty /bin/bash
-	cd /share/workshops/<your username>/rnaseq
+	cd /share/workshops/$USER/rnaseq
 	mkdir rnaseq
 	cd rnaseq
 
 Then, link in some raw data, take a look at the directory, and take a look at one of the files:
 
-	ln -s /share/biocore/workshops/2018_Sept_Prereq/00-RawData
+	ln -s /share/biocore/workshops/prereq_data/00-RawData
 	ls -ltrh 00-RawData/
 	zless 00-RawData/C61subset/C61subset_S67_L006_R1_001.fastq.gz
 
@@ -33,9 +33,9 @@ Take a look at the options:
 
 ---
 
-**3\.** Now, let's run it. We are going to use our subsetted raw input files, we are going to specify gzipped, fastq output, a prefix for the output files, and a stats log file that gives us statistics about the state of the reads before and after the command. We are going to use the "--no-orphans" option to make things easier so that we only have to deal with a pair of files per sample.
+**3\.** Now, let's run it. We are going to use our subsetted raw input files, fastq output prefix, and a stats log file that gives us statistics about the state of the reads before and after the command. We are going to use the "--no-orphans" option to make things easier so that we only have to deal with a pair of files per sample.
 
-	hts_AdapterTrimmer -F --read1-input ../00-RawData/C61subset/C61subset_S67_L006_R1_001.fastq.gz --read2-input ../00-RawData/C61subset/C61subset_S67_L006_R2_001.fastq.gz --gzip-output --no-orphans --fastq-output --prefix C61_trimmed --stats-file C61.stats.log
+	hts_AdapterTrimmer -F --read1-input ../00-RawData/C61subset/C61subset_S67_L006_R1_001.fastq.gz --read2-input ../00-RawData/C61subset/C61subset_S67_L006_R2_001.fastq.gz --no-orphans --fastq-output C61_trimmed --stats-file C61.stats.log
 
 Take a look at the stats log file output:
 
@@ -43,7 +43,7 @@ Take a look at the stats log file output:
 
 Now, go back to the command (by using the up arrow) and change it so that all the filenames are for the other sample. You can use <Ctrl>-Arrow keys to go left and right by entire words to make it easier to get to the parts you need to change:
 
-	hts_AdapterTrimmer -F --read1-input ../00-RawData/I561subset/I561subset_S71_L006_R1_001.fastq.gz --read2-input ../00-RawData/I561subset/I561subset_S71_L006_R2_001.fastq.gz --gzip-output --no-orphans --fastq-output --prefix I561_trimmed --stats-file I561.stats.log
+	hts_AdapterTrimmer -F --read1-input ../00-RawData/I561subset/I561subset_S71_L006_R1_001.fastq.gz --read2-input ../00-RawData/I561subset/I561subset_S71_L006_R2_001.fastq.gz --no-orphans --fastq-output I561_trimmed --stats-file I561.stats.log
 
 Take a look at that stats file:
 
@@ -53,7 +53,7 @@ Take a look at that stats file:
 
 **4\.** The next step is to do alignment, but instead of using a module, we are going to download and compile the software ourselves. So we are going to use an aligner called STAR, which is made for RNA-Seq data. First, go back to your rnaseq directory:
 
-	cd /share/workshops/<your username>/rnaseq
+	cd /share/workshops/$USER/rnaseq
 
 Go to the [STAR github page](https://github.com/alexdobin/STAR) and copy the the URL for the git repository after clicking on the "Clone or download" button. Then use that URL to clone the repo:
 
@@ -91,7 +91,7 @@ You will know if it worked if you can run STAR from any directory.
 
 **6\.** Now we should be ready to run STAR. Go back to your rnaseq directory:
 
-	cd /share/workshops/<your username>/rnaseq
+	cd /share/workshops/$USER/rnaseq
 
 To run STAR we need an indexed genome to align against. So the first step is to get a genome, an annotation for that genome, and index it. Make a directory for the reference:
 
@@ -100,7 +100,7 @@ To run STAR we need an indexed genome to align against. So the first step is to 
 
 Link in reference and annotation files for Arabidopsis:
 
-	ln -s /share/biocore/workshops/2018_Sept_Prereq/ref/* .
+	ln -s /share/biocore/workshops/prereq_data/ref/* .
 
 Make a directory for the STAR index files:
 
@@ -117,7 +117,8 @@ There are a lot of them. In order to understand what is going on, you really nee
 		--genomeDir star_index \
 		--genomeFastaFiles Arabidopsis_thaliana.TAIR10.dna.toplevel.fa \
 		--sjdbGTFfile Arabidopsis_thaliana.TAIR10.39.gtf \
-		--sjdbOverhang 99
+		--sjdbOverhang 99 \
+        --genomeSAindexNbases 12
 
 This step takes about 8 minutes to run.
 
@@ -125,7 +126,7 @@ This step takes about 8 minutes to run.
 
 **7\.** Once we've generated an index, we are ready to align. Go back to your rnaseq directory:
 
-	cd /share/workshops/<your username>/rnaseq
+	cd /share/workshops/$USER/rnaseq
 
 And make a directory for the alignments:
 
