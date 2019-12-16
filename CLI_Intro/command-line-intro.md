@@ -165,6 +165,8 @@ Using tab-completion is a must on the command line. A single <tab> auto-complete
 
 touch updates the timestamp on a file, here we use it to create three empty files.
 
+    mkdir ~/cli
+    cd ~/cli
     touch one seven september
     ls o
 
@@ -191,7 +193,6 @@ We already learned one command that will create a file, touch. Lets create a fol
 
     cd  # home again
     echo $USER # echo to screen the contents of the variable $USER
-    mkdir ~/cli
     cd ~/cli
     echo 'Hello, world!' > first.txt
 
