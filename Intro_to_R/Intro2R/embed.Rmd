@@ -917,10 +917,11 @@ To render R notebook to html/pdf/word documents can be done using the **Preview*
 Working with an R notebook, load the Iris data as we did earlier in this documentation, generate a table that lists the median of each measurement (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) for each species. Then generate a plot based on the result, such as following. Finally produce an html report with the table and the plot.
 
 
-```{r echo=FALSE, message=FALSE, include=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, error=FALSE}
 tmp <- sapply(1:4, function(x){tapply(iris[,x], iris[[5]], median)})
 colnames(tmp) <- colnames(iris)[1:4]
 nms <- colnames(tmp)
+kable(data.frame(tmp, stringsAsFactors=F), align='c') %>% kable_styling(bootstrap_options=c("striped", "hover", "responsive"), full_width=F, position="center")
 species <- as.vector(levels(iris$Species))
 x <- c(1, 2, 3, 4)
 png("test.png")
@@ -929,13 +930,13 @@ points(x, tmp["virginica",], pch=20, col='orange')
 points(x, tmp["versicolor",], pch=20, col='blue')
 axis(1, at=x, labels=nms, las=2, cex.axis=0.7)
 text(c(1.5,1.5,1.5), c(0, 0.7, 1.4), labels=species, col=c("red", "blue", "orange"), cex=1.5)
-dev.off()
+tt <- dev.off()
 ```
 
 ![](./test.png)
 
 
-`r colFmt("Hint: in order to print out a nice looking table, one will have to use an R package called **kableExtra**.", 'red')`
+`r colFmt("Hint: in order to output a nice looking table in the final report, one will have to use an R package called **knitr**.", 'red')`
 
 <br>
 
