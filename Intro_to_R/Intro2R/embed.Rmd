@@ -7,16 +7,13 @@ output:
 .colsel {
 background-color: lightyellow;
 }
-```
 
-```{css echo=FALSE}
-pre code, pre, code {
-  withie-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
+pre, code {
+  white-space:pre !important;
+  overflow-x:scroll auto
 }
 ```
+
 
 ```{r echo=FALSE}
 library(knitr)
@@ -32,8 +29,7 @@ colFmt = function(x,color){
 ```
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(class.source = "colsel")
-options(width=200)
+knitr::opts_chunk$set(class.source = "colsel", echo=TRUE)
 ```
 
 
