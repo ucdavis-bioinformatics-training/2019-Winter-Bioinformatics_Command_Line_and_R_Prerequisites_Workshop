@@ -121,3 +121,7 @@ rmarkdown::render("Intro2R_main.Rmd")
 rmarkdown::render("embed.Rmd")
 rmarkdown::render("Intro2R_main.Rmd")
 rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+meta.data
+t(meta.data)
+rmarkdown::render("embed.Rmd")

@@ -651,6 +651,17 @@ for (i in 1:dim(my_matrix)[1]){
 }
 ```
 
+There is **while** loop in R similarly as in command line or any other programming language. The basic structure of *while* loop is:
+
+**while (condition){**
+
+  **some operation**
+
+**}**
+
+
+`r colFmt("Please rewrite the calculation of the column sum using *while* loop.", 'blue')`
+
 
 ### A few useful functions: apply(), lapply(), sapply(), and tapply() to replace for loop
 
