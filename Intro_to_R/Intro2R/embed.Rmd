@@ -935,6 +935,8 @@ dev.off()
 ![](./test.png)
 
 
-`r colFmt("Hint: in order to print out a nice looking table, one will have to use an R package called **kableExtra**.", 'red')
+`r colFmt("Hint: in order to print out a nice looking table, one will have to use an R package called **kableExtra**.", 'red')`
+
+<br>
 
 
