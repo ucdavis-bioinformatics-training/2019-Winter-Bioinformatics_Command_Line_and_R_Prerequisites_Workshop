@@ -70,12 +70,12 @@ navigation:
 
 
   - heading: Optional
-  - title: CLI Warmup / Review
-    url: Advanced_CLI/warmup
-  - title: CLI Warmup - Solutions
-    url: Advanced_CLI/warmup-solution
-  - title: Using Screen to Manage Multiple Projects
-    url: Advanced_CLI/screen.pdf
+#  - title: CLI Warmup / Review
+#    url: Advanced_CLI/warmup
+#  - title: CLI Warmup - Solutions
+#    url: Advanced_CLI/warmup-solution
+#  - title: Using Screen to Manage Multiple Projects
+#    url: Advanced_CLI/screen.pdf
   - title: Conda
     url: CLI_Intro/conda
 
