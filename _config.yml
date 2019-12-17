@@ -26,19 +26,21 @@ navigation:
     url: CLI_Intro/env
   - title: Installing Simple Bioinformatics Software # NIK
     url: CLI_Intro/software
+  - title: Conda
+    url: CLI_Intro/conda
+  - title: Clusters & Modules # KEITH
+    url: CLI_Intro/cluster
 
 
   - heading: Advanced CLI
-  - title: Clusters & Modules # KEITH
-    url: Advanced_CLI/cluster
   - title: Git Basics # HANNAH
     url: Advanced_CLI/git_basics
-  #- title: Folder and Experiment Structure # MATT
-  #  url:
   - title: Advanced Command Line Topics # NIK
     url: Advanced_CLI/advanced-command-line
   - title: Advanced Challenge Solutions # NIK
     url: Advanced_CLI/advanced-challenge-solutions
+  #- title: Folder and Experiment Structure # MATT
+  #  url:
   - title: A Simple RNA-Seq Workflow # NIK
     url: Advanced_CLI/bioworkflow
 
@@ -76,8 +78,6 @@ navigation:
 #    url: Advanced_CLI/warmup-solution
 #  - title: Using Screen to Manage Multiple Projects
 #    url: Advanced_CLI/screen.pdf
-  - title: Conda
-    url: CLI_Intro/conda
 
   - heading: Support
   - title: Cheat Sheets
