@@ -2,6 +2,7 @@ All documentation for the workshop is best viewed from the github.io pages
 
 [Documentation](https://ucdavis-bioinformatics-training.github.io/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/)
 
+
 ## Bioinformatics Command-Line and R Prerequisites Workshop @ UC Davis  
 
 Dec. 16, 2019, 9 a.m. - Dec. 19, 2019, 4:30 p.m.
@@ -22,6 +23,7 @@ The registration fee for the entire workshop is $600 for UC and UC affiliates, $
 
 
 ### UNIX/COMMAND LINE CONCEPTS
+
 * Introductory materials, Unix/bash command line basics.
 * Environment variables, your bash profile
 * Basic bash shell scripting.
@@ -32,7 +34,7 @@ The registration fee for the entire workshop is $600 for UC and UC affiliates, $
 * Constructing and run a simple bioinformatics pipeline.
 
 
-### R/DATA PROGRAMMING CONCEPTS
+###  R/DATA PROGRAMMING CONCEPTS
 * Introduction to the R programming language.
 * R markdown and notebooks.
 * Constructing metadata tables, data munging, excel to R
