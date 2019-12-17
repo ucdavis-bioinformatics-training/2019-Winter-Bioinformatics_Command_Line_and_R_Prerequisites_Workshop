@@ -508,8 +508,9 @@ data <- read.table(file="./raw_counts.txt", sep="\t", header=T, stringsAsFactors
 
 ```
 
-Take a look at the beginning part of the data frame.
+To check what type of object *data* is in and take a look at the beginning part of the data.
 ```{r}
+is.data.frame(data)
 head(data)
 ```
 
