@@ -65,3 +65,23 @@ rmarkdown::render("embed.Rmd")
 rmarkdown::render("embed.Rmd")
 rmarkdown::render("embed.Rmd")
 rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+my_data
+meta.data
+if (meta.data$Family_history) {
+rmarkdown::render("embed.Rmd")
+gene_expression
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+my_matrix
+for (i in 1:dim(my_matrix)[2]){
+  sum(my_matrix[,i]
+}
+for (i in 1:dim(my_matrix)[2]){
+  sum(my_matrix[,i])
+}
+for (i in 1:dim(my_matrix)[2]){
+  out <- sum(my_matrix[,i])
+  print(out)
+}
+rmarkdown::render("embed.Rmd")
