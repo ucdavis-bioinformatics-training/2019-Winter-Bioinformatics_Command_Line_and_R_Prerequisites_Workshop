@@ -47,8 +47,8 @@ Now we should see that the environment at the start of our terminal is set to th
 
 Finally lets modify this environment with a software of interest.
 ```
-conda install htstream -p /share/workshop/$USER/htstream
-``` 
+conda install -c bioconda htstream
+```
 
 Lets see what our environment looks like after running this.
 
@@ -99,8 +99,6 @@ zlib                      1.2.11               h7b6447c_3
 ### Now lets say we created some software in python/R on top of htstream and we want to be able to distribute the environment to someone else or load if off of the cluster. 
 
 ```
-conda install pandas
-conda install ggplot
 conda list -e > htstream_requirments.txt
 ``` 
 
