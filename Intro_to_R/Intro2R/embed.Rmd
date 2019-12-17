@@ -831,7 +831,7 @@ if (!requireNamespace("BiocManager"))
 ## install core packages
 BiocManager::install()
 ## install specific packages
-BiocManager::install(c("ggplot2", "tidyverse"))
+BiocManager::install(c("devtools", "tidyverse"))
 ```
 
 * Bioconductor has a repository and release schedule that differ from R (Bioconductor has a ‘devel’ branch to which new packages and updates are introduced, and a stable ‘release’ branch emitted once every 6 months to which bug fixes but not new features are introduced). This mismatch causes that the version detected by install.packages() is sometimes not the most recent 'release'.
