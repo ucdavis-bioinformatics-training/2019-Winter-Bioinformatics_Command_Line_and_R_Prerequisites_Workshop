@@ -22,6 +22,8 @@ navigation:
     url: CLI_Intro/command-line-intro-challenge-solutions
 #  - title: Some Bioinformatics File Formats # MATT
 #    url: CLI_Intro/formats.pdf
+  - title: Environment Variables
+    url: CLI_Intro/env
   - title: Installing Simple Bioinformatics Software # NIK
     url: CLI_Intro/software
 
@@ -43,7 +45,7 @@ navigation:
 
   - heading: Intro to R
   - title: Introduction to R
-    url: Intro_to_R/Intro2R/Intro2R
+    url: Intro_to_R/Intro2R/Intro2R_main
   - title: Data in R - Prepare
     url: Intro_to_R/Intro2R/data_in_R_prepare_fixed
   - title: Data in R
