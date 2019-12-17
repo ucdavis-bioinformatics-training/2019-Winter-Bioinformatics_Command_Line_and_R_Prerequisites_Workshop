@@ -640,12 +640,12 @@ The basic structure of *for* loop is:
 **}**
 
 
-For excample, we would like to calculate the sum of a column for every column in the matrix we created earlier. We are going to use *for* loop to do it.
+For excample, we would like to calculate the sum of a row for every row in the matrix we created earlier. We are going to use *for* loop to do it.
 
 
 ```{r}
-for (i in 1:dim(my_matrix)[2]){
-  out <- sum(my_matrix[,i])
+for (i in 1:dim(my_matrix)[1]){
+  out <- sum(my_matrix[i, ])
   print(out)
 }
 ```
