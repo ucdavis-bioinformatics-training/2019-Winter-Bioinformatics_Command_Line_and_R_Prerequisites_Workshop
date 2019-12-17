@@ -10,7 +10,13 @@
 9. Switch panes again
 10. Leave process running!
 11. Detach screen {C-a d}
-12.
+12. Reattach screen {screen -r name}
+13. Create pane {C-a c}
+14. Reattach, switch panes
+15. Kill pane {C-a k, then y}
+16. New screen {screen -S name}
+17. Exit server, screens still running!
+
 
 ## 1. What is ‘screen’?
 Screen manages multiple sets of terminal windows (panes), allowing you to
