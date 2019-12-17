@@ -85,3 +85,11 @@ for (i in 1:dim(my_matrix)[2]){
   print(out)
 }
 rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.txt")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.txt", file="./test.txt")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.txt", desfile="./test.txt")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.txt", "./test.txt")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")

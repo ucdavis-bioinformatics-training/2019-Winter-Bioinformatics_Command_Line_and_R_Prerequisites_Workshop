@@ -498,11 +498,12 @@ Topic 3. Import and export data in R
 
 R base function read.table() is a general funciton that can be used to read a file in table format. The data will be imported as a data frame.
 
-```{r}
+```{r eval=FALSE}
 # There is a very convenient way to read files from the internet.
 data <- read.table(file="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.txt", sep="\t", header=T, stringsAsFactors=F)
 
 # To read a local file. If you have downloaded the raw_counts.txt file to your local machine, you may use the following command to read it in, by providing the full path for the file location. The way to specify the full path is the same as taught in the command line session.
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.txt", "./raw_counts.txt")
 data <- read.table(file="./raw_counts.txt", sep="\t", header=T, stringsAsFactors=F)
 
 ```
