@@ -28,7 +28,7 @@ To cover the **"prerequisites for doing bioinformatics"**
 * Basic knowledge of Statistics and model building
 
 
-###UNIX/COMMAND LINE CONCEPTS
+### UNIX/COMMAND LINE CONCEPTS
 * Introductory materials, Unix/bash command line basics.
 * Environment variables, your bash profile
 * Basic bash shell scripting.
@@ -39,7 +39,7 @@ To cover the **"prerequisites for doing bioinformatics"**
 * Constructing and run a simple bioinformatics pipeline.
 
 
-###R/DATA PROGRAMMING CONCEPTS
+### R/DATA PROGRAMMING CONCEPTS
 * Introduction to the R programming language.
 * R markdown and notebooks.
 * Constructing metadata tables, data munging, excel to R
@@ -74,7 +74,7 @@ http://bioinformatics.ucdavis.edu/training/events/
 
 	https://github.com/ucdavis-bioinformatics-training
 
-* This RNAseq Workshop
+* This Bioinformatics Prerequisites Workshop
 
   https://ucdavis-bioinformatics-training.github.io/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/  
 

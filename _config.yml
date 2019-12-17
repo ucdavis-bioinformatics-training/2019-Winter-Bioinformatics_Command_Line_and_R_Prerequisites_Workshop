@@ -17,11 +17,14 @@ navigation:
   - heading: CLI Intro
   - title: Unix & the Command Line # KEITH
     url: CLI_Intro/command-line-intro
+    #TODO add more info on when not to uncompress files
   - title: Unix & the Command Line - Challenge Solutions # KEITH
     url: CLI_Intro/command-line-intro-challenge-solutions
 #  - title: Some Bioinformatics File Formats # MATT
 #    url: CLI_Intro/formats.pdf
-  - title: Installing Simple Bioinformatics Software & Conda # NIK
+  - title: Environment Variables
+    url: CLI_Intro/env
+  - title: Installing Simple Bioinformatics Software # NIK
     url: CLI_Intro/software
 
 
@@ -42,7 +45,7 @@ navigation:
 
   - heading: Intro to R
   - title: Introduction to R
-    url: Intro_to_R/Intro2R/Intro2R_fixed
+    url: Intro_to_R/Intro2R/Intro2R_main
   - title: Data in R - Prepare
     url: Intro_to_R/Intro2R/data_in_R_prepare_fixed
   - title: Data in R

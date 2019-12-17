@@ -1,5 +1,37 @@
 # Introduction to Command Line Interface
 
+## Outline:
+1. What is the command line?
+2. Directory Structure 
+3. Syntax of a Command
+4. Logging Into a Remove Server
+5. Command Line Basics (ls, pwd, Ctrl-C, man, alias, ls -lthra)
+6. Getting Around (cd)
+7. Absolute and Relative Paths
+8. Tab Completion
+9. Create and Destroy (echo, cat, rm, rmdir)
+10. Piping and Redirection (\|, >, >>, cut, sort, grep)
+11. History Repeats Itself (history, head, tail, <up arrow>)
+12. Editing Yourself (Ctrl-A, Ctrl-E, Ctrl-K, Ctrl-W)
+13. Compressions and Archives (tar, gzip, gunzip)
+14. Forced Removal (rm -R)
+15. BASH Wildcard Characters (?, *, find, environment variables($), quotes/ticks)
+16. Manipulation of a FASTA file (cp, mv, wc -l/-c)
+17. Symbolic Links (ln -s)
+18. STDOUT and STDERR (>1, >2)
+19. Paste Command (paste, for loops)
+20. Running in the Background (bg, &, nohup, jobs, kill, top)
+21. Shell Scripts and File Permissions (chmod, nano, ./)
+
+### A CLI cheat sheet
+
+<object data="https://files.fosswire.com/2007/08/fwunixref.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
+
 ## What is the command line
 
 * CLI is a tool into which one can type commands to perform tasks.
@@ -165,6 +197,8 @@ Using tab-completion is a must on the command line. A single <tab> auto-complete
 
 touch updates the timestamp on a file, here we use it to create three empty files.
 
+    mkdir ~/tmp
+    cd ~/tmp
     touch one seven september
     ls o
 
@@ -191,8 +225,7 @@ We already learned one command that will create a file, touch. Lets create a fol
 
     cd  # home again
     echo $USER # echo to screen the contents of the variable $USER
-    mkdir ~/cli
-    cd ~/cli
+    cd ~/tmp
     echo 'Hello, world!' > first.txt
 
 echo text then redirect ('>') to a file.
@@ -214,6 +247,8 @@ OK, let's destroy what we just created:
 
 So, 'mkdir' and 'rmdir' are used to create and destroy (empty) directories. 'rm' to remove files. To create a file can be as simple as using 'echo' and the '>' (redirection) character to put text into a file. Even simpler is the 'touch' command.
 
+    mkdir ~/cli
+    cd ~/cli
     touch newFile
     ls -ltra  # look at the time listed for the file you just created
     cat newFile  # it's empty!
@@ -255,6 +290,7 @@ This is a great way to build up a set of operations while inspecting the output 
 
 Linux remembers everything you've done (at least in the current shell session), which allows you to pull steps from your history, potentially modify them, and redo them. This can obviously save a lot of time and typing.
 
+The 'head' and 'tail' commands view the first 10 (by default) lines of a file and last 10 lines of a file (type 'man head' or 'man tail' to consult their manuals).
     <up arrow>  # last command
     <up>  # next-to-last command
     <down>  # last command, again
@@ -282,7 +318,7 @@ What's the first command you executed today? How many times have you used the 'm
 
 ### CHALLENGE
 
-The 'head' and 'tail' commands view the first 10 (by default) lines of a file and last 10 lines of a file (type 'man head' or 'man tail' to consult their manuals). How would you create a second text file - let's say 'test2.txt' - with the line that says 'third' *before* the line that says 'second'? Without directly editing the file with a text editor, of course ..
+How would you create a second text file - let's say 'test2.txt' - with the line that says 'third' *before* the line that says 'second'? Without directly editing the file with a text editor, of course ..
 
 ## Editing Yourself
 Here are some more ways to make editing previous commands, or novel commands that you're building up, easier:
@@ -298,7 +334,7 @@ Here are some more ways to make editing previous commands, or novel commands tha
 
 ## Compression and Archives
 
-As file sizes get large, you'll often see compressed files, or whole compressed folders.
+As file sizes get large, you'll often see compressed files, or whole compressed folders. Note that **any good bioinformatics software** should be able to work with compressed file formats. 
 
     gzip test.txt
     cat test.txt.gz
@@ -369,7 +405,16 @@ However, some commands try to be 'smarter' about this behavior, so it's a little
 
 We just found the phiX-174 genome, so let's copy it to our current directory so we can play with it:
 
-    cp ./PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/genome.fa phix.fa
+    cp ./PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/genome.fa phix.fa    
+
+Similarly we can also use the move command here, but then ./PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/genome.fa will no longer be there:
+
+    cp ./PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/genome.fa  ./PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/genome2.fa
+    ls ./PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/
+    mv ./PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/genome2.fa phix.fa
+    ls ./PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/
+
+This functionality of mv is why it is used to rename files. 
 
 Note how we copied the 'genome.fa' file to a different name: 'phix.fa'
 
@@ -423,6 +468,14 @@ Many programs and data archives contain files named something like 'readme' or '
 ## Symbolic Links
 
 Since copying or even moving large files (like sequence data) around your filesystem may be impractical, we can use links to reference 'distant' files without duplicating the data in the files. Symbolic links are disposable pointers that refer to other files, but behave like the referenced files in commands.
+
+**You should, by default, always use a symbolic (-s) link.**
+
+Hard links point to the location of the data on the hard drive while symbolic links point to an secondary location of the data on the hard drive (or the original file itself)
+
+![](./hard_vs_symbolic.png)
+
+Draw back of hard links is that deleting the original file become much more difficult because all hard links need to be deleted first.
 
     ln -s PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/genome.fa .
     ls -ltrhaF  # notice the symbolic link pointing at its target
@@ -597,3 +650,8 @@ OK! So let's run this script, feeding it the phiX genome. When we put the genome
 </div>
 
 The script's grep command splits out every character in the file on a separate line, then sorts them so it can count the occurrences of every unique character and show the most frequent characters first ... a quick and dirty way to get at GC content.
+
+
+
+
+
