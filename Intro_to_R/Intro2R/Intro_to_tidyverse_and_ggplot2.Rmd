@@ -1,0 +1,156 @@
+---
+title: "An introduction to tidyverse and GGPLOT2"
+author: "Bioinformatics Core"
+output: 
+  html_document:
+    keep_md: TRUE
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+
+colFmt = function(x,color){
+  outputFormat = opts_knit$get("rmarkdown.pandoc.to")
+  if(outputFormat == 'latex')
+    paste("\\textcolor{",color,"}{",x,"}",sep="")
+  else if(outputFormat == 'html')
+    paste("<font color='",color,"'>",x,"</font>",sep="")
+  else
+    x
+}
+
+library(tidyverse)
+```
+
+### Getting started with Tidyverse
+
+Tidyverse is a set of package for doing data science.  [R for Data Science](https://r4ds.had.co.nz/index.html) by Garrett Grolemund, Hadley Wickham model Data Science in the following way.
+
+![](./Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
+
+
+We will start learning about Tidyverse tools by starting at the first step in this process, importing data.
+
+*** 
+
+### Step 1: Import data with the [readr](https://readr.tidyverse.org/) package ![](./Intro_to_tidyverse_and_ggplot2_images/readr.png){width=100px}
+
+
+> “The goal of 'readr' is to provide a fast and friendly way to read rectangular data (like 'csv', 'tsv', and 'fwf'). It is designed to flexibly parse many types of data found in the wild, while still cleanly failing when data unexpectedly changes.”
+
+The readr package gets loaded automatically when you use library(tidyverse), or you can load it directly.
+```{r readr}
+library(readr)
+```
+
+***
+
+
+#### readr supports a number of file formats with different read_* functions including:
+
+* read_csv(): comma separated (CSV) files
+* read_tsv(): tab separated files
+* read_delim(): general delimited files (you must supply delimiter!)
+* read_fwf(): fixed width files           
+* read_table(): tabular files where columns are separated by white-space.
+* read_log(): web log files
+
+#### Readr also has functions write data in a number of formats with various write_* functions:
+
+* write_csv(): comma separated (CSV) files
+* write_tsv(): tab separated files
+* write_delim(): general delimited files
+* write_excel_csv(): comma separated files for Excel
+
+*** 
+
+#### Get some data and try out these functions:
+```{r download2, eval=FALSE, results='hide', warning=FALSE, error=FALSE, message=FALSE, collapse=TRUE}
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/intro2R/mpg.tsv", "mpg.tsv")
+```
+
+
+The file has a ".tsv" extension, so it is probably a tab separated values file. Lets check this assumption (note that the output from the system() function does not appear in the markdown document, and this approach may not work on windows computers):
+```{r}
+getwd()
+
+dir(pattern="*.tsv")
+
+system('head mpg.tsv')
+
+system('wc -l mpg.tsv')
+```
+
+Alternatively we could use another of the readr functions, **read_lines**, to look at the first few lines of the file:
+```{r}
+read_lines('mpg.tsv', n_max = 5)
+```
+
+*How many lines does the file have?*
+
+
+*What is the first line of the file?*
+
+
+*What separates the values in the file?*
+
+Read the file and store it in an object:
+```{r}
+
+mpg <- read_tsv('mpg.tsv')
+
+```
+
+#### Column specifications
+
+In order to read a file, readr skims the [first 1000 lines](https://readr.tidyverse.org/articles/readr.html) of the file, investigating the values it finds there, and building a guess at the format of the file.
+
+*** 
+
+
+
+d = read_csv(readr_example("challenge.csv"), guess_max = 2000)
+
+
+### Step 1.5: Detour for [Tibbles](https://tibble.tidyverse.org/) ![](./Intro_to_tidyverse_and_ggplot2_images/hex-tibble.png){width=100}
+
+Tibbles are 
+
+
+TODO
+
+
+
+#### Readr and Tibble Exercises 
+
+1) In the R code chunk below try to generate a *parsing failure* in readr. 
+Make a trecherous tibble. Write it out. Read it in again.
+
+```{r parsing_failure}
+
+```
+
+2) Take a look at the documentation for read_delim. Enter R code below that successfully loads the trecherous tibble you created in the last exercise.
+```{r}
+
+```
+
+
+
+### Step 2: Tidying data with [tidyr](https://tidyr.tidyverse.org/) package![](./Intro_to_tidyverse_and_ggplot2_images/hex-tidyr.png){width=100}
+
+### tidyr
+
+
+### dplyr
+
+### stringr
+
+
+### ggplot2
+
+
+### Real data example
+
+
