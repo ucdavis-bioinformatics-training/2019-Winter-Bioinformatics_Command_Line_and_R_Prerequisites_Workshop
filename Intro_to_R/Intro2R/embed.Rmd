@@ -593,7 +593,9 @@ Decision making is important in programming. This can be achieved using **if...e
 The basic structure of a *if...else* statement is 
 
 **if (condition statement){
+
 	some operation
+
 }**
 
 
@@ -632,7 +634,9 @@ In programming, it is common that one has to do one set of specific operation on
 The basic structure of *for* loop is:
 
 **for (value in sequence){
+
   some operation
+
 }**
 
 

@@ -93,3 +93,5 @@ download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training
 rmarkdown::render("embed.Rmd")
 rmarkdown::render("embed.Rmd")
 rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
