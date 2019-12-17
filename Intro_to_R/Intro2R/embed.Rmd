@@ -936,7 +936,7 @@ tt <- dev.off()
 ![](./test.png)
 
 
-`r colFmt("Hint: in order to output a nice looking table in the final report, one will have to use an R package called **knitr**.", 'red')`
+`r colFmt("Hint: in order to output a nice looking table in the final report, one may check out the [documentation] (https://cran.r-project.org/web/packages/htmlTable/vignettes/tables.html)", 'red')`
 
 <br>
 
