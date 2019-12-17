@@ -29,6 +29,12 @@ conda create -p /share/workshop/$USER/htstream
 ```
    - Type 'y' when prompted
  
+ 
+Some initial conda setup (if you have not already done so)
+```
+conda init bash
+source ~/.bashrc
+```
 Lets activate the environment that we just created
 ```
 source activate /share/workshop/$USER/htstream
@@ -107,15 +113,9 @@ conda create --name new_environement --file htstream_requirements.txt -p ~/path_
 ## How does this compare with how the software HTStream would typically be installed?
 
 *DON'T RUN THESE LINEs*
-```
-wget -O 1_60.tar.bz2 https://sourceforge.net/projects/boost/files/boost/1.60.0/boost_1_60_0.tar.bz2/download
-tar --bzip2 -xf 1_60.tar.bz2
-cd boost_1_60_0
-./bootstrap.sh 
-./b2 # This will take a while.
-BOOST_INCLUDE=$(pwd)
-BOOST_INCLUDE_LIB=$(pwd)/stage/lib
-```
+
+![](./hts_install.png)
+
 
 Compared to typical installations such as the one shown above, conda installs only requires one command. Conda is quicker, more user friendly, and more commonly results in success. 
     
