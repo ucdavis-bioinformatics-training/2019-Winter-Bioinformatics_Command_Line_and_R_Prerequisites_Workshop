@@ -914,7 +914,7 @@ To render R notebook to html/pdf/word documents can be done using the **Preview*
 `r colFmt("Challenge", 'blue')`
 ====================================================
 
-Working with an R notebook, load the Iris data as we did earlier in this documentation, generate a table that lists the median of each measurement (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) for each species. Then generate a plot based on the result, such as following. Finally produce an html report with the table and the plot.
+Working with an R notebook, load the Iris data as we did earlier in this documentation, generate a table that lists the median of each measurement (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) for each species. Then generate a plot based on the result. Finally produce an html report with the table and the plot, such as following.
 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, error=FALSE}
@@ -936,7 +936,7 @@ tt <- dev.off()
 ![](./test.png)
 
 
-`r colFmt("Hint: in order to output a nice looking table in the final report, one may check out the [documentation] (https://cran.r-project.org/web/packages/htmlTable/vignettes/tables.html)", 'red')`
+`r colFmt("Hint: in order to output a nice looking table in the final report, one may check out the documentation at https://cran.r-project.org/web/packages/htmlTable/vignettes/tables.html", 'red')`
 
 <br>
 
