@@ -41,8 +41,8 @@ navigation:
     url: Advanced_CLI/advanced-challenge-solutions
   #- title: Folder and Experiment Structure # MATT
   #  url:
-  - title: A Simple RNA-Seq Workflow # NIK
-    url: Advanced_CLI/bioworkflow
+  - title: A Simple Bioinformatics Workflow # NIK
+    url: Advanced_CLI/Bioinformatics_CLI
 
 
   - heading: Intro to R

@@ -173,3 +173,5 @@ For those who are interested, here's how you'd create a BAM file that could be v
     samtools stats 02-Mapping/escherichia_coli.4k.bam > 02-Mapping/escherichia_coli.4k.stats
 
 View the output files to see the outcome of mapping results.
+
+**9/.** Transfer the depth and stats files to your computer and analyze in **R**
