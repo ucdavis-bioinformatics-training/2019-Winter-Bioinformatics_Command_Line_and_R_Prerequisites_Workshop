@@ -296,7 +296,7 @@ tibble(
 
 
 
-2) Try to generate a *parsing failure* in readr.  Based on what you know about how readr processes data, make a trecherous tibble. Write it out. Read it in again.
+2) Try to generate a *parsing failure* in readr.  Based on what you know about how readr processes data, make a trecherous tibble. Write it out. Read it in again to generate the failure.
 
 
 
@@ -325,9 +325,9 @@ tibble(
 
 Definitions:
 
-* **variable** stores a set of values of a particular type (height, temperature, duration)
+* A **variable** stores a set of values of a particular type (height, temperature, duration)
 
-* **observation** all values measured on the same unit across variables
+* An **observation** all values measured on the same unit across variables
 
 ***
 
@@ -451,13 +451,184 @@ d2.3
 ## 6 sample3 b          4
 ```
 
-### Detour for magrittr and the %>% operator
+***
+
+### Detour for [magrittr](https://magrittr.tidyverse.org/) and the %>% operator ![](./Intro_to_tidyverse_and_ggplot2_images/magrittr.png){width=100} 
+Although the code above is fairly readable, it is not compact. It also creates three copies of the data (d2.1, d2.2, d2.3). We could use a couple of different strategies for carrying out this series of operations in a more concise manner.
+
+#### Option 1, the base-R strategy, Nested Functions
+Traditionally, R users have used nested functions to skip the creation of intermediary objects:
+
+```r
+d2.3 <- select( pivot_longer(rownames_to_column(d2, 'trt'), 
+                              cols = -trt, names_to = "sample", values_to = "result"), 
+                               sample, trt, result)
+d2.3
+```
+
+```
+## # A tibble: 6 x 3
+##   sample  trt   result
+##   <chr>   <chr>  <dbl>
+## 1 sample1 a          4
+## 2 sample2 a          6
+## 3 sample3 a          9
+## 4 sample1 b          8
+## 5 sample2 b          5
+## 6 sample3 b          4
+```
+
+
+#### Option 2, using the %>% pipe operator (syntactic sugar)
+
+> The magrittr package offers a set* of operators which make your code more readable by:
+> 
+> * structuring sequences of data operations left-to-right (as opposed to from the inside and out),
+> * avoiding nested function calls,
+> * minimizing the need for local variables and function definitions, and
+> * making it easy to add steps anywhere in the sequence of operations.
+
+*we will only look at one
+
+
+```r
+d2.3 <- 
+  d2 %>% rownames_to_column('trt') %>% 
+    pivot_longer(cols = -trt, names_to = "sample", values_to = "result") %>% 
+    select(sample, trt, result)
+d2.3
+```
+
+```
+## # A tibble: 6 x 3
+##   sample  trt   result
+##   <chr>   <chr>  <dbl>
+## 1 sample1 a          4
+## 2 sample2 a          6
+## 3 sample3 a          9
+## 4 sample1 b          8
+## 5 sample2 b          5
+## 6 sample3 b          4
+```
+
+Does either one look more readable to you?
+
+#### How does %>% work?
+
+By default, %>% works to replace the first argument in a function with the left-hand side value with basic piping:
+
+* x %>% f is equivalent to f(x)
+* x %>% f(y) is equivalent to f(x, y)
+* x %>% f %>% g %>% h is equivalent to h(g(f(x)))
+
+In more complicated situations you can also specify the argument to pipe to using the argument placeholder:
+
+* x %>% f(y, .) is equivalent to f(y, x)
+* x %>% f(y, z = .) is equivalent to f(y, z = x)
+
+#### More tidyr functions
+
+Tidyr comes with a number of additional functions to help with manipulating data.
+
+
+* **pivot_wider()** does the inverse transformation of **pivot_longer()**, add columns by removing rows.
+
+For example:
+
+```r
+d1
+```
+
+```
+##    sample trt result
+## 1 sample1   a      4
+## 2 sample2   a      6
+## 3 sample3   a      9
+## 4 sample1   b      8
+## 5 sample2   b      5
+## 6 sample3   b      4
+```
+
+
+```r
+pivot_wider(d1, names_from = sample, values_from = result )
+```
+
+```
+## # A tibble: 2 x 4
+##   trt   sample1 sample2 sample3
+##   <fct>   <dbl>   <dbl>   <dbl>
+## 1 a           4       6       9
+## 2 b           8       5       4
+```
+
+Note that **pivot_longer()** and **pivot_wider()** replace the old functionality in **spread()** and **gather()**, and also have similar functionality to **melt()** and **cast()** from the reshape2 package. [You can read more about this on r-bloggers](https://www.r-bloggers.com/using-r-from-gather-to-pivot/).
+
+* **separate()** 
+
+```r
+is 
+```
+
+```
+## function (object, class2) 
+## {
+##     class1 <- class(object)
+##     S3Case <- length(class1) > 1L
+##     if (S3Case) 
+##         class1 <- class1[[1L]]
+##     if (missing(class2)) 
+##         return(extends(class1))
+##     class1Def <- getClassDef(class1)
+##     if (is.null(class1Def)) 
+##         return(inherits(object, class2))
+##     if (is.character(class2)) {
+##         class2Def <- getClassDef(class2, .classDefEnv(class1Def), 
+##             if (!is.null(package <- packageSlot(class2))) 
+##                 package
+##             else getPackageName(topenv(parent.frame())))
+##     }
+##     else {
+##         class2Def <- class2
+##         class2 <- class2Def@className
+##     }
+##     S3Case <- S3Case || (is.object(object) && !isS4(object))
+##     S3Case <- S3Case && (is.null(class2Def) || class2 %in% .BasicClasses || 
+##         extends(class2Def, "oldClass"))
+##     if (S3Case) 
+##         inherits(object, class2)
+##     else if (.identC(class1, class2) || .identC(class2, "ANY")) 
+##         TRUE
+##     else {
+##         if (!is.null(contained <- class1Def@contains[[class2]])) 
+##             contained@simple || contained@test(object)
+##         else if (is.null(class2Def)) 
+##             FALSE
+##         else if (!.identC(class(class2Def), "classRepresentation") && 
+##             isClassUnion(class2Def)) 
+##             any(c(class1, names(class1Def@contains)) %in% names(class2Def@subclasses))
+##         else {
+##             ext <- class2Def@subclasses[[class1]]
+##             !is.null(ext) && (ext@simple || ext@test(object))
+##         }
+##     }
+## }
+## <bytecode: 0x561176975148>
+## <environment: namespace:methods>
+```
+
+
+extract()
+
+unite()
+
+complete()
+
+drop_na()
 
 
 
-
-d2 %>% rownames_to_column('row') %>% pivot_longer(cols = -row)
-
+Ixodes scapularis
 
 #### tidyr exercises
 
@@ -470,6 +641,7 @@ tidy the billboard dataset
 
 
 ### dplyr
+
 
 ### stringr
 
