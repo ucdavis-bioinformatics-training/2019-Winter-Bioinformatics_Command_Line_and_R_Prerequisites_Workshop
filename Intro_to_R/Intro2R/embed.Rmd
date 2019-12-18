@@ -106,6 +106,19 @@ b
 as.character(b)
 ```
 
+What happens when one converts a logical variable to numeric?
+
+```{r}
+as.numeric(her2_expressed)
+
+her2_expressed + 1
+
+```
+
+A logical *TRUE* is converted to integer 1 and a logical *FALSE* is converted to integer 0.
+
+
+
 
 ---
 
@@ -156,51 +169,7 @@ length(gene_expression)
 
 
 
-### Matrices: A matrix is like an Excel sheet containing multiple rows and columns. It is used to combine vectors of the same type.
-
-```{r}
-col1 <- c(1,3,8,9)
-col2 <- c(2,18,27,10)
-col3 <- c(8,37,267,19)
-
-my_matrix <- cbind(col1, col2, col3)
-my_matrix
-
-rownames(my_matrix) <- c("row1", "row2", "row3", "row4")
-my_matrix
-
-t(my_matrix)
-```
-
-To find out the dimension of a matrix:
-```{r}
-ncol(my_matrix)
-nrow(my_matrix)
-dim(my_matrix)
-```
-
-
-Calculations with matrices.
-
-```{r}
-my_matrix * 3
-log10(my_matrix)
-```
-
-Total of each row.
-```{r}
-rowSums(my_matrix)
-```
-
-Total of each column.
-```{r}
-colSums(my_matrix)
-```
-
-There is a data structure _Array_ in R, that holds multi-dimensional (d > 2) data and is a generalized version of a matrix. *Matrix* is used much more commonly than *Array*, therefore we are not going to talk about *Array* here.
-
-
-### Factors: a factor represents categorical variables, which are important in statistical modeling and can only take on a limited number of different values. The function factor() can be used to create a factor variable.
+### Factors: a factor represents categorical variables, which are important in statistical modeling and can only take on a limited number of pre-defined values. The function factor() can be used to create a factor variable.
 
 ```{r}
 disease_stage <- factor(c("Stage1", "Stage2", "Stage2", "Stage3", "Stage1", "Stage4"))
@@ -213,7 +182,7 @@ In R, categories are called factor levels. The function levels() can be used to 
 levels(disease_stage)
 ```
 
-A function to compactly display the internal structure of an R object is str(). Please use str() to display the internal structure of the object we just created *disease_stage*. It shows that _disease_stage_ is a factor with four levels: "Stage1", "Stage2", "Stage3", etc... The integer numbers after the colon shows that these leves are encoded under the hood by integer numbers: the first level is 1, the second level is 2, and so on. Basically, when _factor_ function is called, R first scan through the vector to determine how many different categories that are in there, then it converts the character vector to a vector of integer values.
+A function to compactly display the internal structure of an R object is str(). Please use str() to display the internal structure of the object we just created *disease_stage*. It shows that _disease_stage_ is a factor with four levels: "Stage1", "Stage2", "Stage3", etc... The integer numbers after the colon shows that these leves are encoded under the hood by integer numbers: the first level is 1, the second level is 2, and so on. Basically, when _factor_ function is called, R first scan through the vector to determine how many different categories there are, then it converts the character vector to a vector of integer values, with each integer value associated with a category.
 
 
 ```{r}
@@ -221,7 +190,7 @@ str(disease_stage)
 ```
 
 
-By default, R infers the factor levels by ordering them alphabetically. One may specifically define the factor levels at the creation of the factor.
+By default, R infers the factor levels by ordering the unique elements in a factor alphabetically. One may specifically define the factor levels at the creation of the factor.
 
 
 ```{r}
@@ -239,6 +208,64 @@ summary(disease_stage)
 ```{r}
 table(disease_stage)
 ```
+
+`r colFmt("Try to add a new element to a factor. This element does not match any of the levels of the factor. What will happen?", 'blue')`
+
+
+
+### Matrices: A matrix is like an Excel sheet containing multiple rows and columns. It is used to combine vectors of the same type.
+
+```{r}
+col1 <- c(1,3,8,9)
+col2 <- c(2,18,27,10)
+col3 <- c(8,37,267,19)
+
+my_matrix <- cbind(col1, col2, col3)
+my_matrix
+
+```
+
+One other way to create a matrix is to use *matrix()* function.
+
+```{r}
+nums <- c(col1, col2, col3)
+nums
+matrix(nums, ncol=2)
+```
+
+```{r}
+rownames(my_matrix) <- c("row1", "row2", "row3", "row4")
+my_matrix
+
+t(my_matrix)
+```
+
+To find out the dimension of a matrix:
+```{r}
+ncol(my_matrix)
+nrow(my_matrix)
+dim(my_matrix)
+```
+
+
+Calculations with numeric matrices.
+
+```{r}
+my_matrix * 3
+log10(my_matrix)
+```
+
+Total of each row.
+```{r}
+rowSums(my_matrix)
+```
+
+Total of each column.
+```{r}
+colSums(my_matrix)
+```
+
+There is a data structure _Array_ in R, that holds multi-dimensional (d > 2) data and is a generalized version of a matrix. *Matrix* is used much more commonly than *Array*, therefore we are not going to talk about *Array* here.
 
 
 ### Data frames: a data frame is like a matrix but can have columns with different types (numeric, character, logical).
@@ -508,8 +535,9 @@ data <- read.table(file="./raw_counts.txt", sep="\t", header=T, stringsAsFactors
 
 ```
 
-Take a look at the beginning part of the data frame.
+To check what type of object *data* is in and take a look at the beginning part of the data.
 ```{r}
+is.data.frame(data)
 head(data)
 ```
 
@@ -618,7 +646,7 @@ if (gene_expression["ESR1"] > 0){
   print("Treatment plan 1")
 }else if(gene_expression["BRCA1"] > 0){
   print("Treatment plan 2")
-}else if(gene_expression["p53" > 0]){
+}else if(gene_expression["p53"] > 0){
   print("Treatment plan 3")
 }else{
   print("Treatment plan 4")
@@ -649,6 +677,17 @@ for (i in 1:dim(my_matrix)[1]){
   print(out)
 }
 ```
+
+There is **while** loop in R similarly as in command line or any other programming language. The basic structure of *while* loop is:
+
+**while (condition){**
+
+  **some operation**
+
+**}**
+
+
+`r colFmt("Please rewrite the calculation of the column sum using *while* loop.", 'blue')`
 
 
 ### A few useful functions: apply(), lapply(), sapply(), and tapply() to replace for loop
@@ -831,7 +870,7 @@ if (!requireNamespace("BiocManager"))
 ## install core packages
 BiocManager::install()
 ## install specific packages
-BiocManager::install(c("ggplot2", "tidyverse"))
+BiocManager::install(c("devtools", "tidyverse"))
 ```
 
 * Bioconductor has a repository and release schedule that differ from R (Bioconductor has a ‘devel’ branch to which new packages and updates are introduced, and a stable ‘release’ branch emitted once every 6 months to which bug fixes but not new features are introduced). This mismatch causes that the version detected by install.packages() is sometimes not the most recent 'release'.
