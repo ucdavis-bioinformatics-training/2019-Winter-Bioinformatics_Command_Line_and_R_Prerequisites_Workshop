@@ -48,10 +48,10 @@ navigation:
   - heading: Intro to R
   - title: Introduction to R
     url: Intro_to_R/Intro2R/Intro2R_main
-  - title: Data in R - Prepare
-    url: Intro_to_R/Intro2R/data_in_R_prepare_fixed
-  - title: Data in R
-    url: Intro_to_R/Intro2R/data_in_R_fixed
+#  - title: Data in R - Prepare
+#    url: Intro_to_R/Intro2R/data_in_R_prepare_fixed
+#  - title: Data in R
+#    url: Intro_to_R/Intro2R/data_in_R_fixed
 
 
   #- heading: Advanced R
