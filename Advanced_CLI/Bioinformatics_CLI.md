@@ -136,28 +136,31 @@ Qual files are so rarely used these days and so are not discussed.
 **7\.** Lets 'preprocess' our data by just taking the first 4000 reads (16,000) lines from the fasta file placing the result it into the 01-Preproc folder. Often preprocessing will include evaluating the raw data, removing poor quality bases, reads, removing primers/adapters, PCR duplicates, etc. CREATE a script (preproc.sh) that does the following. And then run the script.
 
 
-<div class="script">#!/bin/bash
+<pre class="prettyprint"><code class="language-bash" style="background-color:333333">
+#!/bin/bash
 
 cd /share/workshop/$USER/bioinfo_example
 head -n 16000 00-RawData/escherichia_coli.fastq > 01-Preproc/escherichia_coli.4k.fastq
-</div>
+</code></pre>
 
     bash preproc.sh
+    cd /share/workshop/$USER/bioinfo_example
     ll 01-Preproc
     less 01-Preproc/escherichia_coli.4k.fastq
     wc -l 00-RawData/escherichia_coli.fastq
     wc -l 01-Preproc/escherichia_coli.4k.fastq
 
 
-**8/.** Lets align the reads to the genome using [minimap2](https://github.com/lh3/minimap2), then sort to bam format with samtools. Create a script (mapping.sh) to align the reads. View the help documentation.
+**8\.** Lets align the reads to the genome using [minimap2](https://github.com/lh3/minimap2), then sort to bam format with samtools. Create a script (mapping.sh) to align the reads. View the help documentation.
 
-<div class="script">#!/bin/bash
+<pre class="prettyprint"><code class="language-bash" style="background-color:333333">
+#!/bin/bash
 
 module load minimap2/2.7
 module load samtools/1.9
 minimap2 References/Escherichia_coli_str_k_12_substr_mg1655_gca_000801205.ASM80120v1.dna.toplevel.fa 01-Preproc/escherichia_coli.4k.fastq -a | samtools sort -o 02-Mapping/escherichia_coli.4k.bam
 samtools index 02-Mapping/escherichia_coli.4k.bam
-</div>
+</code></pre>
 
     mkdir 02-Mapping
     bash mapping.sh
@@ -166,12 +169,13 @@ samtools index 02-Mapping/escherichia_coli.4k.bam
 
 For those who are interested, here's how you'd create a BAM file that could be viewed in [IGV](https://software.broadinstitute.org/software/igv/download)
 
-**8/.** Lets get some stats on the mapping results, using samtools.
+**9\.** Lets get some stats on the mapping results, using samtools.
 
+    module load samtools/1.9
     samtools flagstat 02-Mapping/escherichia_coli.4k.bam > 02-Mapping/escherichia_coli.4k.flagstat
     samtools depth 02-Mapping/escherichia_coli.4k.bam > 02-Mapping/escherichia_coli.4k.depth
     samtools stats 02-Mapping/escherichia_coli.4k.bam > 02-Mapping/escherichia_coli.4k.stats
 
 View the output files to see the outcome of mapping results.
 
-**9/.** Transfer the depth and stats files to your computer and analyze in **R**
+**10\.** Transfer the depth and stats files to your computer and analyze in **R**
