@@ -54,6 +54,10 @@ navigation:
 #    url: Intro_to_R/Intro2R/data_in_R_fixed
 
 
+  - heading: Spreadsheets
+  - title: Working with spreadsheets
+    url: spreadsheets/spreadsheets
+
   #- heading: Advanced R
   #- title: R Oddities
   #  url: Advanced_R/R_Oddities.Rmd
