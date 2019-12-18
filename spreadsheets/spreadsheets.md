@@ -94,7 +94,8 @@ data.
 > interfaces) for data entry and data analysis might be
 > different. It is important to take this into account, and ideally
 > automate the conversion from one to another.
->
+
+
 ## Keeping track of your analyses
 
 When you're working with spreadsheets, during data clean up or analyses, it's
