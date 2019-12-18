@@ -364,33 +364,34 @@ pivot_wider(d1, names_from = sample, values_from = result )
 
 Note that **pivot_longer()** and **pivot_wider()** replace the old functionality in **spread()** and **gather()**, and also have similar functionality to **melt()** and **cast()** from the reshape2 package. [You can read more about this on r-bloggers](https://www.r-bloggers.com/using-r-from-gather-to-pivot/).
 
-* **separate()** 
+* **separate()** turns a single character column into multiple columns. This can be handy when a single column contains two different pieces of data.
+
+Lets practice on table3 from the tidyr package:
 ```{r}
+table3
+```
 
-is 
-
+The third column **rate** contains two different values, **cases** and **population**. Wecan 
+```{r}
+separate(data = table3, col = rate, into = c("cases", "population"), sep = '/')
 ```
 
 
-extract()
-
-unite()
-
-complete()
-
-drop_na()
-
-
-
-Ixodes scapularis
-
 #### tidyr exercises
-
 https://tidyr.tidyverse.org/articles/tidy-data.html
 
-tidy the relig_income dataset
+1) The tidyr package comes with a relig_income dataset. Use tidyr functions to make it into a tidy dataset. What are the variables? What are the observations?
 
-tidy the billboard dataset
+```{r}
+
+
+
+```
+
+2) The tidyr package come with a table2 dataset. What is wrong with this dataset? How many rows does it have per observation? Use tidyr functions to make it into a tidy dataset.
+```{r}
+
+```
 
 
 
@@ -406,3 +407,22 @@ tidy the billboard dataset
 ### Real data example
 
 
+
+
+
+# TODO:
+#download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Is_10.gff3", "Is_10.gff3")
+
+
+# Ixodes scapularis
+
+# gff <- read_tsv("Is_10.gff3", col_names = F) 
+# colnames(gff) = c("seqid", "source", "type", "start", "end", "score", "strand", "phase", "attributes")
+# head(gff)
+
+# gff$attributes[1]
+# ```
+
+# ```{r}
+# separate(data = gff, col = attributes, )
+# ```

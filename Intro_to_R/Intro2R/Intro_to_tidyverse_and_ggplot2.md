@@ -564,57 +564,53 @@ pivot_wider(d1, names_from = sample, values_from = result )
 
 Note that **pivot_longer()** and **pivot_wider()** replace the old functionality in **spread()** and **gather()**, and also have similar functionality to **melt()** and **cast()** from the reshape2 package. [You can read more about this on r-bloggers](https://www.r-bloggers.com/using-r-from-gather-to-pivot/).
 
-* **separate()** 
+* **separate()** turns a single character column into multiple columns. This can be extremely handy in processing annotation information from some types of biological data format files (gff for example).
 
 ```r
-is 
+# TODO:
+#download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Is_10.gff3", "Is_10.gff3")
+
+gff <- read_tsv("Is_10.gff3", col_names = F) 
 ```
 
 ```
-## function (object, class2) 
-## {
-##     class1 <- class(object)
-##     S3Case <- length(class1) > 1L
-##     if (S3Case) 
-##         class1 <- class1[[1L]]
-##     if (missing(class2)) 
-##         return(extends(class1))
-##     class1Def <- getClassDef(class1)
-##     if (is.null(class1Def)) 
-##         return(inherits(object, class2))
-##     if (is.character(class2)) {
-##         class2Def <- getClassDef(class2, .classDefEnv(class1Def), 
-##             if (!is.null(package <- packageSlot(class2))) 
-##                 package
-##             else getPackageName(topenv(parent.frame())))
-##     }
-##     else {
-##         class2Def <- class2
-##         class2 <- class2Def@className
-##     }
-##     S3Case <- S3Case || (is.object(object) && !isS4(object))
-##     S3Case <- S3Case && (is.null(class2Def) || class2 %in% .BasicClasses || 
-##         extends(class2Def, "oldClass"))
-##     if (S3Case) 
-##         inherits(object, class2)
-##     else if (.identC(class1, class2) || .identC(class2, "ANY")) 
-##         TRUE
-##     else {
-##         if (!is.null(contained <- class1Def@contains[[class2]])) 
-##             contained@simple || contained@test(object)
-##         else if (is.null(class2Def)) 
-##             FALSE
-##         else if (!.identC(class(class2Def), "classRepresentation") && 
-##             isClassUnion(class2Def)) 
-##             any(c(class1, names(class1Def@contains)) %in% names(class2Def@subclasses))
-##         else {
-##             ext <- class2Def@subclasses[[class1]]
-##             !is.null(ext) && (ext@simple || ext@test(object))
-##         }
-##     }
-## }
-## <bytecode: 0x561176975148>
-## <environment: namespace:methods>
+## Parsed with column specification:
+## cols(
+##   X1 = col_character(),
+##   X2 = col_character(),
+##   X3 = col_character(),
+##   X4 = col_double(),
+##   X5 = col_double(),
+##   X6 = col_character(),
+##   X7 = col_character(),
+##   X8 = col_character(),
+##   X9 = col_character()
+## )
+```
+
+```r
+colnames(gff) = c("seqid", "source", "type", "start", "end", "score", "strand", "phase", "attributes")
+head(gff)
+```
+
+```
+## # A tibble: 6 x 9
+##   seqid  source  type  start    end score strand phase attributes               
+##   <chr>  <chr>   <chr> <dbl>  <dbl> <chr> <chr>  <chr> <chr>                    
+## 1 DS978… Vector… mRNA  78062  95653 .     +      .     ID=ISCW015124-RA;Parent=…
+## 2 DS978… Vector… mRNA  96058  96222 .     +      .     ID=ISCW015125-RA;Parent=…
+## 3 DS978… Vector… mRNA  96651  96836 .     -      .     ID=ISCW015126-RA;Parent=…
+## 4 DS978… Vector… mRNA  97348 115516 .     -      .     ID=ISCW015127-RA;Parent=…
+## 5 DS978… Vector… mRNA  19433  30533 .     -      .     ID=ISCW015322-RA;Parent=…
+## 6 DS978… Vector… mRNA  73824  74264 .     -      .     ID=ISCW015323-RA;Parent=…
+```
+
+```r
+gff$attributes[1]
+```
+
+```
+## [1] "ID=ISCW015124-RA;Parent=ISCW015124;Dbxref=EMBL:ABJB010147884,EMBL:ABJB010212012,RefSeq:XM_002416386.1,RefSeq:XP_002416431.1,UniParc:UPI00018EC0B1,UniProtKB:B7QNC6,NCBI_GP:EEC20348.1;Ontology_term=GO:0016263,GO:0016267,GO:0047238;biotype=protein_coding;version=1"
 ```
 
 

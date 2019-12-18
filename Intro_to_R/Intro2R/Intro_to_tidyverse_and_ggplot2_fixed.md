@@ -57,9 +57,8 @@ Note that this data set is from the ggplot2 package.
 
 
 ```r
-download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/intro2R/mpg.tsv", "mpg.tsv")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/mpg.tsv", "mpg.tsv")
 ```
-
 
 The file has a ".tsv" extension, so it is probably a tab separated values file. Lets check this assumption in a few different ways.
 Note that the output from the system() function does not appear in the markdown document, and this approach may not work on windows computers.
@@ -164,7 +163,7 @@ print(mpg)
 
 
 
-### Step 1.5: Detour for [Tibbles](https://tibble.tidyverse.org/) ![](./Intro_to_tidyverse_and_ggplot2_images/hex-tibble.png){width=100}
+### Detour for [Tibbles](https://tibble.tidyverse.org/) ![](./Intro_to_tidyverse_and_ggplot2_images/hex-tibble.png){width=100}
 
 Tibbles are a modified type of data frame. Everything you have learned about accessing and manipulating data frames still applies, but a tibble behaves a little differently.
 
@@ -275,7 +274,7 @@ tibble(
 
 
 
-2) Try to generate a *parsing failure* in readr.  Based on what you know about how readr processes data, make a trecherous tibble. Write it out. Read it in again.
+2) Try to generate a *parsing failure* in readr.  Based on what you know about how readr processes data, make a trecherous tibble. Write it out. Read it in again to generate the failure.
 
 
 
@@ -304,21 +303,21 @@ tibble(
 
 Definitions:
 
-* **variable** stores a set of values of a particular type (height, temperature, duration)
+* A **variable** stores a set of values of a particular type (height, temperature, duration)
 
-* **observation** all values measured on the same unit across variables
+* An **observation** all values measured on the same unit across variables
 
 ***
 
-#### Lets make a data set. Is this data set tidy?
+#### Lets make a data set:
 
 ```r
-d = data.frame(
+d1 = data.frame(
         sample = rep(c("sample1","sample2","sample3"), 2),
         trt = rep(c('a','b'), each=3),
         result = c(4,6,9,8,5,4)
 )
-d
+d1
 ```
 
 <div class='r_output'>    sample trt result
@@ -344,27 +343,22 @@ d
 
 ***
 
-#### Lets make another data set, is this data tidy?
+#### Lets make another data set:
 
 ```r
-d = data.frame(
+d2 <- data.frame(
         sample1=c(4,8),
         sample2=c(6,5),
         sample3=c(9,4)
 )
-rownames(d) = c("a","b")
-d
+rownames(d2) <- c("a","b")
+d2
 ```
 
 <div class='r_output'>   sample1 sample2 sample3
  a       4       6       9
  b       8       5       4
-</div>
-variables: ?
-
-observations: ?
-
-**Is this tidy?**
+</div>**Is this tidy?**
 
 1) Every column is a variable?
   
@@ -372,10 +366,232 @@ observations: ?
   
 3) Every cell is a single value?
 
+4) What are the variables?
+
+5) What are the observations?
+
+***
+
+#### How can we make d2 look like d1 (make d2 tidy)?
+
+First, make the row names into a new column with the **rownames_to_column()** function:
+
+```r
+d2.1 <- rownames_to_column(d2, 'trt')
+d2.1
+```
+
+<div class='r_output'>   trt sample1 sample2 sample3
+ 1   a       4       6       9
+ 2   b       8       5       4
+</div>
+Make each row an observation with **pivot_longer()** function:
+
+```r
+d2.2 <- pivot_longer(d2.1, cols = -trt, names_to = "sample", values_to = "result")
+d2.2
+```
+
+<div class='r_output'> # A tibble: 6 x 3
+   trt   sample  result
+   <chr> <chr>    <dbl>
+ 1 a     sample1      4
+ 2 a     sample2      6
+ 3 a     sample3      9
+ 4 b     sample1      8
+ 5 b     sample2      5
+ 6 b     sample3      4
+</div>
+Reorder columns for looks using **select()** function:
+
+```r
+d2.3 <- select(d2.2, sample, trt, result)
+d2.3
+```
+
+<div class='r_output'> # A tibble: 6 x 3
+   sample  trt   result
+   <chr>   <chr>  <dbl>
+ 1 sample1 a          4
+ 2 sample2 a          6
+ 3 sample3 a          9
+ 4 sample1 b          8
+ 5 sample2 b          5
+ 6 sample3 b          4
+</div>
+***
+
+### Detour for [magrittr](https://magrittr.tidyverse.org/) and the %>% operator ![](./Intro_to_tidyverse_and_ggplot2_images/magrittr.png){width=100} 
+Although the code above is fairly readable, it is not compact. It also creates three copies of the data (d2.1, d2.2, d2.3). We could use a couple of different strategies for carrying out this series of operations in a more concise manner.
+
+#### Option 1, the base-R strategy, Nested Functions
+Traditionally, R users have used nested functions to skip the creation of intermediary objects:
+
+```r
+d2.3 <- select( pivot_longer(rownames_to_column(d2, 'trt'), 
+                              cols = -trt, names_to = "sample", values_to = "result"), 
+                               sample, trt, result)
+d2.3
+```
+
+<div class='r_output'> # A tibble: 6 x 3
+   sample  trt   result
+   <chr>   <chr>  <dbl>
+ 1 sample1 a          4
+ 2 sample2 a          6
+ 3 sample3 a          9
+ 4 sample1 b          8
+ 5 sample2 b          5
+ 6 sample3 b          4
+</div>
+
+#### Option 2, using the %>% pipe operator (syntactic sugar)
+
+> The magrittr package offers a set* of operators which make your code more readable by:
+> 
+> * structuring sequences of data operations left-to-right (as opposed to from the inside and out),
+> * avoiding nested function calls,
+> * minimizing the need for local variables and function definitions, and
+> * making it easy to add steps anywhere in the sequence of operations.
+
+*we will only look at one
+
+
+```r
+d2.3 <- 
+  d2 %>% rownames_to_column('trt') %>% 
+    pivot_longer(cols = -trt, names_to = "sample", values_to = "result") %>% 
+    select(sample, trt, result)
+d2.3
+```
+
+<div class='r_output'> # A tibble: 6 x 3
+   sample  trt   result
+   <chr>   <chr>  <dbl>
+ 1 sample1 a          4
+ 2 sample2 a          6
+ 3 sample3 a          9
+ 4 sample1 b          8
+ 5 sample2 b          5
+ 6 sample3 b          4
+</div>
+Does either one look more readable to you?
+
+#### How does %>% work?
+
+By default, %>% works to replace the first argument in a function with the left-hand side value with basic piping:
+
+* x %>% f is equivalent to f(x)
+* x %>% f(y) is equivalent to f(x, y)
+* x %>% f %>% g %>% h is equivalent to h(g(f(x)))
+
+In more complicated situations you can also specify the argument to pipe to using the argument placeholder:
+
+* x %>% f(y, .) is equivalent to f(y, x)
+* x %>% f(y, z = .) is equivalent to f(y, z = x)
+
+#### More tidyr functions
+
+Tidyr comes with a number of additional functions to help with manipulating data.
+
+
+* **pivot_wider()** does the inverse transformation of **pivot_longer()**, add columns by removing rows.
+
+For example:
+
+```r
+d1
+```
+
+<div class='r_output'>    sample trt result
+ 1 sample1   a      4
+ 2 sample2   a      6
+ 3 sample3   a      9
+ 4 sample1   b      8
+ 5 sample2   b      5
+ 6 sample3   b      4
+</div>
+
+```r
+pivot_wider(d1, names_from = sample, values_from = result )
+```
+
+<div class='r_output'> # A tibble: 2 x 4
+   trt   sample1 sample2 sample3
+   <fct>   <dbl>   <dbl>   <dbl>
+ 1 a           4       6       9
+ 2 b           8       5       4
+</div>
+Note that **pivot_longer()** and **pivot_wider()** replace the old functionality in **spread()** and **gather()**, and also have similar functionality to **melt()** and **cast()** from the reshape2 package. [You can read more about this on r-bloggers](https://www.r-bloggers.com/using-r-from-gather-to-pivot/).
+
+* **separate()** turns a single character column into multiple columns. This can be extremely handy in processing annotation information from some types of biological data format files (gff for example).
+
+```r
+# TODO:
+#download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Is_10.gff3", "Is_10.gff3")
+
+gff <- read_tsv("Is_10.gff3", col_names = F) 
+```
+
+<div class='r_output'> Parsed with column specification:
+ cols(
+   X1 = col_character(),
+   X2 = col_character(),
+   X3 = col_character(),
+   X4 = col_double(),
+   X5 = col_double(),
+   X6 = col_character(),
+   X7 = col_character(),
+   X8 = col_character(),
+   X9 = col_character()
+ )
+</div>
+```r
+colnames(gff) = c("seqid", "source", "type", "start", "end", "score", "strand", "phase", "attributes")
+head(gff)
+```
+
+<div class='r_output'> # A tibble: 6 x 9
+   seqid  source  type  start    end score strand phase attributes               
+   <chr>  <chr>   <chr> <dbl>  <dbl> <chr> <chr>  <chr> <chr>                    
+ 1 DS978… Vector… mRNA  78062  95653 .     +      .     ID=ISCW015124-RA;Parent=…
+ 2 DS978… Vector… mRNA  96058  96222 .     +      .     ID=ISCW015125-RA;Parent=…
+ 3 DS978… Vector… mRNA  96651  96836 .     -      .     ID=ISCW015126-RA;Parent=…
+ 4 DS978… Vector… mRNA  97348 115516 .     -      .     ID=ISCW015127-RA;Parent=…
+ 5 DS978… Vector… mRNA  19433  30533 .     -      .     ID=ISCW015322-RA;Parent=…
+ 6 DS978… Vector… mRNA  73824  74264 .     -      .     ID=ISCW015323-RA;Parent=…
+</div>
+```r
+gff$attributes[1]
+```
+
+<div class='r_output'> [1] "ID=ISCW015124-RA;Parent=ISCW015124;Dbxref=EMBL:ABJB010147884,EMBL:ABJB010212012,RefSeq:XM_002416386.1,RefSeq:XP_002416431.1,UniParc:UPI00018EC0B1,UniProtKB:B7QNC6,NCBI_GP:EEC20348.1;Ontology_term=GO:0016263,GO:0016267,GO:0047238;biotype=protein_coding;version=1"
+</div>
+
+extract()
+
+unite()
+
+complete()
+
+drop_na()
+
+
+
+Ixodes scapularis
+
+#### tidyr exercises
+
+https://tidyr.tidyverse.org/articles/tidy-data.html
+
+tidy the relig_income dataset
+
+tidy the billboard dataset
 
 
 
 ### dplyr
+
 
 ### stringr
 
