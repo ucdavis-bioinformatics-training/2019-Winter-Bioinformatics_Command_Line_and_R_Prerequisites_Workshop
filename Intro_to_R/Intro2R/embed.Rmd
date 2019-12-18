@@ -156,51 +156,7 @@ length(gene_expression)
 
 
 
-### Matrices: A matrix is like an Excel sheet containing multiple rows and columns. It is used to combine vectors of the same type.
-
-```{r}
-col1 <- c(1,3,8,9)
-col2 <- c(2,18,27,10)
-col3 <- c(8,37,267,19)
-
-my_matrix <- cbind(col1, col2, col3)
-my_matrix
-
-rownames(my_matrix) <- c("row1", "row2", "row3", "row4")
-my_matrix
-
-t(my_matrix)
-```
-
-To find out the dimension of a matrix:
-```{r}
-ncol(my_matrix)
-nrow(my_matrix)
-dim(my_matrix)
-```
-
-
-Calculations with matrices.
-
-```{r}
-my_matrix * 3
-log10(my_matrix)
-```
-
-Total of each row.
-```{r}
-rowSums(my_matrix)
-```
-
-Total of each column.
-```{r}
-colSums(my_matrix)
-```
-
-There is a data structure _Array_ in R, that holds multi-dimensional (d > 2) data and is a generalized version of a matrix. *Matrix* is used much more commonly than *Array*, therefore we are not going to talk about *Array* here.
-
-
-### Factors: a factor represents categorical variables, which are important in statistical modeling and can only take on a limited number of different values. The function factor() can be used to create a factor variable.
+### Factors: a factor represents categorical variables, which are important in statistical modeling and can only take on a limited number of pre-defined values. The function factor() can be used to create a factor variable.
 
 ```{r}
 disease_stage <- factor(c("Stage1", "Stage2", "Stage2", "Stage3", "Stage1", "Stage4"))
@@ -221,7 +177,7 @@ str(disease_stage)
 ```
 
 
-By default, R infers the factor levels by ordering them alphabetically. One may specifically define the factor levels at the creation of the factor.
+By default, R infers the factor levels by ordering the unique elements in a factor alphabetically. One may specifically define the factor levels at the creation of the factor.
 
 
 ```{r}
@@ -239,6 +195,64 @@ summary(disease_stage)
 ```{r}
 table(disease_stage)
 ```
+
+`r colFmt("Try to add a new element to a factor. This element does not match any of the levels of the factor. What will happen?", 'blue')`
+
+
+
+### Matrices: A matrix is like an Excel sheet containing multiple rows and columns. It is used to combine vectors of the same type.
+
+```{r}
+col1 <- c(1,3,8,9)
+col2 <- c(2,18,27,10)
+col3 <- c(8,37,267,19)
+
+my_matrix <- cbind(col1, col2, col3)
+my_matrix
+
+```
+
+One other way to create a matrix is to use *matrix()* function.
+
+```{r}
+nums <- c(col1, col2, col3)
+nums
+matrix(nums, ncol=2)
+```
+
+```{r}
+rownames(my_matrix) <- c("row1", "row2", "row3", "row4")
+my_matrix
+
+t(my_matrix)
+```
+
+To find out the dimension of a matrix:
+```{r}
+ncol(my_matrix)
+nrow(my_matrix)
+dim(my_matrix)
+```
+
+
+Calculations with numeric matrices.
+
+```{r}
+my_matrix * 3
+log10(my_matrix)
+```
+
+Total of each row.
+```{r}
+rowSums(my_matrix)
+```
+
+Total of each column.
+```{r}
+colSums(my_matrix)
+```
+
+There is a data structure _Array_ in R, that holds multi-dimensional (d > 2) data and is a generalized version of a matrix. *Matrix* is used much more commonly than *Array*, therefore we are not going to talk about *Array* here.
 
 
 ### Data frames: a data frame is like a matrix but can have columns with different types (numeric, character, logical).
