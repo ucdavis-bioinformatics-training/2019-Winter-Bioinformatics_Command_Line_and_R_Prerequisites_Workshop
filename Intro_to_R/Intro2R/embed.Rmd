@@ -169,7 +169,7 @@ In R, categories are called factor levels. The function levels() can be used to 
 levels(disease_stage)
 ```
 
-A function to compactly display the internal structure of an R object is str(). Please use str() to display the internal structure of the object we just created *disease_stage*. It shows that _disease_stage_ is a factor with four levels: "Stage1", "Stage2", "Stage3", etc... The integer numbers after the colon shows that these leves are encoded under the hood by integer numbers: the first level is 1, the second level is 2, and so on. Basically, when _factor_ function is called, R first scan through the vector to determine how many different categories that are in there, then it converts the character vector to a vector of integer values.
+A function to compactly display the internal structure of an R object is str(). Please use str() to display the internal structure of the object we just created *disease_stage*. It shows that _disease_stage_ is a factor with four levels: "Stage1", "Stage2", "Stage3", etc... The integer numbers after the colon shows that these leves are encoded under the hood by integer numbers: the first level is 1, the second level is 2, and so on. Basically, when _factor_ function is called, R first scan through the vector to determine how many different categories there are, then it converts the character vector to a vector of integer values, with each integer value associated with a category.
 
 
 ```{r}

@@ -160,3 +160,7 @@ matrix(tt, ncol=2)
 mm2 <- matrix(c("t1", "t2", "t3", "t4", "t5", "t6"), ncol=2)
 mm2
 rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+3 > A
+3 > "A"
+rmarkdown::render("embed.Rmd")
