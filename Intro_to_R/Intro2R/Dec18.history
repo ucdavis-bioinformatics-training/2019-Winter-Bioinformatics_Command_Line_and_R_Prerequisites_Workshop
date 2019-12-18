@@ -9,3 +9,158 @@ rmarkdown::render("Intro2R.Rmd")
 rmarkdown::render("Intro2R.Rmd")
 rmarkdown::render("Intro2R.Rmd")
 rmarkdown::render("Intro2R.Rmd")
+rmarkdown::render("part2.Rmd")
+rmarkdown::render("part1.Rmd")
+rmarkdown::render("part1.Rmd")
+rmarkdown::render("part2.Rmd")
+rmarkdown::render("part1.Rmd")
+rmarkdown::render("part1.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+my_data
+meta.data
+if (meta.data$Family_history) {
+rmarkdown::render("embed.Rmd")
+gene_expression
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+my_matrix
+for (i in 1:dim(my_matrix)[2]){
+  sum(my_matrix[,i]
+}
+for (i in 1:dim(my_matrix)[2]){
+  sum(my_matrix[,i])
+}
+for (i in 1:dim(my_matrix)[2]){
+  out <- sum(my_matrix[,i])
+  print(out)
+}
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.txt")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.txt", file="./test.txt")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.txt", desfile="./test.txt")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.txt", "./test.txt")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+meta.data
+t(meta.data)
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+meta.data
+meta.data[,1]
+meta.data[,1, drop=F]
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+while (i < dim(my_matrix)[1]){
+ tmp <- sum(my_matrix[i,])
+ print(tmp)
+ i+=1
+}
+whil (i < dim(my_matrix)[1]){
+while (i < dim(my_matrix)[1]{
+while (i < dim(my_matrix)[1]){
+  print(sum(my_matrix[i,]))
+  i <- i + 1
+}
+i <- 1
+while (i < dim(my_matrix)[1]){
+  print(sum(my_matrix[i,]))
+  i <- i + 1
+}
+dim(my_matrix)
+while (i <= dim(my_matrix)[1]){
+ print(sum(my_matrix[i,]))
+ i <- i + 1
+}
+str(tapply(iris$Sepal.Length, iris$Species, summary))
+mm2 <- matrix(c("t1", "t2", "t3", "t4", "t5", "t6"), col=2)
+tt <- c(col1, col2, col3)
+tt
+matrix(tt, ncol=2)
+mm2 <- matrix(c("t1", "t2", "t3", "t4", "t5", "t6"), ncol=2)
+mm2
+rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+3 > A
+3 > "A"
+rmarkdown::render("embed.Rmd")

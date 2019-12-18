@@ -9,7 +9,7 @@ Git is an open source version control system. It allows users to keep track of c
 
 The history of a repository forms a tree. Each commit in the tree describes exactly what was added to and subtracted from the repo since the previous commit. All the information needed to go from the very first version to the most recent, or any version in between, is contained in the commit history. This tree can be very simple, like a straight line, or something more branched, depending on the complexity of the project. Even if your project is small, version control may still be helpful for record-keeping and collaboration.
 
-Git is already installed on the cluster. These exercises assume you are working within the `~/cli/` directory you created earlier.
+Git is already installed on tadpole. These exercises assume you are logged into tadpole and working within directory where you have write permissions. If you have Git installed on your personal computer, you should be able to do the exercises there, too.
 
 In addition to Git itself, you will need a GitHub account. If you don't have one yet, [set one up now](https://github.com).
 
@@ -28,7 +28,7 @@ Make sure your email address matches the one used by your GitHub account.
 
 	git config --global user.email "<email>"
 
-Using `--global` sets the username and password for all repos, so you won't have to do this again for each one. However, if you are using Git in more than one location (for example, on your personal computer and also on the cluster), you will need to do it each time you set up Git. 
+Using `--global` sets the username and password for all repos, so you won't have to do this again for each one. However, if you are using Git in more than one location (for example, on your personal computer and also on the cluster), you will need to do it each time you set up Git.
 
 Setting up a local repository
 =============================
@@ -93,25 +93,25 @@ Only changes to the README, which also exists in the previous commit, are displa
 
 After staging these changes, we will get different output from `git diff` and `git status`.
 
-	git diff
+	git diff --staged
 	git status
 
 To examine staged changes in detail, use the `--staged` option.
 
 	git diff --staged
 	git commit -m "updated README and added a second file"
-	
+
 Sometimes a repository may contain a file that does not actually need to be tracked. For example, a very large data file to which no changes are being made (e.g. a genome sequence), or a log file that records the output of scripts for debugging purposes.
 
 	echo "read-only data" > data.txt
 	echo "output data for debugging purposes" > log.txt
-	
+
 To avoid tracking the file, simply don't add it to any commit. But let's say you add something...
 
 	git add log.txt
 	git status
 	git commit -m "now tracking log.txt"
-	
+
 ... and then change your mind.  You can tell Git to stop tracking it without deleting the file.
 
 	git rm --cached log.txt
@@ -121,7 +121,7 @@ To avoid tracking the file, simply don't add it to any commit. But let's say you
 But be careful. Without the `--cached` option, the `git rm` command deletes the file from the directory entirely.
 
 	git rm log.txt # This deletes the file!
-	
+
 Let's look at the history of the repo now.
 
 	git log
@@ -134,7 +134,7 @@ The most recent commit appears first, and each commit is followed by an identify
 
 	git diff <commit> <commit>
 	git diff <commit> # Hint: Try your first commit's SHA hash
-	
+
 Remote repositories
 ===================
 
@@ -189,7 +189,7 @@ The local repo is the working copy. How do you update the remote repo with chang
 	git add test.txt
 	git commit -m "first commit after adding remote"
 	git push # Refresh the GitHub page to see your changes reflected in the remote repo
-	
+
 What if someone else is also pushing to the remote repo? How do you get the changes they made? To get changes from the remote, pull.
 
 	cd ../git_basics # this local repo doesn't have the commit you just pushed
@@ -218,18 +218,18 @@ Now, in your other local copy of this repo, make different changes.
 	git add test.txt
 	git commit -m "second conflicting commit"
 	git push
-	
+
 What happened? Why wasn't your push successful?
 
 	git pull
 
-When you pull, you should see something like this: 
+When you pull, you should see something like this:
 
 	Auto-merging test.txt
 	CONFLICT (content): Merge conflict in test.txt
 	Automatic merge failed; fix conflicts and then commit the result.
 
-All right, so let's `vi test.txt` and fix those conflicts. You should see a bunch of weird things in your file when you open it:
+All right, so let's `nano test.txt` and fix those conflicts. You should see a bunch of weird things in your file when you open it:
 
 ![Git conflict](git_basics_conflict.png)
 
@@ -248,7 +248,7 @@ Let's make sure `git_basics/` (the local repo) is up to date.
 
 	cd ../git_basics
 	git pull
-	
+
 It is best practice to pull and merge any resulting conflicts that may have arisen before you push your commits.
 
 Branching

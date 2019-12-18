@@ -1,7 +1,4 @@
 ---
-title: "R for Biologist - An Introduction to R"
-author: "Bioinformatics Core"
-date: "`r format(Sys.Date())`"
 output:
     html_document
 ---
@@ -10,7 +7,13 @@ output:
 .colsel {
 background-color: lightyellow;
 }
+
+pre, code {
+  white-space:pre !important;
+  overflow-x:scroll auto
+}
 ```
+
 
 ```{r echo=FALSE}
 library(knitr)
@@ -25,131 +28,9 @@ colFmt = function(x,color){
 }
 ```
 
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(class.source = "colsel")
+knitr::opts_chunk$set(class.source = "colsel", echo=TRUE)
 ```
-
-R and RStudio
-========================================================
-
-### What is R?
-[R](http://r-project.org/) is a language and environment for statistical computing and graphics developed in 1993. It provides a wide variety of statistical and graphical techniques (linear and nonlinear modeling, statistical tests, time series analysis, classification, clustering, ...), and is highly extensible, meaning that the user community can write new R tools. It is a GNU project (Free and Open Source).
-
-The R language has its roots in the S language and environment which was developed at Bell Laboratories (formerly AT&T, now Lucent Technologies) by John Chambers and colleagues. R was created by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand, and now, R is developed by the R Development Core Team, of which Chambers is a member. R is named partly after the first names of the first two R authors (Robert Gentleman and Ross Ihaka), and partly as a play on the name of S. R can be considered as a different implementation of S. There are some important differences, but much code written for S runs unaltered under R.
-
-Some of R's strengths:
-
-* The ease with which well-designed publication-quality plots can be produced, including mathematical symbols and formulae where needed. Great care has been taken over the defaults for the minor design choices in graphics, but the user retains full control.
-* It compiles and runs on a wide variety of UNIX platforms and similar systems (including FreeBSD and Linux), Windows and MacOS.
-* R can be extended (easily) via packages.
-* R has its own LaTeX-like documentation format, which is used to supply comprehensive documentation, both on-line in a number of formats and in hardcopy.
-* It has a vast community both in academia and in business.
-* It's FREE!   
-
-### The R environment
-R is an integrated suite of software facilities for data manipulation, calculation and graphical display. It includes
-
-* an effective data handling and storage facility,
-* a suite of operators for calculations on arrays, in particular matrices,
-* a large, coherent, integrated collection of intermediate tools for data analysis,
-* graphical facilities for data analysis and display either on-screen or on hardcopy, and
-* a well-developed, and effective programming language which includes conditionals, loops, user-defined recursive functions and input and output facilities.
-
-The term "environment" is intended to characterize it as a fully planned and coherent system, rather than an incremental accretion of very specific and inflexible tools, as is frequently the case with other data analysis software.
-
-R, like S, is designed around a true computer language, and it allows users to add additional functionality by defining new functions. Much of the system is itself written in the R dialect of S, which makes it easy for users to follow the algorithmic choices made. For computationally-intensive tasks, C, C++ and Fortran code can be linked and called at run time. Advanced users can write C code to manipulate R objects directly.
-
-Many users think of R as a statistics system. The R group prefers to think of it of an environment within which statistical techniques are implemented.   
-
-### The R Homepage
-The R homepage has a wealth of information on it,
-
-[R-project.org](http://r-project.org/)
-
-On the homepage you can:
-
-* Learn more about R
-* Download R
-* Get Documentation (official and user supplied)
-* Get access to CRAN 'Comprehensive R archival network'
-
-### Interface for R
-
-There are many ways one can interface with R language. Here are a few popular ones:
-
-* [RStudio](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-March-Bioinformatics-Prerequisites/master/wednesday/Intro2R/rstudio.png)
-* [RGui](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-March-Bioinformatics-Prerequisites/master/wednesday/Intro2R/rgui.png)
-* Jupyter and R notebooks
-* text editors, such as vi(m), Emacs...
-
-
-### RStudio
-
-[RStudio](http://rstudio.com/) started in 2010, to offer R a more full featured integrated development environment (IDE) and modeled after matlab's IDE.
-
-RStudio has many features:
-
-* syntax highlighting
-* code completion
-* smart indentation
-* "Projects"
-* workspace browser and data viewer
-* embedded plots
-* Markdown notebooks, Sweave authoring and knitr with one click pdf or html
-* runs on all platforms and over the web
-* etc. etc. etc.
-
-RStudio and its team have contributed to many R packages.[13] These include:
-
-* Tidyverse – R packages for data science, including ggplot2, dplyr, tidyr, and purrr
-* Shiny – An interactive web technology
-* RMarkdown – Insert R code into markdown documents
-* knitr – Dynamic reports combining R, TeX, Markdown & HTML
-* packrat – Package dependency tool
-* devtools – Package development tool
-
-RStudio Cheat Sheets: [rstudio-ide.pdf](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf)
-
----
-
-Programming fundamentals
-====================================================
-
-
-There are three concepts that are essential in any programming language:
-
-* `r colFmt("Variables", 'purple')`
-
-A variable is a named storage. Creating a variable is to reserve some space in memory. In R, the name of a variable can have letters, numbers, dot and underscore. However, a valid variable name cannot start with a underscore or a number, or start with a dot that is followed by a number.
-
-
-
-* `r colFmt("Operations", 'purple')`
-
-```{r echo=FALSE, results= 'asis'}
-library(knitr)
-library(kableExtra)
-kable(data.frame(Operator=paste("<-", " =", sep=","), Description="Assignment", stringsAsFactors=F), align='c', caption="Assignment Operators in R") %>% kable_styling(bootstrap_options="striped", full_width=F, position="left")
-
-kable(data.frame(Operator=c("\\+", "\\-", "\\*", "/", "^", "%%", "%/%"), Description=c("Addition", "Subtraction", "Multiplication", "Division", "Exponent", "Modulus", "Integer Division"), stringsAsFactors=F), align='c', caption="Arithmetic Operators in R") %>% kable_styling(bootstrap_options="striped", full_width=F, position="left")
-
-kable(data.frame(Operator=c("<", ">", "<=", ">=", "==", "!="), Description=c("Less than", "Greater than", "Less than or equal to", "Greater than or equal to", "Equal to", "Not equal to"), stringsAsFactors=F), align='c', caption="Relational Operators in R") %>% kable_styling(bootstrap_options="striped", full_width=F, position="left")
-
-kable(data.frame(Operator=c("!", "&", "&&", "|", "||"), Description=c("Logical NOT", "Element-wise logical AND", "Logical AND", "Element-wise logical OR", "Logical OR"), stringsAsFactors=F), align='c', caption="Logical Operators in R") %>% kable_styling(bootstrap_options="striped", full_width=F, position="left")
-```
-
-* `r colFmt("Functions", 'purple')`
-
-A function is a block of organized, reusable code that is used to perform a set of predefined operations. A function may take zero or more parameters and return a result. The way to use a function in R is:
-
-**function.name(parameter1=value1, ...)**
-
-In R, in order to get help information on a funciton, one may use the command *?function.name*.
-
-
-
-<P style="page-break-before: always">
 
 
 ---
@@ -164,15 +45,14 @@ Topics covered in this introduction to R
 6. Simple data visulization in R
 7. Install packages in R
 8. Save data in R session
-9. R notebook
-
+9. R markdown and R notebooks
 
 ---
 
 Topic 1. Basic data types in R
 ====================================================
 
-### There are 5 basic atomic classes: logical, integer, numeric, complex, and character.
+### There are 5 basic atomic classes: numeric (integer, complex), character, logical
 
 Examples of numeric values.
 ```{r}
@@ -226,7 +106,6 @@ b
 as.character(b)
 ```
 
-<P style="page-break-before: always">
 
 ---
 
@@ -277,51 +156,7 @@ length(gene_expression)
 
 
 
-### Matrices: A matrix is like an Excel sheet containing multiple rows and columns. It is used to combine vectors of the same type.
-
-```{r}
-col1 <- c(1,3,8,9)
-col2 <- c(2,18,27,10)
-col3 <- c(8,37,267,19)
-
-my_matrix <- cbind(col1, col2, col3)
-my_matrix
-
-rownames(my_matrix) <- c("row1", "row2", "row3", "row4")
-my_matrix
-
-t(my_matrix)
-```
-
-To find out the dimension of a matrix:
-```{r}
-ncol(my_matrix)
-nrow(my_matrix)
-dim(my_matrix)
-```
-
-
-Calculations with matrices.
-
-```{r}
-my_matrix * 3
-log10(my_matrix)
-```
-
-Total of each row.
-```{r}
-rowSums(my_matrix)
-```
-
-Total of each column.
-```{r}
-colSums(my_matrix)
-```
-
-There is a data structure _Array_ in R, that holds multi-dimensional (d > 2) data and is a generalized version of a matrix. *Matrix* is used much more commonly than *Array*, therefore we are not going to talk about *Array* here.
-
-
-### Factors: a factor represents categorical variables, which are important in statistical modeling and can only take on a limited number of different values. The function factor() can be used to create a factor variable.
+### Factors: a factor represents categorical variables, which are important in statistical modeling and can only take on a limited number of pre-defined values. The function factor() can be used to create a factor variable.
 
 ```{r}
 disease_stage <- factor(c("Stage1", "Stage2", "Stage2", "Stage3", "Stage1", "Stage4"))
@@ -334,7 +169,7 @@ In R, categories are called factor levels. The function levels() can be used to 
 levels(disease_stage)
 ```
 
-A function to compactly display the internal structure of an R object is str(). Please use str() to display the internal structure of the object we just created *disease_stage*. It shows that _disease_stage_ is a factor with four levels: "Stage1", "Stage2", "Stage3", etc... The integer numbers after the colon shows that these leves are encoded under the hood by integer numbers: the first level is 1, the second level is 2, and so on. Basically, when _factor_ function is called, R first scan through the vector to determine how many different categories that are in there, then it converts the character vector to a vector of integer values.
+A function to compactly display the internal structure of an R object is str(). Please use str() to display the internal structure of the object we just created *disease_stage*. It shows that _disease_stage_ is a factor with four levels: "Stage1", "Stage2", "Stage3", etc... The integer numbers after the colon shows that these leves are encoded under the hood by integer numbers: the first level is 1, the second level is 2, and so on. Basically, when _factor_ function is called, R first scan through the vector to determine how many different categories there are, then it converts the character vector to a vector of integer values, with each integer value associated with a category.
 
 
 ```{r}
@@ -342,7 +177,7 @@ str(disease_stage)
 ```
 
 
-By default, R infers the factor levels by ordering them alphabetically. One may specifically define the factor levels at the creation of the factor.
+By default, R infers the factor levels by ordering the unique elements in a factor alphabetically. One may specifically define the factor levels at the creation of the factor.
 
 
 ```{r}
@@ -360,6 +195,64 @@ summary(disease_stage)
 ```{r}
 table(disease_stage)
 ```
+
+`r colFmt("Try to add a new element to a factor. This element does not match any of the levels of the factor. What will happen?", 'blue')`
+
+
+
+### Matrices: A matrix is like an Excel sheet containing multiple rows and columns. It is used to combine vectors of the same type.
+
+```{r}
+col1 <- c(1,3,8,9)
+col2 <- c(2,18,27,10)
+col3 <- c(8,37,267,19)
+
+my_matrix <- cbind(col1, col2, col3)
+my_matrix
+
+```
+
+One other way to create a matrix is to use *matrix()* function.
+
+```{r}
+nums <- c(col1, col2, col3)
+nums
+matrix(nums, ncol=2)
+```
+
+```{r}
+rownames(my_matrix) <- c("row1", "row2", "row3", "row4")
+my_matrix
+
+t(my_matrix)
+```
+
+To find out the dimension of a matrix:
+```{r}
+ncol(my_matrix)
+nrow(my_matrix)
+dim(my_matrix)
+```
+
+
+Calculations with numeric matrices.
+
+```{r}
+my_matrix * 3
+log10(my_matrix)
+```
+
+Total of each row.
+```{r}
+rowSums(my_matrix)
+```
+
+Total of each column.
+```{r}
+colSums(my_matrix)
+```
+
+There is a data structure _Array_ in R, that holds multi-dimensional (d > 2) data and is a generalized version of a matrix. *Matrix* is used much more commonly than *Array*, therefore we are not going to talk about *Array* here.
 
 
 ### Data frames: a data frame is like a matrix but can have columns with different types (numeric, character, logical).
@@ -542,7 +435,7 @@ my_list[1]
 my_matrix[c(TRUE, FALSE), ]
 ```
 
-##### Subsetting a data frame can be done similarly as subsetting a matrix. However, one may supply only one one dimension index to subset a data frame. In this case, R will treat the data frame as a list with each column is an element in the list.
+##### Subsetting a data frame can be done similarly as subsetting a matrix. In addition, one may supply only one 1-dimensional index to subset a data frame. In this case, R will treat the data frame as a list with each column is an element in the list.
 
 ```{r}
 # recall a data frame created from above: *meta.data*
@@ -612,9 +505,6 @@ kable(data.frame(Simplifying=c("x[[1]]", "x[[1]]", "x[1:3, drop=T]", "x[, 1] or 
 `r colFmt("Please play around with the data structures that we have created to understand the behaviours of simplifying and preserving subsetting", 'blue')`
 
 
-
-<P style="page-break-before: always">
-
 ---
 
 Topic 3. Import and export data in R
@@ -622,17 +512,19 @@ Topic 3. Import and export data in R
 
 R base function read.table() is a general funciton that can be used to read a file in table format. The data will be imported as a data frame.
 
-```{r}
+```{r eval=FALSE}
 # There is a very convenient way to read files from the internet.
 data <- read.table(file="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.txt", sep="\t", header=T, stringsAsFactors=F)
 
 # To read a local file. If you have downloaded the raw_counts.txt file to your local machine, you may use the following command to read it in, by providing the full path for the file location. The way to specify the full path is the same as taught in the command line session.
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2017-August-Variant-Analysis-Workshop/master/friday/Intro2R/raw_counts.txt", "./raw_counts.txt")
 data <- read.table(file="./raw_counts.txt", sep="\t", header=T, stringsAsFactors=F)
 
 ```
 
-Take a look at the beginning part of the data frame.
+To check what type of object *data* is in and take a look at the beginning part of the data.
 ```{r}
+is.data.frame(data)
 head(data)
 ```
 
@@ -670,7 +562,6 @@ write.csv()
 
 write.csv2()
 
-<P style="page-break-before: always">
 
 ---
 
@@ -685,7 +576,7 @@ getwd()
 # to set a different working directory, use setwd
 #setwd("/Users/jli/Desktop")
 
-# to list all variables in the environment
+# to list all objects in the environment
 ls()
 
 # to create a vector from 2 to 3, using increment of 0.1
@@ -702,7 +593,7 @@ rep(1:3, each=3)
 
 ```  
 
-#### `r colFmt("One useful function to find out information on a R object: str(). It compactly display the internal structure of a R object.", 'red')`  
+#### `r colFmt("One useful function to find out information on an R object: str(). It compactly display the internal structure of an R object.", 'red')`  
 
 
 ```{r}
@@ -710,7 +601,83 @@ str(data2)
 ```
 
 
-### A few useful functions: apply(), lapply(), sapply(), and tapply()
+### Conditional structure
+
+Decision making is important in programming. This can be achieved using **if...else** statement.
+
+The basic structure of a *if...else* statement is 
+
+**if (condition statement){**
+
+	**some operation**
+
+**}**
+
+
+Two examples of *if...else* statement
+
+```{r}
+
+Temperature <- 30
+
+if (Temperature < 32){
+  print("Very cold")
+}
+
+```
+
+```{r}
+# recall gene_expression, we are going to design a *if...else* statement to decide treatment plans based on gene expression.
+
+if (gene_expression["ESR1"] > 0){
+  print("Treatment plan 1")
+}else if(gene_expression["BRCA1"] > 0){
+  print("Treatment plan 2")
+}else if(gene_expression["p53"] > 0){
+  print("Treatment plan 3")
+}else{
+  print("Treatment plan 4")
+}
+
+```
+
+
+### Loop structure
+
+In programming, it is common that one has to do one set of specific operation on a sequence of elements. In this case, *for* loop is very useful to achieve the goal.
+
+The basic structure of *for* loop is:
+
+**for (value in sequence){**
+
+  **some operation**
+
+**}**
+
+
+For excample, we would like to calculate the sum of a row for every row in the matrix we created earlier. We are going to use *for* loop to do it.
+
+
+```{r}
+for (i in 1:dim(my_matrix)[1]){
+  out <- sum(my_matrix[i, ])
+  print(out)
+}
+```
+
+There is **while** loop in R similarly as in command line or any other programming language. The basic structure of *while* loop is:
+
+**while (condition){**
+
+  **some operation**
+
+**}**
+
+
+`r colFmt("Please rewrite the calculation of the column sum using *while* loop.", 'blue')`
+
+
+### A few useful functions: apply(), lapply(), sapply(), and tapply() to replace for loop
 
 #### apply() takes array or matrix as input and output in vector, array or list.
 
@@ -799,7 +766,6 @@ my.area(side1=3, side2=4, side3=5)
 ```
 
 
-<P style="page-break-before: always">
 
 ---
 
@@ -829,7 +795,6 @@ Calculate the quantiles of each samples.
 apply(data, 2, quantile)
 ```
 
-<P style="page-break-before: always">
 
 ---
 
@@ -878,7 +843,6 @@ hist(x, breaks=seq(range(x)[1]-1, range(x)[2]+1, by=0.5))
 dev.off()
 ```
 
-<P style="page-break-before: always">
 
 ---
 
@@ -893,7 +857,7 @@ if (!requireNamespace("BiocManager"))
 ## install core packages
 BiocManager::install()
 ## install specific packages
-BiocManager::install(c("ggplot2", "tidyverse"))
+BiocManager::install(c("devtools", "tidyverse"))
 ```
 
 * Bioconductor has a repository and release schedule that differ from R (Bioconductor has a ‘devel’ branch to which new packages and updates are introduced, and a stable ‘release’ branch emitted once every 6 months to which bug fixes but not new features are introduced). This mismatch causes that the version detected by install.packages() is sometimes not the most recent 'release'.
@@ -926,7 +890,6 @@ install_github("stephenturner/qqman")
 ```
 
 
-<P style="page-break-before: always">
 
 ---
 
@@ -977,13 +940,14 @@ To render R notebook to html/pdf/word documents can be done using the **Preview*
 `r colFmt("Challenge", 'blue')`
 ====================================================
 
-Working with an R notebook, load the Iris data as we did earlier in this documentation, generate a table that lists the median of each measurement (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) for each species. Then generate a plot based on the result, such as following. Finally produce an html report with the table and the plot.
+Working with an R notebook, load the Iris data as we did earlier in this documentation, generate a table that lists the median of each measurement (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) for each species. Then generate a plot based on the result. Finally produce an html report with the table and the plot, such as following.
 
 
-```{r echo=FALSE, message=FALSE, include=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, error=FALSE}
 tmp <- sapply(1:4, function(x){tapply(iris[,x], iris[[5]], median)})
 colnames(tmp) <- colnames(iris)[1:4]
 nms <- colnames(tmp)
+kable(data.frame(tmp, stringsAsFactors=F), align='c') %>% kable_styling(bootstrap_options=c("striped", "hover", "responsive"), full_width=F, position="center")
 species <- as.vector(levels(iris$Species))
 x <- c(1, 2, 3, 4)
 png("test.png")
@@ -992,12 +956,14 @@ points(x, tmp["virginica",], pch=20, col='orange')
 points(x, tmp["versicolor",], pch=20, col='blue')
 axis(1, at=x, labels=nms, las=2, cex.axis=0.7)
 text(c(1.5,1.5,1.5), c(0, 0.7, 1.4), labels=species, col=c("red", "blue", "orange"), cex=1.5)
-dev.off()
+tt <- dev.off()
 ```
 
 ![](./test.png)
 
 
+`r colFmt("Hint: in order to output a nice looking table in the final report, one may check out the documentation at https://cran.r-project.org/web/packages/htmlTable/vignettes/tables.html", 'red')`
+
 <br>
-<br>
+
 
