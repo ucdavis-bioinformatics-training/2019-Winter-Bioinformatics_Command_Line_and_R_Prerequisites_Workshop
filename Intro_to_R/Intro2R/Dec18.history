@@ -164,3 +164,25 @@ rmarkdown::render("Intro2R_main.Rmd")
 3 > A
 3 > "A"
 rmarkdown::render("embed.Rmd")
+rmarkdown::render("Intro2R_main.Rmd")
+disease_stage
+levels(disease_stage)
+levels(disease_stage) <- c("Stage1", "Stage2", "Stage3", "Stage4")
+disease_stage
+str(disease_stage)
+disease_stage <- factor(c("Stage1", "Stage2", "Stage2", "Stage3", "Stage1", "Stage4"))
+disease_stage
+str(disease_stage)
+disease_stage <- factor(c("Stage1", "Stage2", "Stage2", "Stage3", "Stage1", "Stage4"), levels=c("Stage2", "Stage1", "Stage3", "Stage4"))
+str(disease_stage)
+levels(disease_stage) <- c("Stage1", "Stage2", "Stage3", "Stage4")
+str(disease_stage)
+relevel(disease_stage) <- c("Stage2", "Stage1", "Stage3", "Stage4")
+relevel
+relevel(disease_stage)
+relevel(disease_stage, "Stage2")
+relevel(disease_stage, "Stage1")
+rmarkdown::render("embed.Rmd")
+her2_expressed + 1
+her2_expressed
+rmarkdown::render("embed.Rmd")

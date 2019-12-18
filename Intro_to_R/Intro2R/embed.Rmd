@@ -106,6 +106,19 @@ b
 as.character(b)
 ```
 
+What happens when one converts a logical variable to numeric?
+
+```{r}
+as.numeric(her2_expressed)
+
+her2_expressed + 1
+
+```
+
+A logical *TRUE* is converted to integer 1 and a logical *FALSE* is converted to integer 0.
+
+
+
 
 ---
 
