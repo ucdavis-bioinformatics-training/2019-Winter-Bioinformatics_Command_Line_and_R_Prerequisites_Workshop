@@ -41,17 +41,14 @@ navigation:
     url: Advanced_CLI/advanced-challenge-solutions
   #- title: Folder and Experiment Structure # MATT
   #  url:
-  - title: A Simple RNA-Seq Workflow # NIK
-    url: Advanced_CLI/bioworkflow
+  - title: Using Screen to Manage Multiple Projects (optional)
+    url: Advanced_CLI/screen
 
 
   - heading: Intro to R
   - title: Introduction to R
     url: Intro_to_R/Intro2R/Intro2R_main
-  - title: Data in R - Prepare
-    url: Intro_to_R/Intro2R/data_in_R_prepare_fixed
-  - title: Data in R
-    url: Intro_to_R/Intro2R/data_in_R_fixed#  - title: Data in R - Prepare
+#  - title: Data in R - Prepare
 #    url: Intro_to_R/Intro2R/data_in_R_prepare_fixed
 #  - title: Data in R
 #    url: Intro_to_R/Intro2R/data_in_R_fixed
@@ -59,6 +56,10 @@ navigation:
     url: Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_prepare_fixed
   - title: Intro to tidyverse and ggplot2
     url: Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_fixed
+
+  - heading: Spreadsheets
+  - title: Working with spreadsheets
+    url: spreadsheets/spreadsheets
 
   #- heading: Advanced R
   #- title: R Oddities
@@ -68,6 +69,9 @@ navigation:
   #- title: Linear Models in R
   #  url: Advanced_R/linear_models.Rmd
 
+  - heading: Bioinformatics
+  - title: A Simple Bioinformatics Workflow
+    url: Advanced_CLI/Bioinformatics_CLI
 
     # todo for Wed/Advanced_R:
       # stats talk = linear models in R?
@@ -75,15 +79,6 @@ navigation:
       # Data munging?
       # tidyverse, data frame manipulation
       # Figures in R and model building
-
-
-#  - heading: Optional
-#  - title: CLI Warmup / Review
-#    url: Advanced_CLI/warmup
-#  - title: CLI Warmup - Solutions
-#    url: Advanced_CLI/warmup-solution
-#  - title: Using Screen to Manage Multiple Projects
-#    url: Advanced_CLI/screen.pdf
 
   - heading: Support
   - title: Cheat Sheets
