@@ -8,7 +8,7 @@ Goals:
 * Effectively export data from spreadsheet programs
 
 
-## Lesson taken from data carpentry (much unchanged with sone modifications)
+### Lesson taken from data carpentry (much unchanged with sone modifications)
 
 https://datacarpentry.org/spreadsheet-ecology-lesson/
 
@@ -23,7 +23,7 @@ quality control functions.
 Spreadsheets are good for data entry. Therefore we have a lot of data
 in spreadsheets.
 
-### **Download** this data file to your computer: [https://ndownloader.figshare.com/files/2252083](https://ndownloader.figshare.com/files/2252083)
+**Download** this data file to your computer: [https://ndownloader.figshare.com/files/2252083](https://ndownloader.figshare.com/files/2252083)
 
 **About the data**
 
@@ -39,7 +39,7 @@ available for reuse.
 
 Ernest, M., Brown, J., Valone, T., and White, E.P. (2017). Portal Project Teaching Database. Version 6. Figshare. [DOI: 10.6084/m9.figshare.1314459.v6](https://figshare.com/articles/Portal_Project_Teaching_Database/1314459)
 
-### Problems with Spreadsheets
+## Problems with Spreadsheets
 
 Spreadsheets are good for data entry, but in reality we tend to
 use spreadsheet programs for much more than data entry. We use them
@@ -64,7 +64,7 @@ command-line based statistics program like R or SAS, it’s practically
 impossible to apply a calculation to one observation in your
 dataset but not another unless you’re doing it on purpose.
 
-## Formatting data table in Spreadsheets
+# Formatting data table in Spreadsheets
 
 The most common mistake made is treating spreadsheet programs like lab notebooks, that is,
 relying on context, notes in the margin,
@@ -94,8 +94,8 @@ data.
 > interfaces) for data entry and data analysis might be
 > different. It is important to take this into account, and ideally
 > automate the conversion from one to another.
-
-### Keeping track of your analyses
+>
+## Keeping track of your analyses
 
 When you're working with spreadsheets, during data clean up or analyses, it's
 very easy to end up with a spreadsheet that looks very different from the one
@@ -114,7 +114,7 @@ This might be an example of a spreadsheet setup:
 
 Put these principles in to practice today during your Exercises.
 
-### Structuring data in spreadsheets
+## Structuring data in spreadsheets
 
 
 The cardinal rule of using spreadsheet programs for data is to keep it "tidy":
@@ -143,7 +143,7 @@ look at all of one species or look at different weight distributions by sex,
 it would be hard to do this using this data setup. If instead we put sex and species
 in different columns, you can see that it would be much easier.
 
-### Columns for variables and rows for observations
+## Columns for variables and rows for observations
 
 The rule of thumb, when setting up a datasheet, is columns =
 variables, rows = observations, cells = data (values).
@@ -152,21 +152,21 @@ So, instead we should have:
 
 ![single-info example](./fig/single-info.png)
 
-> ## Exercise
->
-> We're going to take a messy version of the survey data and describe how we would clean it up.
->
-> 1. Download the data by clicking [here](https://ndownloader.figshare.com/files/2252083) to get it from FigShare.
-> 2. Open up the data in a spreadsheet program.
-> 3. You can see that there are two tabs. Two field assistants conducted the surveys, one
+### Exercise
+
+We're going to take a messy version of the survey data and describe how we would clean it up.
+
+1. Download the data by clicking [here](https://ndownloader.figshare.com/files/2252083) to get it from FigShare.
+2. Open up the data in a spreadsheet program.
+3. You can see that there are two tabs. Two field assistants conducted the surveys, one
 in 2013 and one in 2014, and they both kept track of the data in their own way. Now
 you're the person in charge of this project and you want to be able to
 start analyzing the data.
-> 4. With the person next to you, identify what is wrong with this spreadsheet. Also discuss the steps you would need to take to clean up the 2013 and 2014 tabs, and to put them all together in one spreadsheet.
+4. With the person next to you, identify what is wrong with this spreadsheet. Also discuss the steps you would need to take to clean up the 2013 and 2014 tabs, and to put them all together in one spreadsheet.
 
 **Important** Do not forget our first piece of advice: to create a new file (or tab) for the cleaned data, never modify your original (raw) data.
 
-## Common Spreadsheet Errors
+# Common Spreadsheet Errors
 
 There are a few potential errors to be on the lookout for in your own data as well as data from collaborators or the Internet. If you are aware of the errors and the possible negative effect on downstream data analysis and result interpretation, it might motivate yourself and your project members to try and avoid them. Making small changes to the way you format your data in spreadsheets can have a great impact on efficiency and reliability when it comes to data cleaning and analysis.
 
@@ -306,49 +306,15 @@ that are excessively long. Including the units in the field names avoids confusi
 
 **Examples**
 
-
-<table align = "left" style = "width =100%; border: 1px solid black;">
-<tr>
-	<td> <b>Good Name</b></td> <br />
-	<td> <b>Good Alternative </b> </td><br />
-	<td> <b>Avoid </b></td><br />
-</tr>
-<tr>
-	<td> Max_temp_C</td>
-	<td> MaxTemp </td>
-	<td> Maximum Temp (°C) </td>
-</tr>
-<tr>
-	<td> Precipitation_mm</td>
-	<td> Precipitation</td>
-	<td> precmm </td>
-</tr>
-<tr>
-	<td> Mean_year_growth</td>
-	<td> MeanYearGrowth </td>
-	<td> Mean growth/year</td>
-</tr>
-<tr>
-	<td> sex </td>
-	<td> sex </td>
-	<td> M/F </td>
-</tr>
-<tr>
-	<td> weight </td>
-	<td> weight </td>
-	<td> w.</td>
-</tr>
-<tr>
-	<td> cell_type </td>
-	<td> CellType </td>
-	<td> Cell Type </td>
-</tr>
-<tr>
-	<td> Observation_01 </td>
-	<td> first_observation</td>
-	<td> 1st Obs</td>
-</tr>
-</table>
+|Good Name|Good Alternative|Avoid|
+|--- |--- |--- |
+|Max_temp_C|MaxTemp|Maximum Temp (°C)|
+|Precipitation_mm|Precipitation|precmm|
+|Mean_year_growth|MeanYearGrowth|Mean growth/year|
+|sex|sex|M/F|
+|weight|weight|w.|
+|cell_type|CellType|Cell Type|
+|Observation_01|first_observation|1st Obs|
 
 
 ## <a name="special"></a> Using special characters in data
@@ -393,7 +359,7 @@ all the files and folders in a project.
 (Text on metadata adapted from the online course Research Data [MANTRA](http://datalib.edina.ac.uk/mantra) by EDINA and Data Library, University of Edinburgh. MANTRA is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).)
 
 
-## Dates as data
+# Dates as data
 
 Dates in spreadsheets are stored in a single column. While this seems the
 most natural way to record dates, it actually is not best
@@ -427,7 +393,7 @@ Let’s extract month, day and year from the dates to new columns. For this we c
 You can see that even though you wanted the year to be 2014, your spreadsheet program automatically interpreted it as 2015, the year you entered the data.
 
 ### Solution
-![dates, exersize 1](./fig/solution_exercise_1_dates.png)
+![dates, exercise 1](./fig/solution_exercise_1_dates.png)
 
 ### Exercise
 
@@ -453,7 +419,7 @@ functions `HOUR()`, `MINUTE()` and `SECOND()`.
 
 3) To extract the hour, type `=HOUR(NOW()-TODAY())` and similarly for minute and second.
 
-### Preferred date format
+## Preferred date format
 
 It is much safer to store dates with [YEAR, MONTH, DAY](#day) in separate columns or as [YEAR and DAY-OF-YEAR](#doy) in separate columns.
 
@@ -473,7 +439,7 @@ Spreadsheet programs have numerous “useful features” which allow them to han
 
 But these "features" often allow ambiguity to creep into your data. Ideally, data should be as unambiguous as possible.
 
-### Dates stored as integers
+## Dates stored as integers
 
 The first thing you need to know is that Excel stores dates as numbers - see the last column in the above figure. Essentially, it counts the days from a default of December 31, 1899, and thus stores July 2, 2014 as  the serial number 41822.
 
@@ -529,7 +495,7 @@ As you can see, exporting data from Excel and then importing it back into Excel 
 **Note**
 You will notice that when exporting into a text-based format (such as CSV), Excel will export its internal date integer instead of a useful value (that is, the dates will be represented as integer numbers). This can potentially lead to problems if you use other software to manipulate the file.
 
-### Advantages of Alternative Date Formatting
+## Advantages of Alternative Date Formatting
 
 ### <a name="day"></a> Storing dates as YEAR, MONTH, DAY
 
@@ -619,32 +585,7 @@ The cells containing no data values sort to the bottom of the tabular data, whil
 
 ![quality_control3, exercise1](./fig/sorting_solution_2.png)
 
-
-## Conditional formatting ##
-Conditional formatting basically can do something like color code your values by some
-criteria or lowest to highest. This makes it easy to scan your data for outliers.
-
-Conditional formatting should be used with caution, but it can be a great way to flag inconsistent values when entering data.
-
-## Exercise
-1. Make sure the Weight_grams column is highlighted.
-
-2. In the main Excel menu bar, click `Home` > `Conditional Formatting...` choose a formatting rule.
-
-3. Apply any `2-Color Scale` formatting rule.
-
-4. Now we can scan through and different colors will stand out. Do you notice any strange values?
-
-### Solution
-
-Cells that contain non-numerical values are not colored. This includes both the cells where the letter "g" was included and the empty cells.
-
-![quality_control4, exercise2](./fig/conditional_formating.png)
-
-It is nice to be able to do these scans in spreadsheets, but we also can do these
-checks in a programming language like R, or in OpenRefine or SQL.
-
-## Exporting data
+# Exporting data
 
 Storing the data you're going to work with for your analyses in Excel default file format (`*.xls` or `*.xlsx` - depending on the Excel version) isn't a good idea. Why?
 
@@ -685,8 +626,17 @@ An important note for backwards compatibility: you can open CSV files in Excel!
 
 ![Saving an Excel file to CSV](./fig/excel-to-csv.png)
 
+## Caveats on commas
 
-#### A note on R and `.xlsx`
+In some datasets, the data values themselves may include commas (,). In that case, the software which you use (including Excel)
+will most likely incorrectly display the data in columns. This is because the commas which are a part of the data values will be
+interpreted as delimiters.
+
+If you are working with data that contains commas, you likely will need to use another delimiter when working in a spreadsheet. In this
+case, consider using tabs as your delimiter and working with TSV files. TSV files can be exported from spreadsheet
+programs in the same way as CSV files.
+
+## A note on R and `.xlsx`
 
 There are R packages that can read `.xls` or `.xlsx` files (as well as
 Google spreadsheets). It is even possible to access different
@@ -699,13 +649,3 @@ worksheets in the `.xlsx` documents.
   additional complexity/dependencies in the data analysis R code
 - data formatting best practice still apply
 - Is there really a good reason why `csv` (or similar) is not adequate?
-
-#### Caveats on commas
-
-In some datasets, the data values themselves may include commas (,). In that case, the software which you use (including Excel)
-will most likely incorrectly display the data in columns. This is because the commas which are a part of the data values will be
-interpreted as delimiters.
-
-If you are working with data that contains commas, you likely will need to use another delimiter when working in a spreadsheet. In this
-case, consider using tabs as your delimiter and working with TSV files. TSV files can be exported from spreadsheet
-programs in the same way as CSV files.
