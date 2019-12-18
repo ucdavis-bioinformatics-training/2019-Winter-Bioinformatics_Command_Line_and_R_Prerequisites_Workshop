@@ -43,11 +43,14 @@ navigation:
   - heading: Intro to R
   - title: Introduction to R
     url: Intro_to_R/Intro2R/Intro2R
-  - title: Data in R - Prepare
-    url: Intro_to_R/Intro2R/data_in_R_prepare_fixed
-  - title: Data in R
-    url: Intro_to_R/Intro2R/data_in_R_fixed
-
+#  - title: Data in R - Prepare
+#    url: Intro_to_R/Intro2R/data_in_R_prepare_fixed
+#  - title: Data in R
+#    url: Intro_to_R/Intro2R/data_in_R_fixed
+  - title: Intro to tidyverse and ggplot2 - Prepare
+    url: Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_prepare_fixed
+  - title: Intro to tidyverse and ggplot2
+    url: Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_fixed
 
   #- heading: Advanced R
   #- title: R Oddities
