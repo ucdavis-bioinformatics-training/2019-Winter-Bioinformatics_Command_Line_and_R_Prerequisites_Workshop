@@ -141,7 +141,7 @@ Computers use different types of containers to store different types of data. In
 #### Now lets look at the object we just loaded 
 
 ```r
-print(mpg)
+mpg
 ```
 
 <div class='r_output'> # A tibble: 234 x 11
@@ -524,69 +524,50 @@ pivot_wider(d1, names_from = sample, values_from = result )
 </div>
 Note that **pivot_longer()** and **pivot_wider()** replace the old functionality in **spread()** and **gather()**, and also have similar functionality to **melt()** and **cast()** from the reshape2 package. [You can read more about this on r-bloggers](https://www.r-bloggers.com/using-r-from-gather-to-pivot/).
 
-* **separate()** turns a single character column into multiple columns. This can be extremely handy in processing annotation information from some types of biological data format files (gff for example).
+* **separate()** turns a single character column into multiple columns. This can be handy when a single column contains two different pieces of data.
+
+Lets practice on table3 from the tidyr package:
 
 ```r
-# TODO:
-#download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Is_10.gff3", "Is_10.gff3")
-
-gff <- read_tsv("Is_10.gff3", col_names = F) 
+table3
 ```
 
-<div class='r_output'> Parsed with column specification:
- cols(
-   X1 = col_character(),
-   X2 = col_character(),
-   X3 = col_character(),
-   X4 = col_double(),
-   X5 = col_double(),
-   X6 = col_character(),
-   X7 = col_character(),
-   X8 = col_character(),
-   X9 = col_character()
- )
+<div class='r_output'> # A tibble: 6 x 3
+   country      year rate             
+ * <chr>       <int> <chr>            
+ 1 Afghanistan  1999 745/19987071     
+ 2 Afghanistan  2000 2666/20595360    
+ 3 Brazil       1999 37737/172006362  
+ 4 Brazil       2000 80488/174504898  
+ 5 China        1999 212258/1272915272
+ 6 China        2000 213766/1280428583
 </div>
+The third column **rate** contains two different values, **cases** and **population**. Wecan 
+
 ```r
-colnames(gff) = c("seqid", "source", "type", "start", "end", "score", "strand", "phase", "attributes")
-head(gff)
+separate(data = table3, col = rate, into = c("cases", "population"), sep = '/')
 ```
 
-<div class='r_output'> # A tibble: 6 x 9
-   seqid  source  type  start    end score strand phase attributes               
-   <chr>  <chr>   <chr> <dbl>  <dbl> <chr> <chr>  <chr> <chr>                    
- 1 DS978… Vector… mRNA  78062  95653 .     +      .     ID=ISCW015124-RA;Parent=…
- 2 DS978… Vector… mRNA  96058  96222 .     +      .     ID=ISCW015125-RA;Parent=…
- 3 DS978… Vector… mRNA  96651  96836 .     -      .     ID=ISCW015126-RA;Parent=…
- 4 DS978… Vector… mRNA  97348 115516 .     -      .     ID=ISCW015127-RA;Parent=…
- 5 DS978… Vector… mRNA  19433  30533 .     -      .     ID=ISCW015322-RA;Parent=…
- 6 DS978… Vector… mRNA  73824  74264 .     -      .     ID=ISCW015323-RA;Parent=…
+<div class='r_output'> # A tibble: 6 x 4
+   country      year cases  population
+   <chr>       <int> <chr>  <chr>     
+ 1 Afghanistan  1999 745    19987071  
+ 2 Afghanistan  2000 2666   20595360  
+ 3 Brazil       1999 37737  172006362 
+ 4 Brazil       2000 80488  174504898 
+ 5 China        1999 212258 1272915272
+ 6 China        2000 213766 1280428583
 </div>
-```r
-gff$attributes[1]
-```
-
-<div class='r_output'> [1] "ID=ISCW015124-RA;Parent=ISCW015124;Dbxref=EMBL:ABJB010147884,EMBL:ABJB010212012,RefSeq:XM_002416386.1,RefSeq:XP_002416431.1,UniParc:UPI00018EC0B1,UniProtKB:B7QNC6,NCBI_GP:EEC20348.1;Ontology_term=GO:0016263,GO:0016267,GO:0047238;biotype=protein_coding;version=1"
-</div>
-
-extract()
-
-unite()
-
-complete()
-
-drop_na()
-
-
-
-Ixodes scapularis
 
 #### tidyr exercises
-
 https://tidyr.tidyverse.org/articles/tidy-data.html
 
-tidy the relig_income dataset
+1) The tidyr package comes with a relig_income dataset. Use tidyr functions to make it into a tidy dataset. What are the variables? What are the observations?
 
-tidy the billboard dataset
+
+
+2) The tidyr package come with a table2 dataset. What is wrong with this dataset? How many rows does it have per observation? Use tidyr functions to make it into a tidy dataset.
+
 
 
 
@@ -602,3 +583,22 @@ tidy the billboard dataset
 ### Real data example
 
 
+
+
+
+# TODO:
+#download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Is_10.gff3", "Is_10.gff3")
+
+
+# Ixodes scapularis
+
+# gff <- read_tsv("Is_10.gff3", col_names = F) 
+# colnames(gff) = c("seqid", "source", "type", "start", "end", "score", "strand", "phase", "attributes")
+# head(gff)
+
+# gff$attributes[1]
+# ```
+
+# ```{r}
+# separate(data = gff, col = attributes, )
+# ```

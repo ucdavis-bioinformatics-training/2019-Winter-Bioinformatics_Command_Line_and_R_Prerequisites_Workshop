@@ -120,7 +120,7 @@ Computers use different types of containers to store different types of data. In
 
 #### Now lets look at the object we just loaded 
 ```{r}
-print(mpg)
+mpg
 ```
 
 *Does the mpg object have the expected number of lines?*
