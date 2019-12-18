@@ -41,8 +41,8 @@ navigation:
     url: Advanced_CLI/advanced-challenge-solutions
   #- title: Folder and Experiment Structure # MATT
   #  url:
-  - title: A Simple Bioinformatics Workflow # NIK
-    url: Advanced_CLI/Bioinformatics_CLI
+  - title: Using Screen to Manage Multiple Projects (optional)
+    url: Advanced_CLI/screen
 
 
   - heading: Intro to R
@@ -54,14 +54,16 @@ navigation:
 #    url: Intro_to_R/Intro2R/data_in_R_fixed
 
 
-  #- heading: Advanced R
+  - heading: Advanced R
+
   #- title: R Oddities
   #  url: Advanced_R/R_Oddities.Rmd
   #- title: Walkthrough of Vignettes for limma and biomaRt
   #  url: Advanced_R/limma_biomart_vignettes.Rmd
   #- title: Linear Models in R
   #  url: Advanced_R/linear_models.Rmd
-
+  - title: A Simple Bioinformatics Workflow
+    url: Advanced_CLI/Bioinformatics_CLI
 
     # todo for Wed/Advanced_R:
       # stats talk = linear models in R?
@@ -69,15 +71,6 @@ navigation:
       # Data munging?
       # tidyverse, data frame manipulation
       # Figures in R and model building
-
-
-#  - heading: Optional
-#  - title: CLI Warmup / Review
-#    url: Advanced_CLI/warmup
-#  - title: CLI Warmup - Solutions
-#    url: Advanced_CLI/warmup-solution
-#  - title: Using Screen to Manage Multiple Projects
-#    url: Advanced_CLI/screen.pdf
 
   - heading: Support
   - title: Cheat Sheets
