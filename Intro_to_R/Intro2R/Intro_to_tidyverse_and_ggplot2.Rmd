@@ -70,9 +70,8 @@ library(readr)
 Note that this data set is from the ggplot2 package. 
 
 ```{r download2, eval=FALSE, results='hide', warning=FALSE, error=FALSE, message=FALSE, collapse=TRUE}
-download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/intro2R/mpg.tsv", "mpg.tsv")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/mpg.tsv", "mpg.tsv")
 ```
-
 
 The file has a ".tsv" extension, so it is probably a tab separated values file. Lets check this assumption in a few different ways.
 Note that the output from the system() function does not appear in the markdown document, and this approach may not work on windows computers.
@@ -277,9 +276,9 @@ d2
 
 ***
 
-#### How can we make d2 look like d1 (make d2 tiday)?
+#### How can we make d2 look like d1 (make d2 tidy)?
 
-First, make the row names into a column with **rownames_to_column()** function:
+First, make the row names into a new column with the **rownames_to_column()** function:
 ```{r tidyup}
 d2.1 <- rownames_to_column(d2, 'trt')
 d2.1
@@ -297,7 +296,9 @@ d2.3 <- select(d2.2, sample, trt, result)
 d2.3
 ```
 
-### Detour for 
+### Detour for magrittr and the %>% operator
+
+
 
 
 d2 %>% rownames_to_column('row') %>% pivot_longer(cols = -row)

@@ -38,13 +38,17 @@ output:
 ***
 
 ### Why was tidyverse invented?
-# TODO
 
-<http://r4stats.com/articles/why-r-is-hard-to-learn/>
+* Out of a sense of frustration with some of the R's warts including inconsistent syntax and naming schemes.
+  * Read more here <http://r4stats.com/articles/why-r-is-hard-to-learn/> 
 
-<https://priceonomics.com/hadley-wickham-the-man-who-revolutionized-r/>
+* In order to make some steps of analysis easier, especially data manipulation
 
-<https://tidyverse.tidyverse.org/articles/manifesto.html>
+>“There are definitely some academic statisticians who just don’t understand why what I do is statistics, but basically I think they are all wrong . What I do is fundamentally statistics. The fact that data science exists as a field is a colossal failure of statistics. To me, that is what statistics is all about. It is gaining insight from data using modelling and visualization. Data munging and manipulation is hard and statistics has just said that’s not our domain.”
+> --Hadley Wickham  <https://priceonomics.com/hadley-wickham-the-man-who-revolutionized-r/>
+
+* To provide a unified approach for doing Data Science 
+  * Read the manifesto here <https://tidyverse.tidyverse.org/articles/manifesto.html>
 
 ***
 
@@ -70,6 +74,15 @@ output:
 * ![](./Intro_to_tidyverse_and_ggplot2_images/pandas_logo.png){width=200px}[Python pandas](https://pandas.pydata.org/) 
 
 
+***
+### Should you learn tidyverse?
+
+# Yes
+
+1) Data science is an area of active development. 
+
+![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/tidy/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/popularity.png){width=500}
+
 
 ***
 
@@ -88,16 +101,6 @@ if (!any(rownames(installed.packages()) == "tidyverse")){
   install.packages("tidyverse")
 }
 library(tidyverse)
-
-if (!any(rownames(installed.packages()) == "reshape2")){
-  install.packages("reshape2")
-}
-library(reshape2)
-
-if (!any(rownames(installed.packages()) == "gridExtra")){
-  install.packages("gridExtra")
-}
-library(gridExtra)
 ```
 
 ***
@@ -107,19 +110,6 @@ library(gridExtra)
 In the R console run the following command
 
 ```r
-download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/intro2R/Intro_to_tidyverse_and_ggplot2.Rmd", "Intro_to_tidyverse_and_ggplot2.Rmd")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2.Rmd", "Intro_to_tidyverse_and_ggplot2.Rmd")
 ```
-
-
-
-### Download the data file for the workshop document and preview/open it
-
-This is the stats file generated after running samtools stats on a bam file generated from running BWA MEM.
-
-In the R console run the following command.
-
-```r
-download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/intro2R/Data_in_R_files/bwa_mem_Stats.log", "bwa_mem_Stats.log")
-```
-
 

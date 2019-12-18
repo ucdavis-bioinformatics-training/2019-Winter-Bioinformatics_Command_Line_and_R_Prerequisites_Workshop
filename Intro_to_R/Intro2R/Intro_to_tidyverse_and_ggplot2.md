@@ -57,9 +57,8 @@ Note that this data set is from the ggplot2 package.
 
 
 ```r
-download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/intro2R/mpg.tsv", "mpg.tsv")
+download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/mpg.tsv", "mpg.tsv")
 ```
-
 
 The file has a ".tsv" extension, so it is probably a tab separated values file. Lets check this assumption in a few different ways.
 Note that the output from the system() function does not appear in the markdown document, and this approach may not work on windows computers.
@@ -176,7 +175,7 @@ print(mpg)
 
 
 
-### Step 1.5: Detour for [Tibbles](https://tibble.tidyverse.org/) ![](./Intro_to_tidyverse_and_ggplot2_images/hex-tibble.png){width=100}
+### Detour for [Tibbles](https://tibble.tidyverse.org/) ![](./Intro_to_tidyverse_and_ggplot2_images/hex-tibble.png){width=100}
 
 Tibbles are a modified type of data frame. Everything you have learned about accessing and manipulating data frames still applies, but a tibble behaves a little differently.
 
@@ -332,15 +331,15 @@ Definitions:
 
 ***
 
-#### Lets make a data set. Is this data set tidy?
+#### Lets make a data set:
 
 ```r
-d = data.frame(
+d1 = data.frame(
         sample = rep(c("sample1","sample2","sample3"), 2),
         trt = rep(c('a','b'), each=3),
         result = c(4,6,9,8,5,4)
 )
-d
+d1
 ```
 
 ```
@@ -368,16 +367,16 @@ d
 
 ***
 
-#### Lets make another data set, is this data tidy?
+#### Lets make another data set:
 
 ```r
-d = data.frame(
+d2 <- data.frame(
         sample1=c(4,8),
         sample2=c(6,5),
         sample3=c(9,4)
 )
-rownames(d) = c("a","b")
-d
+rownames(d2) <- c("a","b")
+d2
 ```
 
 ```
@@ -385,11 +384,6 @@ d
 ## a       4       6       9
 ## b       8       5       4
 ```
-
-variables: ?
-
-observations: ?
-
 **Is this tidy?**
 
 1) Every column is a variable?
@@ -398,6 +392,80 @@ observations: ?
   
 3) Every cell is a single value?
 
+4) What are the variables?
+
+5) What are the observations?
+
+***
+
+#### How can we make d2 look like d1 (make d2 tidy)?
+
+First, make the row names into a new column with the **rownames_to_column()** function:
+
+```r
+d2.1 <- rownames_to_column(d2, 'trt')
+d2.1
+```
+
+```
+##   trt sample1 sample2 sample3
+## 1   a       4       6       9
+## 2   b       8       5       4
+```
+
+Make each row an observation with **pivot_longer()** function:
+
+```r
+d2.2 <- pivot_longer(d2.1, cols = -trt, names_to = "sample", values_to = "result")
+d2.2
+```
+
+```
+## # A tibble: 6 x 3
+##   trt   sample  result
+##   <chr> <chr>    <dbl>
+## 1 a     sample1      4
+## 2 a     sample2      6
+## 3 a     sample3      9
+## 4 b     sample1      8
+## 5 b     sample2      5
+## 6 b     sample3      4
+```
+
+Reorder columns for looks using **select()** function:
+
+```r
+d2.3 <- select(d2.2, sample, trt, result)
+d2.3
+```
+
+```
+## # A tibble: 6 x 3
+##   sample  trt   result
+##   <chr>   <chr>  <dbl>
+## 1 sample1 a          4
+## 2 sample2 a          6
+## 3 sample3 a          9
+## 4 sample1 b          8
+## 5 sample2 b          5
+## 6 sample3 b          4
+```
+
+### Detour for magrittr and the %>% operator
+
+
+
+
+d2 %>% rownames_to_column('row') %>% pivot_longer(cols = -row)
+
+
+#### tidyr exercises
+
+https://tidyr.tidyverse.org/articles/tidy-data.html
+
+tidy the relig_income dataset
+
+tidy the billboard dataset
 
 
 
