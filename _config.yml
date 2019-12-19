@@ -69,7 +69,7 @@ navigation:
   #- title: Walkthrough of Vignettes for limma and biomaRt
   #  url: Advanced_R/limma_biomart_vignettes.Rmd
   #- title: Linear Models in R
-  #  url: Advanced_R/linear_models.Rmd
+  #  url: Advanced_R/lm.main
 
   - heading: Bioinformatics
   - title: A Simple Bioinformatics Workflow

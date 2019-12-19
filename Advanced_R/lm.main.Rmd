@@ -1,0 +1,43 @@
+---
+title: "A Brief Introduction to Linear Models in R"
+output:
+  html_document:
+      keep_md: TRUE
+---
+
+# Linear Models in R
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Many bioinformatics applications involving repeatedly fitting linear models to data.  Examples include:
+
+* RNA-Seq differential expression analyses
+* GWAS (for continuous traits)
+* eQTL analyses
+* Microarray data analyses
+* and on and on ....
+
+Understanding linear modelling in R is **critical** in implementing these types of analyses.
+
+## Scope
+* Basics of linear models
+* R model syntax
+* Understanding contrasts
+* Models with continuous covariates
+
+We will not discuss:
+
+* Diagnostic plots 
+* Data-driven model selection
+* Anything that doesn't scale well when applied to 1000's of genes/SNPs/proteins
+
+<P style="page-break-before: always">
+
+
+```{r, echo=FALSE}
+htmltools::includeHTML("embed.html")
+```
+
+
