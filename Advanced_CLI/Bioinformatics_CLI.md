@@ -178,4 +178,4 @@ For those who are interested, here's how you'd create a BAM file that could be v
 
 View the output files to see the outcome of mapping results.
 
-**10\.** Transfer the depth and stats files to your computer and analyze in **R**
+**10\.** Transfer the depth file to your computer and analyze in **R**, perform some summary statistics, plot the distribution of depth over the genome, plot the coverage depth over the whole genome

@@ -1,22 +1,23 @@
 ---
 title: "A Brief Introduction to Linear Models in R"
 output:
-  html_document: default
+  html_document:
+      keep_md: TRUE
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# 0. Introduction
 Many bioinformatics applications involving repeatedly fitting linear models to data.  Examples include:
 
 * RNA-Seq differential expression analyses
 * GWAS (for continuous traits)
 * eQTL analyses
 * Microarray data analyses
+* and on and on ....
 
-Understanding linear modelling in R can help in implementing these types of analyses.
+Understanding linear modelling in R is **critical** in implementing these types of analyses.
 
 ## Scope
 * Basics of linear models
@@ -30,7 +31,8 @@ We will not discuss:
 * Data-driven model selection
 * Anything that doesn't scale well when applied to 1000's of genes/SNPs/proteins
 
-# 1. Linear models
+# Linear models
+
 A linear model is a model for a continuous outcome Y of the form
 $$Y = \beta_0 + \beta_{1}X_{1} + \beta_{2}X_{2} + \dots + \beta_{p}X_{p} + \epsilon$$
 The covariates X can be:
@@ -38,33 +40,50 @@ The covariates X can be:
 * a continuous variable (age, weight, temperature, etc.)
 * Dummy variables coding a categorical covariate (more later)
 
-The $\beta$'s are unknown parameters to be estimated.
+The $\beta$'s are unknown parameters to be estimated, the "coefficients".
 
-The error term $\epsilon$ is assumed to be normally distributed with a variance that is constant across the range of the data.
+The error term $\epsilon$ is assumed to be normally distributed with a variance that is constant across the range of the data, the "residuals".
 
 Models with all categorical covariates are referred to as ANOVA models and models with continuous covariates are referred to as linear regression models. These are all linear models, and R doesn't distinguish between them.
 
-# 2. Linear models in R
-R uses the function `lm` to fit linear models.
-
 Read in 'lm_example_data.csv`:
 ```{r}
-dat <- read.csv("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2018-September-Bioinformatics-Prerequisites/master/friday/lm_example_data.csv")
+dat <- read.csv("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Advanced_R/lm_example_data.csv")
+dim(dat)
 head(dat)
+tail(dat)
 str(dat)
 ```
 
-Fit a linear model using `expression` as the outcome and `treatment` as a categorical covariate:
+## Linear models in R
+
+R uses the function `lm` to fit linear models.
+
+`lm` minimally requires a model formula.
+
+### Formulas (from the help docs)
+
+The ~ operator is basic in the formation of such models. An expression of the form y ~ model is interpreted as a specification that the response y is modelled by a linear predictor specified symbolically by model.
+
+Models consists of a series of terms separated by + operators. The terms themselves consist of variable and factor names separated by : operators. Such a term (:) is interpreted as the interaction of all the variables and factors appearing in the term.
+
+There are a number of other operators that are useful in model formulae, read the help documentation if you need more advanced modeling fomula.
+
+A model with no intercept can be specified as y ~ x + 0 or y ~ 0 + x.
+
+For our data, lets fit a linear model using `expression` as the outcome and `treatment` as a categorical covariate:
 ```{r}
 oneway.model <- lm(expression ~ treatment, data = dat)
 ```
-In R model syntax, the outcome is on the left side, with covariates (separated by `+`) following the `~`
+
+In R model syntax, the outcome is on the left side, with covariates (separated by `+`) following the `~`.
+
 ```{r}
 oneway.model
 class(oneway.model)
 ```
-Note that this is a one-way ANOVA model.
 
+Note that this is a "one-way ANOVA" model.
 
 `summary()` applied to an `lm` object will give p-values and other relevant information:
 ```{r}
@@ -88,7 +107,11 @@ coef(oneway.model)
 ```
 What do the model coefficients mean?
 
-By default, R uses reference group coding or "treatment contrasts". For categorical covariates, the first level alphabetically (or first factor level) is treated as the reference group.  The reference group doesn't get its own coefficient, it is represented by the intercept.  Coefficients for other groups are the difference from the reference:
+By default, R uses reference group coding or "treatment contrasts". For categorical covariates, the first factor level (alphabetically by default) is treated as the reference group.  The reference group doesn't get its own coefficient, it is represented by the intercept.  Coefficients for other groups are the difference from the reference:
+
+```{r}
+levels(dat$treatment)
+```
 
 For our simple design:
 
@@ -127,8 +150,32 @@ coefs <- coef(no.intercept.model)
 coefs["treatmentB"] - coefs["treatmentA"]
 ```
 
-## The Design Matrix
-For the RNASeq analysis programs `limma` and `edgeR`, the model is specified through the _design matrix_.
+## testing contrasts using emmeans
+
+```{r}
+if (!("emmeans" %in% rownames(installed.packages())))
+  install.packages("emmeans")
+library(emmeans)
+
+oneway.model.emm <- emmeans(oneway.model, "treatment")
+pairs(oneway.model.emm)
+coef(pairs(oneway.model.emm))
+```
+
+### relevel a variable
+You can relevel your treatment, if say treatment "E" should be considered your control and you'd like the intercept to be the control treatment.
+
+```{r}
+dat$treatment <- relevel(dat$treatment, "E")
+oneway.model <- lm(expression ~ treatment, data = dat)
+coef(oneway.model)
+summary(oneway.model)
+```
+
+
+# The Design Matrix
+
+For the RNASeq analysis programs, ex. `limma` and `edgeR`, the model is specified through the _design matrix_.
 
 The design matrix $\mathbf{X}$ has one row for each observation and one column for each model coefficient.
 
@@ -136,7 +183,7 @@ Sound complicated?  The good news is that the design matrix can be specified thr
 
 Design matrix for reference group coded model:
 ```{r}
-X <- model.matrix(~treatment, data = dat)
+X <- model.matrix(~ treatment, data = dat)
 X
 ```
 (Note that "contr.treatment", or treatment contrasts, is how R refers to reference group coding)
@@ -146,21 +193,39 @@ X
 * The column `treatmentC` is 1 if an observation has treatment C and 0 otherwise
 * etc.
 
-## Exercises and Things to Think About
-- Use ?formula to explore specifying models in R.  
+### Exercises and Things to Think About
 - Use ?lm.fit to see how lm uses the design matrix internally.
-- If the response y is log gene expression, the model coefficients are often referred to as log fold-changes.  Why does this make sense?  (Hint: log(x/y) = log(x) - log(y))
+- If the response y is log gene expression, the model coefficients are often referred to as log fold-changes.  Why does this make sense?  (Hint: log(x/y) = log(x) - log(y)).
 
-# 3. Adding More Covariates
+# Adding More Covariates
+
 ## Batch Adjustment
 Suppose we want to adjust for batch differences in our model.  We do this by adding the covariate "batch" to the model formula:
 ```{r}
 batch.model <- lm(expression ~ treatment + batch, data = dat)
 summary(batch.model)
-coef(batch.model)
 ```
 For a model with more than one coefficient, `summary` provides estimates and tests for each coefficient adjusted for all the other coefficients in the model.
 
+Recall:
+
+$$Y = \beta_0 + \beta_{1}X_{1} + \beta_{2}X_{2} + \dots + \beta_{p}X_{p} + \epsilon$$
+
+model.matrix help you visualize the covariates for each sample.
+
+```{r}
+model.matrix(~treatment + batch, data = dat)
+```
+
+and coefficients of the model are
+```{r}
+coef(batch.model)
+```
+
+The response if then of course
+```{r}
+dat$expression
+```
 ## Two-Way ANOVA Models
 Suppose our experiment involves two factors, treatment and time.  `lm` can be used to fit a two-way ANOVA model:
 ```{r}
@@ -189,7 +254,7 @@ We can see from `summary` that one of the interaction effects is significant.  H
 interaction.plot(x.factor = dat$time, trace.factor = dat$treatment, response = dat$expression)
 ```
 
-#### Another Parameterization
+### Another Parameterization
 In a multifactor model, estimating contrasts can be fiddly, especially with lots of factors or levels.  Here is an equivalent way to estimate the same two-way ANOVA model that gives easier contrasts:
 
 First, define a new variable that combines the information from the `treatment` and `time` variables
@@ -231,11 +296,11 @@ c2 <- coef(other.2way.model)
 https://www.bioconductor.org/packages/3.7/bioc/vignettes/limma/inst/doc/usersguide.pdf
 for more details on this parameterization)
 
-## Exercises and Things to Think About
+### Exercises and Things to Think About
 - How much do the parameter estimates for treatment change when batch is added?  
 - The data frame dat has a column called 'temperature'.  What formula would you use if you wanted to look at differences between treatments, adjusting for temperature? 
 
-# 4. Continuous Covariates
+## Continuous Covariates
 Linear models with continuous covariates ("regression models") are fitted in much the same way:
 ```{r}
 continuous.model <- lm(expression ~ temperature, data = dat)
@@ -264,20 +329,8 @@ coef(scaled.mod)[2]
 cor(dat$expression, dat$temperature)
 ```
 
-## Exercises and things to think about
+### Exercises and things to think about
 - Look at the documentation for formula again using ?formula.  How would you change the formula statement if you wanted to add a quadratic term?
 - Convert temperature to Farenheit by replacing temperature with I(9/5*temperature + 32) in the model formula.  Does the p-value for the association with expression change?
 - *For your experiment, what would the model formula look like?*
-
-
-
-
-
-
-
-
-
-
-
-
 
