@@ -3,7 +3,6 @@ output:
   html_document
 ---
 
-# Linear Models in R
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

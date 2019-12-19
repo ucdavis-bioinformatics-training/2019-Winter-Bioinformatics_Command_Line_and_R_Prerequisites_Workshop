@@ -413,9 +413,6 @@ $(document).ready(function () {
 </div>
 
 
-<div id="linear-models-in-r" class="section level1">
-<h1>Linear Models in R</h1>
-</div>
 <div id="linear-models" class="section level1">
 <h1>Linear models</h1>
 <p>A linear model is a model for a continuous outcome Y of the form <span class="math display">\[Y = \beta_0 + \beta_{1}X_{1} + \beta_{2}X_{2} + \dots + \beta_{p}X_{p} + \epsilon\]</span> The covariates X can be:</p>
@@ -454,7 +451,7 @@ dim(dat)</code></pre>
 ##  $ treatment  : Factor w/ 5 levels &quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,..: 1 1 1 1 1 2 2 2 2 2 ...
 ##  $ time       : Factor w/ 2 levels &quot;time1&quot;,&quot;time2&quot;: 1 2 1 2 1 2 1 2 1 2 ...
 ##  $ temperature: num  11.8 12.2 10.5 10.1 12 ...</code></pre>
-<div id="linear-models-in-r-1" class="section level2">
+<div id="linear-models-in-r" class="section level2">
 <h2>Linear models in R</h2>
 <p>R uses the function <code>lm</code> to fit linear models.</p>
 <p><code>lm</code> minimally requires a model formula.</p>
@@ -585,60 +582,8 @@ coefs[&quot;treatmentB&quot;] - coefs[&quot;treatmentA&quot;]</code></pre>
 <h2>testing contrasts using emmeans</h2>
 <pre class="r"><code>if (!(&quot;emmeans&quot; %in% rownames(installed.packages())))
   install.packages(&quot;emmeans&quot;)</code></pre>
-<pre><code>## --- Please select a CRAN mirror for use in this session ---</code></pre>
-<pre><code>## Warning in doTryCatch(return(expr), name, parentenv, handler): unable to load shared object '/Library/Frameworks/R.framework/Resources/modules//R_X11.so':
-##   dlopen(/Library/Frameworks/R.framework/Resources/modules//R_X11.so, 6): Library not loaded: /opt/X11/lib/libSM.6.dylib
-##   Referenced from: /Library/Frameworks/R.framework/Versions/3.6/Resources/modules/R_X11.so
-##   Reason: image not found</code></pre>
-<pre><code>## Secure CRAN mirrors 
-## 
-##  1: 0-Cloud [https]                   2: Algeria [https]                
-##  3: Australia (Canberra) [https]      4: Australia (Melbourne 1) [https]
-##  5: Australia (Melbourne 2) [https]   6: Australia (Perth) [https]      
-##  7: Austria [https]                   8: Belgium (Ghent) [https]        
-##  9: Brazil (BA) [https]              10: Brazil (PR) [https]            
-## 11: Brazil (RJ) [https]              12: Brazil (SP 1) [https]          
-## 13: Brazil (SP 2) [https]            14: Bulgaria [https]               
-## 15: Chile (Santiago) [https]         16: China (Hong Kong) [https]      
-## 17: China (Guangzhou) [https]        18: China (Lanzhou) [https]        
-## 19: China (Shanghai) [https]         20: Colombia (Cali) [https]        
-## 21: Czech Republic [https]           22: Denmark [https]                
-## 23: East Asia [https]                24: Ecuador (Cuenca) [https]       
-## 25: Ecuador (Quito) [https]          26: Estonia [https]                
-## 27: France (Lyon 1) [https]          28: France (Lyon 2) [https]        
-## 29: France (Marseille) [https]       30: France (Montpellier) [https]   
-## 31: Germany (Erlangen) [https]       32: Germany (Göttingen) [https]    
-## 33: Germany (Münster) [https]        34: Germany (Regensburg) [https]   
-## 35: Greece [https]                   36: Hungary [https]                
-## 37: Iceland [https]                  38: Indonesia (Jakarta) [https]    
-## 39: Ireland [https]                  40: Italy (Padua) [https]          
-## 41: Japan (Tokyo) [https]            42: Japan (Yonezawa) [https]       
-## 43: Korea (Busan) [https]            44: Korea (Gyeongsan-si) [https]   
-## 45: Korea (Seoul 1) [https]          46: Korea (Ulsan) [https]          
-## 47: Malaysia [https]                 48: Mexico (Mexico City) [https]   
-## 49: Morocco [https]                  50: Norway [https]                 
-## 51: Philippines [https]              52: Russia [https]                 
-## 53: Spain (Madrid) [https]           54: Sweden [https]                 
-## 55: Switzerland [https]              56: Turkey (Denizli) [https]       
-## 57: Turkey (Mersin) [https]          58: UK (Bristol) [https]           
-## 59: UK (London 1) [https]            60: USA (CA) [https]               
-## 61: USA (IA) [https]                 62: USA (KS) [https]               
-## 63: USA (MI 1) [https]               64: USA (MI 2) [https]             
-## 65: USA (OR) [https]                 66: USA (TN) [https]               
-## 67: USA (TX 1) [https]               68: Uruguay [https]                
-## 69: (other mirrors)                  
-## 
-## Enter an item from the menu, or 0 to exit</code></pre>
-<pre><code>## also installing the dependencies 'estimability', 'numDeriv'</code></pre>
-<pre><code>## 
-## The downloaded binary packages are in
-##  /var/folders/fm/d05z14cd7y5_w_zvbb61kv300000gn/T//Rtmpsg4KmF/downloaded_packages</code></pre>
-<pre class="r"><code>library(emmeans)</code></pre>
-<pre><code>## Welcome to emmeans.
-## NOTE -- Important change from versions &lt;= 1.41:
-##     Indicator predictors are now treated as 2-level factors by default.
-##     To revert to old behavior, use emm_options(cov.keep = character(0))</code></pre>
-<pre class="r"><code>oneway.model.emm &lt;- emmeans(oneway.model, &quot;treatment&quot;)
+<pre class="r"><code>library(emmeans)
+oneway.model.emm &lt;- emmeans(oneway.model, &quot;treatment&quot;)
 pairs(oneway.model.emm)</code></pre>
 <pre><code>##  contrast estimate  SE df t.ratio p.value
 ##  A - B      -0.446 1.1 20 -0.405  0.9939 
