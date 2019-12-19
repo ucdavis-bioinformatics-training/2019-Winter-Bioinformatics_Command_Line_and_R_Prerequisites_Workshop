@@ -12,14 +12,14 @@ output:
 
 Tidyverse is a set of package for doing data science.  [R for Data Science](https://r4ds.had.co.nz/index.html) by Garrett Grolemund, Hadley Wickham model Data Science in the following way.
 
-![](./Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
+![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
 
 
 We will start learning about Tidyverse tools by starting at the first step in this process, importing data.
 
 *** 
 
-### Step 1: Import data with the [readr](https://readr.tidyverse.org/) package ![](./Intro_to_tidyverse_and_ggplot2_images/readr.png){width=100px}
+### Step 1: Import data with the [readr](https://readr.tidyverse.org/) package ![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/readr.png)
 
 
 > “The goal of 'readr' is to provide a fast and friendly way to read rectangular data (like 'csv', 'tsv', and 'fwf'). It is designed to flexibly parse many types of data found in the wild, while still cleanly failing when data unexpectedly changes.”
@@ -171,11 +171,12 @@ mpg
 ## # … with 224 more rows
 ```
 
+
 *Does the mpg object have the expected number of lines?*
 
 
 
-### Detour for [Tibbles](https://tibble.tidyverse.org/) ![](./Intro_to_tidyverse_and_ggplot2_images/hex-tibble.png){width=100}
+### Detour for [Tibbles](https://tibble.tidyverse.org/) ![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R//Intro_to_tidyverse_and_ggplot2_images/hex-tibble.png)
 
 Tibbles are a modified type of data frame. Everything you have learned about accessing and manipulating data frames still applies, but a tibble behaves a little differently.
 
@@ -246,7 +247,7 @@ tibble(
 ## 5       5 e         15.7
 ```
 
-Or row-by-row with tribble():![](./Intro_to_tidyverse_and_ggplot2_images/tribble_.jpg){width=100} 
+Or row-by-row with tribble():![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/tribble_.jpg)
 
 ```r
 tribble(
@@ -291,25 +292,25 @@ tibble(
 
 #### Readr and Tibble Exercises 
 
-1) Create a tibble with 100 rows and 3 columns. Write it out using **write_tsv()**. Try to read it back in with **read_csv()**. Did it read in successfully? How does the new tibble look? Try to use **read_delim()** to read in the data correctly (hint, you will need to specify a delim).
+1) Create a tibble with 100 rows and 3 columns. Write it out using **write_tsv()**. Try to read it back in with **read_csv()**. Did it read in successfully? How does the new tibble look? Try to use **read_delim()** to read in the data correctly (hint, you will need to specify the proper delimeter).
 
 
 
 
-2) Try to generate a *parsing failure* in readr.  Based on what you know about how readr processes data, make a trecherous tibble. Write it out. Read it in again to generate the failure.
+2) Try to generate a *parsing failure* in readr. Based on what you know about how readr processes data, make a trecherous tibble. Write it out. Read it in again to generate the failure.
 
 
 
-2) Take a look at the documentation for read_delim. Enter R code below that successfully loads the trecherous tibble you created in the last exercise.
+3) Take a look at the documentation for read_delim. Enter R code below that successfully loads the trecherous tibble you created in the last exercise.
 
 
 
 *** 
 
 
-### Step 2: Tidying data with [tidyr](https://tidyr.tidyverse.org/) package![](./Intro_to_tidyverse_and_ggplot2_images/hex-tidyr.png){width=100}
+### Step 2: Tidying data with [tidyr](https://tidyr.tidyverse.org/) package![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/hex-tidyr.png){width=100}
 
-![](./Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
+![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
 
 #### First, what is "tidy" data?
 [**Wickham, Hadley. "Tidy data." Journal of Statistical Software 59.10 (2014): 1-23.**](https://vita.had.co.nz/papers/tidy-data.pdf)
@@ -327,7 +328,7 @@ Definitions:
 
 * A **variable** stores a set of values of a particular type (height, temperature, duration)
 
-* An **observation** all values measured on the same unit across variables
+* An **observation** is all values measured on the same unit across variables
 
 ***
 
@@ -351,6 +352,7 @@ d1
 ## 5 sample2   b      5
 ## 6 sample3   b      4
 ```
+
 **Is this tidy?**
 
 1) Every column is a variable?
@@ -453,7 +455,7 @@ d2.3
 
 ***
 
-### Detour for [magrittr](https://magrittr.tidyverse.org/) and the %>% operator ![](./Intro_to_tidyverse_and_ggplot2_images/magrittr.png){width=100} 
+### Detour for [magrittr](https://magrittr.tidyverse.org/) and the %>% operator ![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/magrittr.png) 
 Although the code above is fairly readable, it is not compact. It also creates three copies of the data (d2.1, d2.2, d2.3). We could use a couple of different strategies for carrying out this series of operations in a more concise manner.
 
 #### Option 1, the base-R strategy, Nested Functions
@@ -479,7 +481,7 @@ d2.3
 ```
 
 
-#### Option 2, using the %>% pipe operator (syntactic sugar)
+#### Option 2, using the %>% pipe operator (also known as syntactic sugar)
 
 > The magrittr package offers a set* of operators which make your code more readable by:
 > 
@@ -526,12 +528,9 @@ In more complicated situations you can also specify the argument to pipe to usin
 * x %>% f(y, .) is equivalent to f(y, x)
 * x %>% f(y, z = .) is equivalent to f(y, z = x)
 
-#### More tidyr functions
+***
 
-Tidyr comes with a number of additional functions to help with manipulating data.
-
-
-* **pivot_wider()** does the inverse transformation of **pivot_longer()**, add columns by removing rows.
+#### Reverting to wide data format can be done with **pivot_wider()**, it does the inverse transformation of **pivot_longer()** and adds columns by removing rows.
 
 For example:
 
@@ -550,6 +549,7 @@ d1
 ```
 
 
+
 ```r
 pivot_wider(d1, names_from = sample, values_from = result )
 ```
@@ -562,9 +562,11 @@ pivot_wider(d1, names_from = sample, values_from = result )
 ## 2 b           8       5       4
 ```
 
-Note that **pivot_longer()** and **pivot_wider()** replace the old functionality in **spread()** and **gather()**, and also have similar functionality to **melt()** and **cast()** from the reshape2 package. [You can read more about this on r-bloggers](https://www.r-bloggers.com/using-r-from-gather-to-pivot/).
+Note that **pivot_longer()** and **pivot_wider()** replace the old functionality in **spread()** and **gather()**, and also have similar functionality to **melt()** and **cast()** from the reshape2 package. [You can read more about this on r-bloggers](https://www.r-bloggers.com/using-r-from-gather-to-pivot/). 
 
-* **separate()** turns a single character column into multiple columns. This can be handy when a single column contains two different pieces of data.
+***
+
+#### Sometimes a column contains two variables split by a delimiter, **separate()** can be used to create two columns from this single input
 
 Lets practice on table3 from the tidyr package:
 
@@ -584,7 +586,7 @@ table3
 ## 6 China        2000 213766/1280428583
 ```
 
-The third column **rate** contains two different values, **cases** and **population**. Wecan 
+The third column **rate** contains two different values, **cases** and **population**. We can use the **separate()** function to split these into two columns.
 
 ```r
 separate(data = table3, col = rate, into = c("cases", "population"), sep = '/')
@@ -603,8 +605,9 @@ separate(data = table3, col = rate, into = c("cases", "population"), sep = '/')
 ```
 
 
+
 #### tidyr exercises
-https://tidyr.tidyverse.org/articles/tidy-data.html
+
 
 1) The tidyr package comes with a relig_income dataset. Use tidyr functions to make it into a tidy dataset. What are the variables? What are the observations?
 
@@ -613,15 +616,403 @@ https://tidyr.tidyverse.org/articles/tidy-data.html
 2) The tidyr package come with a table2 dataset. What is wrong with this dataset? How many rows does it have per observation? Use tidyr functions to make it into a tidy dataset.
 
 
+3) Use %>% and a set of pivot_wider and pivot_longer calls to convert d2 into d1 and then back into d2 again (round trip).
 
 
-### dplyr
+***
+
+### Step 3, Transforming data with dplyr ![](./Intro_to_tidyverse_and_ggplot2_images/hex-dplyr.png)
+
+![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
 
 
-### stringr
+dplyr provides a set of verbs for modifying, combining, and otherwise transforming variables, creating subsets based on various attributes, combining multiple tibbles, etc. These approaches are meant to enable efficient manipulation of data.
+
+To demonstrate some of them we will use the starwars dataset included in the dplyr package.
+
+
+
+
+```r
+library(dplyr)
+starwars
+```
+
+```
+## # A tibble: 87 x 13
+##    name  height  mass hair_color skin_color eye_color birth_year gender
+##    <chr>  <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> 
+##  1 Luke…    172    77 blond      fair       blue            19   male  
+##  2 C-3PO    167    75 <NA>       gold       yellow         112   <NA>  
+##  3 R2-D2     96    32 <NA>       white, bl… red             33   <NA>  
+##  4 Dart…    202   136 none       white      yellow          41.9 male  
+##  5 Leia…    150    49 brown      light      brown           19   female
+##  6 Owen…    178   120 brown, gr… light      blue            52   male  
+##  7 Beru…    165    75 brown      light      blue            47   female
+##  8 R5-D4     97    32 <NA>       white, red red             NA   <NA>  
+##  9 Bigg…    183    84 black      light      brown           24   male  
+## 10 Obi-…    182    77 auburn, w… fair       blue-gray       57   male  
+## # … with 77 more rows, and 5 more variables: homeworld <chr>, species <chr>,
+## #   films <list>, vehicles <list>, starships <list>
+```
+
+
+* mutate() adds new variables that are functions of existing variables. Lets use this to calculate the [BMI](https://www.cdc.gov/healthyweight/assessing/bmi/adult_bmi/index.html) of characters in the Starwars universe (note that this equation may be incorrect for androids).
+
+
+```r
+starwars %>% mutate(BMI = mass / (height/100))
+```
+
+```
+## # A tibble: 87 x 14
+##    name  height  mass hair_color skin_color eye_color birth_year gender
+##    <chr>  <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> 
+##  1 Luke…    172    77 blond      fair       blue            19   male  
+##  2 C-3PO    167    75 <NA>       gold       yellow         112   <NA>  
+##  3 R2-D2     96    32 <NA>       white, bl… red             33   <NA>  
+##  4 Dart…    202   136 none       white      yellow          41.9 male  
+##  5 Leia…    150    49 brown      light      brown           19   female
+##  6 Owen…    178   120 brown, gr… light      blue            52   male  
+##  7 Beru…    165    75 brown      light      blue            47   female
+##  8 R5-D4     97    32 <NA>       white, red red             NA   <NA>  
+##  9 Bigg…    183    84 black      light      brown           24   male  
+## 10 Obi-…    182    77 auburn, w… fair       blue-gray       57   male  
+## # … with 77 more rows, and 6 more variables: homeworld <chr>, species <chr>,
+## #   films <list>, vehicles <list>, starships <list>, BMI <dbl>
+```
+
+* Perhaps we are only interested in a subset of columns. **select()** allows us to select columns based on name or index.
+
+
+```r
+starwars %>% mutate(BMI = mass / (height/100)) %>% select(name, species, BMI)
+```
+
+```
+## # A tibble: 87 x 3
+##    name               species   BMI
+##    <chr>              <chr>   <dbl>
+##  1 Luke Skywalker     Human    44.8
+##  2 C-3PO              Droid    44.9
+##  3 R2-D2              Droid    33.3
+##  4 Darth Vader        Human    67.3
+##  5 Leia Organa        Human    32.7
+##  6 Owen Lars          Human    67.4
+##  7 Beru Whitesun lars Human    45.5
+##  8 R5-D4              Droid    33.0
+##  9 Biggs Darklighter  Human    45.9
+## 10 Obi-Wan Kenobi     Human    42.3
+## # … with 77 more rows
+```
+
+* Before we calculate any summary statistics, lets check to see if we have appropriate levels of replication. We can determine the number of samples per species using **cout()** 
+
+
+```r
+starwars %>% count(species, sort=T, name = "Samples")
+```
+
+```
+## # A tibble: 38 x 2
+##    species  Samples
+##    <chr>      <int>
+##  1 Human         35
+##  2 Droid          5
+##  3 <NA>           5
+##  4 Gungan         3
+##  5 Kaminoan       2
+##  6 Mirialan       2
+##  7 Twi'lek        2
+##  8 Wookiee        2
+##  9 Zabrak         2
+## 10 Aleena         1
+## # … with 28 more rows
+```
+
+* Species information is missing for a number of samples, lets remove these with **drop_na()**, and also remove any samples for which mass or height is NA.
+
+
+```r
+starwars %>% drop_na(species, mass, height) %>% count(species, sort=T, name = "Samples")
+```
+
+```
+## # A tibble: 31 x 2
+##    species  Samples
+##    <chr>      <int>
+##  1 Human         22
+##  2 Droid          4
+##  3 Gungan         2
+##  4 Mirialan       2
+##  5 Wookiee        2
+##  6 Aleena         1
+##  7 Besalisk       1
+##  8 Cerean         1
+##  9 Clawdite       1
+## 10 Dug            1
+## # … with 21 more rows
+```
+
+* Now lets combine a number of operators to calculate the mean BMI for all groups with at least three samples. We can drop observations for species for which there isn't sufficient replication using a combination of **filter()**, **group_by** and a special **n()** function.
+
+
+```r
+starwars %>% drop_na(species, mass, height) %>%  # remove all observations with missing data
+  mutate(BMI = mass / (height/100)) %>%   # calculate BMI and add a new column
+  group_by(species) %>% filter(n() >= 3) %>%  # filter observations belonging to species with < 3 samples
+  summarize(mean_BMI = mean(BMI))  # calculate summary statistics
+```
+
+```
+## # A tibble: 2 x 2
+##   species mean_BMI
+##   <chr>      <dbl>
+## 1 Droid       45.3
+## 2 Human       45.8
+```
+
+What can we learn from these results?
+
+***
+
+
+* We can use the **arrange()** and **slice()** functions to find the tallest observed inhabitant of each planet sampled:
+
+```r
+starwars %>% 
+  arrange(homeworld, desc(height)) %>%  # sort by homeworld, then height descending
+  group_by(homeworld) %>%  # use group_by to tell slice() how to select records
+  slice(1)  # keep only the first observation per homeworld
+```
+
+```
+## # A tibble: 49 x 13
+## # Groups:   homeworld [49]
+##    name  height  mass hair_color skin_color eye_color birth_year gender
+##    <chr>  <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> 
+##  1 Bail…    191    NA black      tan        brown             67 male  
+##  2 Ratt…     79    15 none       grey, blue unknown           NA male  
+##  3 Lobot    175    79 none       light      blue              37 male  
+##  4 Jek …    180   110 brown      fair       blue              NA male  
+##  5 Nute…    191    90 none       mottled g… red               NA male  
+##  6 Ki-A…    198    82 white      pale       yellow            92 male  
+##  7 Mas …    196    NA none       blue       blue              NA male  
+##  8 Mon …    150    NA auburn     fair       blue              48 female
+##  9 Jang…    183    79 black      tan        brown             66 male  
+## 10 Han …    180    80 brown      fair       brown             29 male  
+## # … with 39 more rows, and 5 more variables: homeworld <chr>, species <chr>,
+## #   films <list>, vehicles <list>, starships <list>
+```
+
+
+*** 
+
+#### Exercises
+
+Install the nycflights13 package and take a look at the **flights** dataset.
+
+
+```r
+if (!any(rownames(installed.packages()) == "nycflights13")){
+  install.packages("nycflights13")
+}
+library(nycflights13)
+```
+
+```r
+flights
+```
+
+```
+## # A tibble: 336,776 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 336,766 more rows, and 11 more variables: arr_delay <dbl>,
+## #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
+## #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
+```
+
+
+1) Assuming that people traveling for the Christmas/New Years holiday depart between December 20th and 24th, from which airport (EWR, JFK, LGA) did the most flights travel to San Francisco Airport (SFO)?
+
+
+
+2) How many of these flights were delayed in departure by at least 30 minutes?
+
+
+3) How many of these flights arrived late by at least 30 minutes?
+
+
+4) What was the shortest in-flight time to SFO from each of the airports? 
+
+
+
+5) Extra credit: answer questions 1, 2, and 3 using base R.
+
+
+
+
+
+***
+
 
 
 ### ggplot2
+
+![](./Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
+
+
+Plotting in R with ggplot2.
+
+ggplot(data = <DATA>)
+<GEOM_FUNCTION>
+aes(<MAPPING>) --> aesthetic mapping
+  Aesthetics - visual property of something in a graph - color, shape, size
+    Mapping connects values in the data to a visual indication in the plot.
+    color, size, shape, alpha
+
+### Aesthetics    
+    
+
+
+```r
+summary(mpg)
+```
+
+```
+##  manufacturer          model               displ            year     
+##  Length:234         Length:234         Min.   :1.600   Min.   :1999  
+##  Class :character   Class :character   1st Qu.:2.400   1st Qu.:1999  
+##  Mode  :character   Mode  :character   Median :3.300   Median :2004  
+##                                        Mean   :3.472   Mean   :2004  
+##                                        3rd Qu.:4.600   3rd Qu.:2008  
+##                                        Max.   :7.000   Max.   :2008  
+##       cyl           trans               drv                 cty       
+##  Min.   :4.000   Length:234         Length:234         Min.   : 9.00  
+##  1st Qu.:4.000   Class :character   Class :character   1st Qu.:14.00  
+##  Median :6.000   Mode  :character   Mode  :character   Median :17.00  
+##  Mean   :5.889                                         Mean   :16.86  
+##  3rd Qu.:8.000                                         3rd Qu.:19.00  
+##  Max.   :8.000                                         Max.   :35.00  
+##       hwy             fl               class          
+##  Min.   :12.00   Length:234         Length:234        
+##  1st Qu.:18.00   Class :character   Class :character  
+##  Median :24.00   Mode  :character   Mode  :character  
+##  Mean   :23.44                                        
+##  3rd Qu.:27.00                                        
+##  Max.   :44.00
+```
+
+
+```r
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, alpha = cty, color=class))
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/mpg-1.png)<!-- -->
+
+
+```r
+plot(x=mpg$displ, y=mpg$hwy)
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-35-1.png)<!-- -->
+
+
+Exercise 1:
+In the next code chunk experiment with different aesthetics. How does the behavior of GGPLOT differ when you use the "class" variable vs the "cty" variable?
+
+
+But what if I want to chose a specific aesthetic (color, size, shape, alpha)?
+
+Which option do you think will produce a plot with blue points?
+
+1) ggplot(data = mpg) + geom_point(mapping = aes(x = displ, y = hwy, color="blue"))
+
+2) ggplot(data = mpg, color="blue") + geom_point(mapping = aes(x = displ, y = hwy))
+
+3) ggplot(data = mpg) + geom_point(mapping = aes(x = displ, y = hwy), color="blue") 
+
+
+```r
+ggplot(data = mpg, aes(x=displ, y=hwy)) + geom_point(shape=18)
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-37-1.png)<!-- -->
+
+```r
+ggplot(data = mpg) + geom_point(mapping = aes(x=displ, y=hwy) , shape=18 )
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-37-2.png)<!-- -->
+
+```r
+new.dataframe = data.frame(x = sample(1:100, replace=T, size=100),  # sample integers randomly
+                          y = sample(runif(100)), 
+                          group=sample(letters, size=100, replace=T))
+
+new.tibble = tibble(x = sample(1:100, replace=T, size=100),  # sample integers randomly
+                          y = sample(runif(100)), 
+                          group=sample(letters, size=100, replace=T))
+```
+
+Exercise 2:
+
+
+
+```r
+shapes.and.colors = tibble(x=1:6, y=rep(1,6), colors=paste("color", 1:6, sep=''), shapes=paste("shape", 1:6, sep=''))
+
+ggplot(data=shapes.and.colors) + geom_point(mapping=aes(x=x, y=y, shape=shapes, color=colors), size=4)
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-38-1.png)<!-- -->
+
+
+
+### Facets
+
+what does facet_grid() and facet_wrap() do?
+
+ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
+
+vs 
+
+q <- ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
+
+
+A plot will be produced: T / F
+
+
+
+```r
+q <- ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
+q + facet_grid(. ~ cyl)
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-39-1.png)<!-- -->
+
+```r
+q + facet_grid(drv ~ .)
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-39-2.png)<!-- -->
+
+```r
+q = facet_grid(drv ~ cyl)
+#q + fact_wrap(~ class)
+```
 
 
 ### Real data example

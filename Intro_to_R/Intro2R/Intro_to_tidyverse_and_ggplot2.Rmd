@@ -10,16 +10,6 @@ output:
 library(knitr)
 knitr::opts_chunk$set(echo = TRUE)
 
-colFmt = function(x,color){
-  outputFormat = opts_knit$get("rmarkdown.pandoc.to")
-  if(outputFormat == 'latex')
-    paste("\\textcolor{",color,"}{",x,"}",sep="")
-  else if(outputFormat == 'html')
-    paste("<font color='",color,"'>",x,"</font>",sep="")
-  else
-    x
-}
-
 library(tidyverse)
 ```
 
@@ -27,14 +17,14 @@ library(tidyverse)
 
 Tidyverse is a set of package for doing data science.  [R for Data Science](https://r4ds.had.co.nz/index.html) by Garrett Grolemund, Hadley Wickham model Data Science in the following way.
 
-![](./Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
+![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
 
 
 We will start learning about Tidyverse tools by starting at the first step in this process, importing data.
 
 *** 
 
-### Step 1: Import data with the [readr](https://readr.tidyverse.org/) package ![](./Intro_to_tidyverse_and_ggplot2_images/readr.png){width=100px}
+### Step 1: Import data with the [readr](https://readr.tidyverse.org/) package ![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/readr.png)
 
 
 > “The goal of 'readr' is to provide a fast and friendly way to read rectangular data (like 'csv', 'tsv', and 'fwf'). It is designed to flexibly parse many types of data found in the wild, while still cleanly failing when data unexpectedly changes.”
@@ -120,14 +110,17 @@ Computers use different types of containers to store different types of data. In
 
 #### Now lets look at the object we just loaded 
 ```{r}
+
 mpg
+
 ```
+
 
 *Does the mpg object have the expected number of lines?*
 
 
 
-### Detour for [Tibbles](https://tibble.tidyverse.org/) ![](./Intro_to_tidyverse_and_ggplot2_images/hex-tibble.png){width=100}
+### Detour for [Tibbles](https://tibble.tidyverse.org/) ![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R//Intro_to_tidyverse_and_ggplot2_images/hex-tibble.png)
 
 Tibbles are a modified type of data frame. Everything you have learned about accessing and manipulating data frames still applies, but a tibble behaves a little differently.
 
@@ -156,7 +149,7 @@ tibble(
        )
 ```
 
-Or row-by-row with tribble():![](./Intro_to_tidyverse_and_ggplot2_images/tribble_.jpg){width=100} 
+Or row-by-row with tribble():![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/tribble_.jpg)
 ```{r}
 tribble(
   ~x, ~y,  ~z,
@@ -181,20 +174,20 @@ tibble(
 
 #### Readr and Tibble Exercises 
 
-1) Create a tibble with 100 rows and 3 columns. Write it out using **write_tsv()**. Try to read it back in with **read_csv()**. Did it read in successfully? How does the new tibble look? Try to use **read_delim()** to read in the data correctly (hint, you will need to specify a delim).
+1) Create a tibble with 100 rows and 3 columns. Write it out using **write_tsv()**. Try to read it back in with **read_csv()**. Did it read in successfully? How does the new tibble look? Try to use **read_delim()** to read in the data correctly (hint, you will need to specify the proper delimeter).
 
 ```{r write a tibble, read a tibble}
 
 ```
 
 
-2) Try to generate a *parsing failure* in readr.  Based on what you know about how readr processes data, make a trecherous tibble. Write it out. Read it in again to generate the failure.
+2) Try to generate a *parsing failure* in readr. Based on what you know about how readr processes data, make a trecherous tibble. Write it out. Read it in again to generate the failure.
 
 ```{r parsing_failure}
 
 ```
 
-2) Take a look at the documentation for read_delim. Enter R code below that successfully loads the trecherous tibble you created in the last exercise.
+3) Take a look at the documentation for read_delim. Enter R code below that successfully loads the trecherous tibble you created in the last exercise.
 ```{r}
 
 ```
@@ -203,9 +196,9 @@ tibble(
 *** 
 
 
-### Step 2: Tidying data with [tidyr](https://tidyr.tidyverse.org/) package![](./Intro_to_tidyverse_and_ggplot2_images/hex-tidyr.png){width=100}
+### Step 2: Tidying data with [tidyr](https://tidyr.tidyverse.org/) package![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/hex-tidyr.png){width=100}
 
-![](./Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
+![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
 
 #### First, what is "tidy" data?
 [**Wickham, Hadley. "Tidy data." Journal of Statistical Software 59.10 (2014): 1-23.**](https://vita.had.co.nz/papers/tidy-data.pdf)
@@ -223,7 +216,7 @@ Definitions:
 
 * A **variable** stores a set of values of a particular type (height, temperature, duration)
 
-* An **observation** all values measured on the same unit across variables
+* An **observation** is all values measured on the same unit across variables
 
 ***
 
@@ -236,6 +229,7 @@ d1 = data.frame(
 )
 d1
 ```
+
 **Is this tidy?**
 
 1) Every column is a variable?
@@ -298,7 +292,7 @@ d2.3
 
 ***
 
-### Detour for [magrittr](https://magrittr.tidyverse.org/) and the %>% operator ![](./Intro_to_tidyverse_and_ggplot2_images/magrittr.png){width=100} 
+### Detour for [magrittr](https://magrittr.tidyverse.org/) and the %>% operator ![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/magrittr.png) 
 Although the code above is fairly readable, it is not compact. It also creates three copies of the data (d2.1, d2.2, d2.3). We could use a couple of different strategies for carrying out this series of operations in a more concise manner.
 
 #### Option 1, the base-R strategy, Nested Functions
@@ -311,7 +305,7 @@ d2.3
 ```
 
 
-#### Option 2, using the %>% pipe operator (syntactic sugar)
+#### Option 2, using the %>% pipe operator (also known as syntactic sugar)
 
 > The magrittr package offers a set* of operators which make your code more readable by:
 > 
@@ -345,40 +339,40 @@ In more complicated situations you can also specify the argument to pipe to usin
 * x %>% f(y, .) is equivalent to f(y, x)
 * x %>% f(y, z = .) is equivalent to f(y, z = x)
 
-#### More tidyr functions
+***
 
-Tidyr comes with a number of additional functions to help with manipulating data.
-
-
-* **pivot_wider()** does the inverse transformation of **pivot_longer()**, add columns by removing rows.
+#### Reverting to wide data format can be done with **pivot_wider()**, it does the inverse transformation of **pivot_longer()** and adds columns by removing rows.
 
 For example:
 ```{r}
 d1
 ```
 
+
 ```{r}
 pivot_wider(d1, names_from = sample, values_from = result )
-
 ```
 
-Note that **pivot_longer()** and **pivot_wider()** replace the old functionality in **spread()** and **gather()**, and also have similar functionality to **melt()** and **cast()** from the reshape2 package. [You can read more about this on r-bloggers](https://www.r-bloggers.com/using-r-from-gather-to-pivot/).
+Note that **pivot_longer()** and **pivot_wider()** replace the old functionality in **spread()** and **gather()**, and also have similar functionality to **melt()** and **cast()** from the reshape2 package. [You can read more about this on r-bloggers](https://www.r-bloggers.com/using-r-from-gather-to-pivot/). 
 
-* **separate()** turns a single character column into multiple columns. This can be handy when a single column contains two different pieces of data.
+***
+
+#### Sometimes a column contains two variables split by a delimiter, **separate()** can be used to create two columns from this single input
 
 Lets practice on table3 from the tidyr package:
 ```{r}
 table3
 ```
 
-The third column **rate** contains two different values, **cases** and **population**. Wecan 
+The third column **rate** contains two different values, **cases** and **population**. We can use the **separate()** function to split these into two columns.
 ```{r}
 separate(data = table3, col = rate, into = c("cases", "population"), sep = '/')
 ```
 
 
+
 #### tidyr exercises
-https://tidyr.tidyverse.org/articles/tidy-data.html
+
 
 1) The tidyr package comes with a relig_income dataset. Use tidyr functions to make it into a tidy dataset. What are the variables? What are the observations?
 
@@ -393,15 +387,239 @@ https://tidyr.tidyverse.org/articles/tidy-data.html
 
 ```
 
+3) Use %>% and a set of pivot_wider and pivot_longer calls to convert d2 into d1 and then back into d2 again (round trip).
+```{r}
+
+```
+
+***
+
+### Step 3, Transforming data with dplyr ![](./Intro_to_tidyverse_and_ggplot2_images/hex-dplyr.png)
+
+![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
 
 
-### dplyr
+dplyr provides a set of verbs for modifying, combining, and otherwise transforming variables, creating subsets based on various attributes, combining multiple tibbles, etc. These approaches are meant to enable efficient manipulation of data.
+
+To demonstrate some of them we will use the starwars dataset included in the dplyr package.
 
 
-### stringr
+
+```{r}
+library(dplyr)
+starwars
+
+```
 
 
-### ggplot2
+* mutate() adds new variables that are functions of existing variables. Lets use this to calculate the [BMI](https://www.cdc.gov/healthyweight/assessing/bmi/adult_bmi/index.html) of characters in the Starwars universe (note that this equation may be incorrect for androids).
+
+```{r}
+
+starwars %>% mutate(BMI = mass / (height/100))
+
+```
+
+* Perhaps we are only interested in a subset of columns. **select()** allows us to select columns based on name or index.
+
+```{r}
+
+starwars %>% mutate(BMI = mass / (height/100)) %>% select(name, species, BMI)
+
+```
+
+* Before we calculate any summary statistics, lets check to see if we have appropriate levels of replication. We can determine the number of samples per species using **cout()** 
+
+```{r}
+starwars %>% count(species, sort=T, name = "Samples")
+```
+
+* Species information is missing for a number of samples, lets remove these with **drop_na()**, and also remove any samples for which mass or height is NA.
+
+```{r}
+starwars %>% drop_na(species, mass, height) %>% count(species, sort=T, name = "Samples")
+```
+
+* Now lets combine a number of operators to calculate the mean BMI for all groups with at least three samples. We can drop observations for species for which there isn't sufficient replication using a combination of **filter()**, **group_by** and a special **n()** function.
+
+```{r}
+starwars %>% drop_na(species, mass, height) %>%  # remove all observations with missing data
+  mutate(BMI = mass / (height/100)) %>%   # calculate BMI and add a new column
+  group_by(species) %>% filter(n() >= 3) %>%  # filter observations belonging to species with < 3 samples
+  summarize(mean_BMI = mean(BMI))  # calculate summary statistics
+
+```
+
+What can we learn from these results?
+
+***
+
+
+* We can use the **arrange()** and **slice()** functions to find the tallest observed inhabitant of each planet sampled:
+```{r}
+starwars %>% 
+  arrange(homeworld, desc(height)) %>%  # sort by homeworld, then height descending
+  group_by(homeworld) %>%  # use group_by to tell slice() how to select records
+  slice(1)  # keep only the first observation per homeworld
+```
+
+
+*** 
+
+#### Exercises
+
+Install the nycflights13 package and take a look at the **flights** dataset.
+
+```{r,  results='hide', warning=FALSE, error=FALSE, message=FALSE, collapse=TRUE}
+if (!any(rownames(installed.packages()) == "nycflights13")){
+  install.packages("nycflights13")
+}
+library(nycflights13)
+
+```
+```{r}
+
+flights
+
+```
+
+
+1) Assuming that people traveling for the Christmas/New Years holiday depart between December 20th and 24th, from which airport (EWR, JFK, LGA) did the most flights travel to San Francisco Airport (SFO)?
+
+```{r}
+
+```
+
+2) How many of these flights were delayed in departure by at least 30 minutes?
+```{r}
+
+```
+
+3) How many of these flights arrived late by at least 30 minutes?
+```{r}
+
+```
+
+4) What was the shortest in-flight time to SFO from each of the airports? 
+```{r}
+
+```
+
+
+5) Extra credit: answer questions 1, 2, and 3 using base R.
+```{r}
+
+```
+
+
+
+
+***
+
+
+
+### ggplot2 ![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/hux_ggplot2.png)
+
+![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
+
+[ggplot2](https://ggplot2.tidyverse.org/) is a system for declaratively creating graphics, based on [The Grammar of Graphics](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448/ref=as_li_ss_tl?ie=UTF8&qid=1477928463&sr=8-1&keywords=the+grammar+of+graphics&linkCode=sl1&tag=ggplot2-20&linkId=f0130e557161b83fbe97ba0e9175c431). You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details.
+
+
+Plotting in R with ggplot2.
+
+ggplot(data = <DATA>)
+<GEOM_FUNCTION>
+aes(<MAPPING>) --> aesthetic mapping
+  Aesthetics - visual property of something in a graph - color, shape, size
+    Mapping connects values in the data to a visual indication in the plot.
+    color, size, shape, alpha
+
+### Aesthetics    
+    
+
+```{r mpg2}
+summary(mpg)
+
+```
+
+```{r mpg}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, alpha = cty, color=class))
+
+```
+
+```{r}
+plot(x=mpg$displ, y=mpg$hwy)
+```
+
+
+Exercise 1:
+In the next code chunk experiment with different aesthetics. How does the behavior of GGPLOT differ when you use the "class" variable vs the "cty" variable?
+```{r}
+
+```
+
+But what if I want to chose a specific aesthetic (color, size, shape, alpha)?
+
+Which option do you think will produce a plot with blue points?
+
+1) ggplot(data = mpg) + geom_point(mapping = aes(x = displ, y = hwy, color="blue"))
+
+2) ggplot(data = mpg, color="blue") + geom_point(mapping = aes(x = displ, y = hwy))
+
+3) ggplot(data = mpg) + geom_point(mapping = aes(x = displ, y = hwy), color="blue") 
+
+```{r}
+ggplot(data = mpg, aes(x=displ, y=hwy)) + geom_point(shape=18)
+
+ggplot(data = mpg) + geom_point(mapping = aes(x=displ, y=hwy) , shape=18 )
+
+```
+```{r test colors}
+new.dataframe = data.frame(x = sample(1:100, replace=T, size=100),  # sample integers randomly
+                          y = sample(runif(100)), 
+                          group=sample(letters, size=100, replace=T))
+
+new.tibble = tibble(x = sample(1:100, replace=T, size=100),  # sample integers randomly
+                          y = sample(runif(100)), 
+                          group=sample(letters, size=100, replace=T))
+
+
+```
+
+Exercise 2:
+
+
+```{r}
+shapes.and.colors = tibble(x=1:6, y=rep(1,6), colors=paste("color", 1:6, sep=''), shapes=paste("shape", 1:6, sep=''))
+
+ggplot(data=shapes.and.colors) + geom_point(mapping=aes(x=x, y=y, shape=shapes, color=colors), size=4)
+```
+
+
+
+### Facets
+
+what does facet_grid() and facet_wrap() do?
+
+ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
+
+vs 
+
+q <- ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
+
+
+A plot will be produced: T / F
+
+
+```{r}
+q <- ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
+q + facet_grid(. ~ cyl)
+q + facet_grid(drv ~ .)
+q = facet_grid(drv ~ cyl)
+#q + fact_wrap(~ class)
+
+```
 
 
 ### Real data example
