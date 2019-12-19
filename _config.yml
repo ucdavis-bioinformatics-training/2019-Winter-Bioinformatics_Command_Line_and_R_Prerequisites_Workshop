@@ -57,7 +57,7 @@ navigation:
   - title: Intro to tidyverse and ggplot2
     url: Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2
   - title: Linear models in R
-    url: Advanced_R/linear_models
+    url: Advanced_R/lm.main
 
   - heading: Spreadsheets
   - title: Working with spreadsheets
