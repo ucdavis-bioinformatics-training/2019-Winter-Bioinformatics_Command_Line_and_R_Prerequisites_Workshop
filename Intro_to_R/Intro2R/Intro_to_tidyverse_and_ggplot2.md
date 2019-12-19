@@ -1042,7 +1042,8 @@ ggplot(mpg) +
 ![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-45-1.png)<!-- -->
 
 
-#### 
+#### Global vs local varaibles can be used to change the behavior of plots
+Notice how the coloring of the points only impacts the geom_point geom, but does not impact geom_smooth
 
 ```r
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
@@ -1058,16 +1059,85 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
 
 
 
+#### This concept of global and local also applied to data. If you only want a subset of your data plotted by one of your geoms, you can specify a second data set inside of the function call to that geom.
 
+
+```r
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point(mapping = aes(color = drv)) +
+  geom_smooth(data = filter(mpg, drv == "f"))
+```
+
+```
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-47-1.png)<!-- -->
+
+
+#### Once your plot is perfect, you want to save it. 
+
+Option 1, using base-R png() or pdf() functions:
+
+```r
+pdf(file="my-plot1.pdf", width=5, height=5)
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point(mapping = aes(color = drv)) +
+  geom_smooth()
+```
+
+```
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+```
+
+```r
+dev.off()
+```
+
+```
+## png 
+##   2
+```
+
+```r
+png(file="myplot.png", width=500, height=500)
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point(mapping = aes(color = drv)) +
+  geom_smooth()
+```
+
+```
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+```
+
+```r
+dev.off()
+```
+
+```
+## png 
+##   2
+```
+
+
+Option 2, using the ggsave function to save the last plot made:
+
+```r
+p <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point(mapping = aes(color = drv)) +
+  geom_smooth()
+
+ggsave(file = "myplot3.pdf", width=5, height=5, plot=p)
+```
+
+```
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+```
 
 
 #### Exercises
 
-1) Visit <https://rstudio.cloud/learn/cheat-sheets> and download the Data Visualization cheatsheet. Choose five different **geoms** to experiment with. Try to get a good mix of one variable, two variables, 
-
-2) Either with a partner or alone, pick five of the different plots. 
-
-
+1) Visit <https://rstudio.cloud/learn/cheat-sheets> and download the Data Visualization cheatsheet. Choose five different **geoms** to experiment with. Try to get a good mix of one variable, two variables, continuous, and discrete.
 
 
 

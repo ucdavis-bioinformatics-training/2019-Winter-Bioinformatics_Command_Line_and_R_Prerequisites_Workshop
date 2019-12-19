@@ -59,7 +59,7 @@ output:
 
 The growing popularity of the tidyverse has led to some controversy, and some great memes!
 
-![](./Intro_to_tidyverse_and_ggplot2_images/civil_war_meme.jpg){width=400px}
+![](./Intro_to_tidyverse_and_ggplot2_images/civil_war_meme.jpg)
 <https://twitter.com/_ColinFay/status/901167200496750592/photo/1>
 
 
@@ -88,7 +88,7 @@ Read more of the back and forth at the following links:
 
 
 
-![](./Intro_to_tidyverse_and_ggplot2_images/use_both_meme.png){width=500}
+![](./Intro_to_tidyverse_and_ggplot2_images/use_both_meme.png)
 
 https://twitter.com/hadleywickham/status/903102871163604994?lang=en
 
@@ -97,10 +97,10 @@ https://twitter.com/hadleywickham/status/903102871163604994?lang=en
 ### Alternatives:
 
 * Base R
-* ![](./Intro_to_tidyverse_and_ggplot2_images/data.table.png){width=75px}[data.table](https://github.com/Rdatatable/data.table/wiki) is a fast alternative with its own special syntax.
+* ![](./Intro_to_tidyverse_and_ggplot2_images/data.table.png)[data.table](https://github.com/Rdatatable/data.table/wiki) is a fast alternative with its own special syntax.
   * a tidyverse package, [dtplyr](https://github.com/tidyverse/dtplyr) is in development to prodvide access to it while maintaining tidyverse syntax.
   * A comparison of common operations in data.table and dplyr [can be found here.](https://atrebas.github.io/post/2019-03-03-datatable-dplyr/)
-* ![](./Intro_to_tidyverse_and_ggplot2_images/pandas_logo.png){width=200px}[Python pandas](https://pandas.pydata.org/) 
+* ![](./Intro_to_tidyverse_and_ggplot2_images/pandas_logo.png)[Python pandas](https://pandas.pydata.org/) 
 
 
 ***
@@ -110,7 +110,7 @@ https://twitter.com/hadleywickham/status/903102871163604994?lang=en
 
 1) Data science and tidyverse are intertwined and growing rapidly.
 
-![](./Intro_to_tidyverse_and_ggplot2_images/popularity.png){width=500}
+![](./Intro_to_tidyverse_and_ggplot2_images/popularity.png)
 
 2) "Future proof" yourself - if the next generation of R users are mostly tidyverse users, knowing tidyverse should be a safe bet for the next ~5+ years (probably?).
 
