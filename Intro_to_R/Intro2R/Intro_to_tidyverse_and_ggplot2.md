@@ -868,172 +868,210 @@ flights
 
 
 
-### ggplot2
+### Step 4, Visualise with ggplot2 ![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/hex-ggplot2.png)
 
-![](./Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
+![](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Intro_to_tidyverse_and_ggplot2_images/R-data-science.png)
 
+[ggplot2](https://ggplot2.tidyverse.org/) is a system for declaratively creating graphics, based on [The Grammar of Graphics](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448/ref=as_li_ss_tl?ie=UTF8&qid=1477928463&sr=8-1&keywords=the+grammar+of+graphics&linkCode=sl1&tag=ggplot2-20&linkId=f0130e557161b83fbe97ba0e9175c431). You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details.
 
-Plotting in R with ggplot2.
+**Note that most of the material on GGPLOT2 was taken directly from [RStudio teaching resources](https://github.com/rstudio-education) that are made freely available online **
 
-ggplot(data = <DATA>)
-<GEOM_FUNCTION>
-aes(<MAPPING>) --> aesthetic mapping
-  Aesthetics - visual property of something in a graph - color, shape, size
-    Mapping connects values in the data to a visual indication in the plot.
-    color, size, shape, alpha
+***
 
-### Aesthetics    
-    
-
-
-```r
-summary(mpg)
-```
-
-```
-##  manufacturer          model               displ            year     
-##  Length:234         Length:234         Min.   :1.600   Min.   :1999  
-##  Class :character   Class :character   1st Qu.:2.400   1st Qu.:1999  
-##  Mode  :character   Mode  :character   Median :3.300   Median :2004  
-##                                        Mean   :3.472   Mean   :2004  
-##                                        3rd Qu.:4.600   3rd Qu.:2008  
-##                                        Max.   :7.000   Max.   :2008  
-##       cyl           trans               drv                 cty       
-##  Min.   :4.000   Length:234         Length:234         Min.   : 9.00  
-##  1st Qu.:4.000   Class :character   Class :character   1st Qu.:14.00  
-##  Median :6.000   Mode  :character   Mode  :character   Median :17.00  
-##  Mean   :5.889                                         Mean   :16.86  
-##  3rd Qu.:8.000                                         3rd Qu.:19.00  
-##  Max.   :8.000                                         Max.   :35.00  
-##       hwy             fl               class          
-##  Min.   :12.00   Length:234         Length:234        
-##  1st Qu.:18.00   Class :character   Class :character  
-##  Median :24.00   Mode  :character   Mode  :character  
-##  Mean   :23.44                                        
-##  3rd Qu.:27.00                                        
-##  Max.   :44.00
-```
-
+Lets start with a plot:
 
 ```r
 ggplot(data = mpg) + 
-  geom_point(mapping = aes(x = displ, y = hwy, alpha = cty, color=class))
-```
-
-![](Intro_to_tidyverse_and_ggplot2_files/figure-html/mpg-1.png)<!-- -->
-
-
-```r
-plot(x=mpg$displ, y=mpg$hwy)
+  geom_point(mapping = aes(x=displ, y=hwy))
 ```
 
 ![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-35-1.png)<!-- -->
 
+#### A template for ggplot:
 
-Exercise 1:
-In the next code chunk experiment with different aesthetics. How does the behavior of GGPLOT differ when you use the "class" variable vs the "cty" variable?
-
-
-But what if I want to chose a specific aesthetic (color, size, shape, alpha)?
-
-Which option do you think will produce a plot with blue points?
-
-1) ggplot(data = mpg) + geom_point(mapping = aes(x = displ, y = hwy, color="blue"))
-
-2) ggplot(data = mpg, color="blue") + geom_point(mapping = aes(x = displ, y = hwy))
-
-3) ggplot(data = mpg) + geom_point(mapping = aes(x = displ, y = hwy), color="blue") 
+> ggplot(data = \<DATA\>) +
+  \<GEOM_FUNCTION\>(mapping = aes(<MAPPING>) )
 
 
-```r
-ggplot(data = mpg, aes(x=displ, y=hwy)) + geom_point(shape=18)
-```
+**Aesthetics** - visual property of something in a graph - color, shape, size
+    Mapping connects values in the data to a visual indication in the plot.
+    color, size, shape, alpha
 
-![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-37-1.png)<!-- -->
+**GEOM** Geometric object (geom_abline, geom_bar, geom_boxplot, geom_dotplot, etc)
 
-```r
-ggplot(data = mpg) + geom_point(mapping = aes(x=displ, y=hwy) , shape=18 )
-```
+### Aesthetic mapping defines how variables in the dataset are connected to visual properties of the plot.
 
-![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-37-2.png)<!-- -->
+Aesthetics can:
 
-```r
-new.dataframe = data.frame(x = sample(1:100, replace=T, size=100),  # sample integers randomly
-                          y = sample(runif(100)), 
-                          group=sample(letters, size=100, replace=T))
+* Tell ggplot which variables are used on what axis
+* Tell ggplot which shape to use for points on a plot
+* Tell ggplot what color to make the points
+* Tell ggplot what size to make the points
+* Tell ggplot how transparent to make a point (alpha)
+* etc
 
-new.tibble = tibble(x = sample(1:100, replace=T, size=100),  # sample integers randomly
-                          y = sample(runif(100)), 
-                          group=sample(letters, size=100, replace=T))
-```
+All off these mappings can be passed in to the aes() function.
 
-Exercise 2:
+#### Exercises
+
+1) Create scatter plots from the mpg dataset. Experiment with mapping color, size, alpha and shape to different variables. 
 
 
 
-```r
-shapes.and.colors = tibble(x=1:6, y=rep(1,6), colors=paste("color", 1:6, sep=''), shapes=paste("shape", 1:6, sep=''))
-
-ggplot(data=shapes.and.colors) + geom_point(mapping=aes(x=x, y=y, shape=shapes, color=colors), size=4)
-```
-
-![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-38-1.png)<!-- -->
+2) How does the behavior of GGPLOT differ when you use the "class" variable vs the "cty" variable for color?
 
 
+3) What happens when you use more than one aesthetic?
 
-### Facets
 
-what does facet_grid() and facet_wrap() do?
+4) Create a tibble with x coordinates, y coordinates, 6 colors (color1-6), and 6 shapes (shape1-6), plot this tibble. Try to set the size of all points to something larger than the default.
 
-ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
 
-vs 
+5) What happens if you try to specify an aesthetic mapping outside of the aes() function? Does the behavior different depending on whether you use a variable from your tibble/data frame?
+
+
+*** 
+
+Plots can be built up piece by piece and only plotted when they are ready. 
+
+This code will not produce a plot:
 
 q <- ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
 
 
-A plot will be produced: T / F
 
+**Facets** are another way to display groupings in your data. Only instead of color or shape, facets display each group in a different plot.
+
+
+#### Exercises
+
+1) Experiment with each of the modifications to the _q_ object below.
+
+Write a brief description of how fact_grid works:
+
+Write a brief description of how facet_wrap works:
 
 
 ```r
-q <- ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
+q <- ggplot(mpg) + geom_point(mapping = aes(x = displ, y = hwy))
 q + facet_grid(. ~ cyl)
 ```
 
-![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-39-1.png)<!-- -->
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-41-1.png)<!-- -->
 
 ```r
 q + facet_grid(drv ~ .)
 ```
 
-![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-39-2.png)<!-- -->
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-41-2.png)<!-- -->
 
 ```r
-q = facet_grid(drv ~ cyl)
-#q + fact_wrap(~ class)
+q + facet_grid(drv ~ cyl)
 ```
 
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-41-3.png)<!-- -->
 
-### Real data example
+```r
+q + facet_wrap(~ class)
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-41-4.png)<!-- -->
+
+2) What happens when you provide two varaiables to facet_wrap?
+
+
+
+#### Lets update our ggplot template:
+
+> ggplot(data = \<DATA\>) +
+  \<GEOM_FUNCTION\>(mapping = aes(<MAPPING>)) +
+  \<FACET_FUNCTION\>
+
+
+#### Now lets add labels to our plots:
+
+```r
+ggplot(data = mpg) +
+  geom_point(mapping = aes(displ, hwy, color = class)) +
+  labs(title = "Fuel Efficiency by Engine Size",
+    subtitle = "Data facetted by class",
+    x = "Engine Size (displacement in liters)",
+    y = "Fuel Efficiency (MPG)",
+    color = "Class of\nAutomobile",
+    caption = "Data from the EPA") + 
+    facet_wrap(~ class)
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-42-1.png)<!-- -->
+
+### Different geometric objects (geom)
+
+GGPLOT supports many different types of geometric objects. Each provides a different way of presenting data. 
+
+#### Boxplots
+
+```r
+ggplot(data = mpg) +
+  geom_boxplot(mapping = aes(x = class, y = hwy))
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-43-1.png)<!-- -->
+
+#### Boxplots (modify binwidth to get higher or lower resolution plots)
+
+```r
+ggplot(data = mpg) +
+  geom_histogram(mapping = aes(x = hwy), binwidth=1)
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-44-1.png)<!-- -->
+
+
+#### It is also possible to include multiple geometric shapes on a single plot 
+
+```r
+ggplot(mpg) +
+  geom_point(aes(displ, hwy)) +
+  geom_smooth(aes(displ, hwy))
+```
+
+```
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-45-1.png)<!-- -->
+
+
+#### 
+
+```r
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point(mapping = aes(color = drv)) +
+  geom_smooth()
+```
+
+```
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+```
+
+![](Intro_to_tidyverse_and_ggplot2_files/figure-html/unnamed-chunk-46-1.png)<!-- -->
 
 
 
 
 
-# TODO:
-#download.file("https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Winter-Bioinformatics_Command_Line_and_R_Prerequisites_Workshop/master/Intro_to_R/Intro2R/Is_10.gff3", "Is_10.gff3")
+
+#### Exercises
+
+1) Visit <https://rstudio.cloud/learn/cheat-sheets> and download the Data Visualization cheatsheet. Choose five different **geoms** to experiment with. Try to get a good mix of one variable, two variables, 
+
+2) Either with a partner or alone, pick five of the different plots. 
 
 
-# Ixodes scapularis
 
-# gff <- read_tsv("Is_10.gff3", col_names = F) 
-# colnames(gff) = c("seqid", "source", "type", "start", "end", "score", "strand", "phase", "attributes")
-# head(gff)
 
-# gff$attributes[1]
-# ```
 
-# ```{r}
-# separate(data = gff, col = attributes, )
-# ```
+#### Putting it all together / something to keep you from getting bored over the holidays
+
+Visit <http://varianceexplained.org/r/tidy-genomics/> and work through the example. How many of the commands do you recognize from 
+
